@@ -1,0 +1,38 @@
+{extend name="default/base" /}
+{block name="css"}
+<style type="text/css">
+    td .layui-table-cell{height:60px !important;line-height: 60px !important;overflow: inherit!important;}
+    td .laytable-cell-1-0-2,td .laytable-cell-1-0-3{overflow:hidden!important;}
+    .layui-table img{max-width:200px!important;}
+</style>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__STORE__/goods/goods.js?v={$v}'></script>
+<script>
+$(function(){saleByPage({$p})})
+</script>
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<div class="wst-toolbar">
+    <select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">
+        <option value="">-请选择商品分类-</option>
+      {volist name=":WSTStoreCats(0)" id="vo"}
+            <option value="{$vo['catId']}" >{$vo['catName']}</option>
+      {/volist}
+    </select>
+    <select name="cat2" id="cat2" class="s-query"><option value="">-请选择商品分类-</option></select>
+  <select id='goodsType' class="s-query">
+     <option value=''>全部商品类型</option>
+     <option value='0'>实物商品</option>
+     <option value='1'>虚拟商品</option>
+  </select>
+    <input type="text" name="goodsName" id="goodsName" class="s-query" placeholder='商品名称/商品编号'/>
+    <a class="s-btn btn btn-primary" onclick="loadGrid()"><i class="fa fa-search"></i>查询</a>
+</div>
+
+<div class='wst-grid'>
+    <div id="mmg" class="mmg"></div>
+</div>
+</div>
+{/block}

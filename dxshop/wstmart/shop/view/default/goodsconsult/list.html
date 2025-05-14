@@ -1,0 +1,39 @@
+{extend name="default/base" /}
+{block name="css"}
+<style>
+.layui-table-body .layui-table-cell{height:auto;overflow: inherit;}
+.laytable-cell-1-0-2{overflow:hidden!important;}
+.layui-table img{max-width:180px!important;}
+.ureply{width:100%;word-break: break-all;white-space: break-spaces;line-height: 20px;margin-bottom: 5px}
+.sreply{padding-top:5px;width:100%;word-break: break-all;white-space: break-spaces;line-height: 20px;border-top: 1px solid #ccc;}
+</style>
+{/block}
+{block name="main"}
+<div class="wst-page">
+    <div class="wst-toolbar">
+        <select name="consultType" id="consultType" class="s-query">
+            <option value="0">-请选择咨询分类-</option>
+          {volist name=":WSTDatas('COUSULT_TYPE')" id="vo"}
+                <option value="{$vo['dataVal']}" >{$vo['dataName']}</option>
+          {/volist}
+        </select>
+        <input type="text" id="consultKey" class="s-query" placeholder='咨询关键词'/>
+        <a class="s-btn btn btn-primary" onclick="loadGrid(0)"><i class="fa fa-search"></i>查询</a>
+        <a class="btn btn-primary f-right"  onclick="editConsult(0,-1)"><i class="fa fa-pencil"></i>批量隐藏</a>
+        <a class="btn btn-primary f-right" onclick="editConsult(1,-1)" style='margin-right:5px;'><i class="fa fa-pencil"></i>批量显示</a>
+    </div>
+    <div class='wst-grid'>
+        <div id="mmg" class="mmg"></div>
+        <div id="pg" style="text-align: right;"></div>
+    </div>
+</div>
+
+{/block}  
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/goodsconsult/goodsconsult.js?v={$v}'></script>
+<script>
+$(function(){
+  queryByPage({$p});
+})
+</script>
+{/block}

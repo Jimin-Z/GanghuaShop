@@ -1,0 +1,45 @@
+{extend name="default/base" /}
+{block name="css"}
+<style type="text/css">
+    td .layui-table-cell{height:50px !important;line-height: 40px !important;overflow: inherit!important;}
+    td .laytable-cell-1-0-5{overflow:hidden!important;}
+    .layui-table img{max-width:180px!important;padding-bottom:8px;}
+</style>
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<div class='wst-toolbar'>
+    <span style="float: left; line-height: 40px">日期：</span><input type='text' class="laydate-icon j-ipt" id='startDate' style="width: 150px"/>
+    <span style="line-height: 40px;margin-right: 5px;">至</span>
+    <input type='text' class="laydate-icon j-ipt" id='endDate' style="width: 150px"/>
+    <input type='text' class="j-ipt" id='goodsName' placeholder="商品名称/编号"/>
+    <input type='hidden' class="j-ipt" id='statType' value="2"/>
+
+    <a class="s-btn btn btn-primary" onclick="loadStat();loadGrid(0);"><i class="fa fa-search"></i>查询</a>
+</div>
+
+<div class='wst-shop-content'>
+    <div id='main' style='height:400px;margin: 20px 0;width: 99%;'></div>
+    {:hook('shopDocumentStatFavoritePromotion',['type'=>1])}
+    <div class='wst-grid'>
+        <div id="mmg" class="mmg"></div>
+    </div>
+</div>
+</div>
+{/block}
+{block name="js"}
+<script src="__STATIC__/plugins/echarts/echarts.min.js?v={$v}" type="text/javascript"></script>
+<script type='text/javascript' src='__SHOP__/reports/stat_favorites.js?v={$v}'></script>
+<script>$(function(){
+    var laydate = layui.laydate;
+    laydate.render({
+        elem: '#startDate'
+    });
+    laydate.render({
+        elem: '#endDate'
+    });
+    loadStat();
+    getStatFavoriteGoods();
+})
+</script>
+{/block}

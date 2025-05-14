@@ -1,0 +1,90 @@
+{extend name="default/users/base" /}
+{block name="title"}首页 - 会员中心{__block__}{/block}
+{block name="css"}
+{/block}
+{block name="content"}
+<div class="wst-user-head"><span>用户信息</span></div>
+<div class="wst-clear"></div>
+<div class="u-menu">
+   <a href="javascript:void(0)" onclick="batchRead()">标记为已读</a> |
+   <a href='javascript:void(0);' onclick="batchDel()" >删除</a>
+</div>
+
+  <div class="wst-body">
+       <div class='wst-page-content'>
+        <table class='wst-list '>
+           <thead>
+             <tr>
+               <th width='25'>
+                <div class="checkbox-box-s layui-form">
+                    <input type="checkbox" lay-skin="primary"  lay-filter="all" >
+                 </div>
+              </th>
+               <th>消息</th>
+               <th width='250'>时间</th>
+               <th width='150' style="border-right: 1px solid #f1f1f1;">操作</th>
+             </tr>
+           </thead>
+           <script id="msg" type="text/html">
+            {{# for(var i = 0, len = d.length; i < len; i++){ }}
+             <tr>
+               <td>
+                  <div class="layui-form">
+                      <input type="checkbox" name="msgIds[]" class="chk" lay-skin="primary" id="chk-{{i}}" value='{{ d[i].id }}'>
+                  </div>
+               </td>
+               <td>
+                <div class="wst-hide msg-content">
+                   {{# if(d[i].msgStatus ==1) { }}
+                   <i class='fa fa-envelope-open-o'></i>
+                   {{# }else{ }}
+                   <i class='fa fa-envelope'></i>
+                   {{# } }}
+                   {{ d[i].msgContent }}
+                </div></td>
+               <td nowrap>{{ d[i].createTime }}</td>
+               <td style="border-right: 1px solid #f1f1f1;" nowrap>
+               <a class="s-handle" href="javascript:showMsg({{ d[i].id }})">【查看】</a>
+               <a class="s-handle" href="javascript:delMsg(this,{{ d[i].id }})">【删除】</a>
+               &nbsp;
+               </td>
+             </tr>
+            {{# } }}
+            </script>
+           <tbody id="msg_box">
+
+
+
+
+
+             <tfoot>
+             <tr>
+                <td colspan='12' align='center'>
+
+                <div id="wst-page" class='wst-page' style="padding-bottom:10px;">
+                </div>
+
+                </td>
+             </tr>
+             </tfoot>
+           </tbody>
+        </table>
+        </div>
+    </div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__STYLE__/users/messages/message.js?v={$v}'></script>
+<script>
+
+$(function(){
+    layui.form.on('checkbox(all)', function (data) {
+        $("input[name='msgIds[]']").each(function () {
+            this.checked = data.elem.checked;
+        });
+        layui.form.render();
+    });
+
+    queryByList({$p});
+});
+</script>
+{/block}

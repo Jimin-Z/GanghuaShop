@@ -1,0 +1,137 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="zh-cn"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="zh-cn"><![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-cn"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="zh-cn"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/font.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/jquery.fallr/jquery.fallr.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/artDialog/skins/default.css" />
+<script type="text/javascript" src="/hsytt/assets/fb04db1/jquery.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/jquery.artDialog.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/plugins/iframeTools.js"></script>
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<script>  
+    var baseUrl = '/hsytt';
+    var indexUrl = '/hsytt/index.php?r=course/index';
+    var uppicUrl = '/hsytt/index.php?r=public/uppic';
+    var upfileUrl = '/hsytt/index.php?r=public/upfile';
+    var submitType='tijiao'
+</script>
+</head>
+<body>
+<div class="box">
+      <div class="box-content">
+      <div class="box-header">
+            <a class="btn" href="/hsytt/index.php?r=course/create"><i class="fa fa-plus"></i>添加</a>
+            <a class="btn" href="javascript:;" onclick="we.reload();"><i class="fa fa-refresh"></i>刷新</a>
+
+            <a style="display:none;" id="j-delete" class="btn" href="javascript:;" onclick="we.dele(we.checkval('.check-item input:checked'), deleteUrl);"><i class="fa fa-trash-o"></i>删除</a>
+        <a href="javascript:;" onclick="bweline();"> 在线咨询</a>
+        </div><!--box-header end-->
+        <div class="box-search">
+            <form action="/hsytt/index.php?r=course/index" method="get">
+                <input type="hidden" name="r" value="course/index">
+                <label style="margin-right:10px;">
+                    <span>关键字：</span>
+                    <input style="width:200px;" class="input-text" type="text" name="keywords" value="">
+                </label>
+                <button class="btn btn-blue" type="submit">查询</button>
+            </form>
+        </div><!--box-search end-->
+        <div class="box-table">
+            <table class="list">
+                <thead>
+                    <tr>
+
+        
+                        <th class="check"><input id="j-checkall" class="input-check" type="checkbox"></th>
+                        <th>编码</th>
+                        <th>名称</th>
+                       <th>备注</th>
+                         
+                      
+                                              <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                                        <tr>  
+                        <td class="check check-item"><input class="input-check" type="checkbox" value="1"></td>           
+                        <td>01</td>
+                        <td>语文</td>
+                         <td>主课</td>
+                        <td>
+            
+            <a class="btn" href="/hsytt/index.php?r=course/update&id=1" title="编辑"><i class="fa fa-edit"></i></a>
+
+        <a class="btn" href="javascript:;" onclick="we.dele('1', deleteUrl);" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                              <tr>  
+                        <td class="check check-item"><input class="input-check" type="checkbox" value="2"></td>           
+                        <td>02</td>
+                        <td>数学</td>
+                         <td></td>
+                        <td>
+            
+            <a class="btn" href="/hsytt/index.php?r=course/update&id=2" title="编辑"><i class="fa fa-edit"></i></a>
+
+        <a class="btn" href="javascript:;" onclick="we.dele('2', deleteUrl);" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                              <tr>  
+                        <td class="check check-item"><input class="input-check" type="checkbox" value="3"></td>           
+                        <td>03</td>
+                        <td>英语</td>
+                         <td></td>
+                        <td>
+            
+            <a class="btn" href="/hsytt/index.php?r=course/update&id=3" title="编辑"><i class="fa fa-edit"></i></a>
+
+        <a class="btn" href="javascript:;" onclick="we.dele('3', deleteUrl);" title="删除"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>
+                          </tbody>
+            </table>
+        </div><!--box-table end-->
+        <div class="box-page c"></div>
+    </div><!--box-content end-->
+</div><!--box end-->
+<script>
+var deleteUrl = '/hsytt/index.php?r=course/delete&id=ID';
+</script>
+<script>
+   // $product=$('#product');
+   // 'http://116.205.242.68/welive/kefu.php?a=6168
+  function bweline(){
+ //   $.dialog.data('id', 0);
+    $.dialog.open('http://116.205.242.68/welive/kefu.php?a=6168',{
+            id:'xiajia',
+            lock:true,
+            opacity:0.3,
+            title:'在线咨询',
+            width:'80%',
+            height:'70%',
+             autoOpen: false,
+    position: {
+      my: 'right top',
+      at: 'right top',
+      of: window
+    },
+            close: function() {
+
+        }
+    });
+   }
+
+</script>
+</body>
+</html>
+
+

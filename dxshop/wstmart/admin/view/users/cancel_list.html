@@ -1,0 +1,38 @@
+{extend name="base" /}
+{block name="css"}
+<style type="text/css">
+    td .laytable-cell-1-0-5{color: red;}
+    td .laytable-cell-1-0-6{color: #31c15a;}
+    td .laytable-cell-1-0-7{color: #1890ff;}
+    td .layui-table-cell{height:60px !important;line-height: 60px !important;}
+</style>
+{/block}
+{block name="js"}
+<script src="__ADMIN__/users/cancel_user.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div id='alertTips' class='alert alert-success alert-tips fade in'>
+  <div id='headTip' class='head'><i class='fa fa-lightbulb-o'></i>操作说明</div>
+  <ul class='body'>
+      <li>本功能主要用于审核申请注销的帐号。</li>
+  </ul>
+</div>
+<div class="wst-toolbar">
+  <form autocomplete="off" >
+   <div id="query" style="float:left;">
+        <input type="text" name="loginName1"  placeholder='账号' id="loginName1" class="query" />
+        <input type="text" name="loginPhone" placeholder='手机号码' id="loginPhone" class="query" />
+        <input type="text" name="loginEmail" placeholder='电子邮箱' id="loginEmail" class="query" />
+        <button type="button" class="btn btn-primary" onclick="javascript:userQuery()" ><i class="fa fa-search"></i>查询</button>
+  </div>
+
+   <div style="clear:both"></div>
+</form>
+</div>
+<div class='wst-grid'>
+<div id="mmg" class="mmg"></div>
+</div>
+<script>
+  $(function(){initGrid({$p})});
+</script>
+{/block}

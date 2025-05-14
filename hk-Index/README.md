@@ -1,0 +1,1 @@
+### 这里的rem的基准稿为1440px,然后一个rem为1/document.documentElement.clientWidth

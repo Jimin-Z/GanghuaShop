@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript"> 
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/font.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/jquery.fallr/jquery.fallr.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/artDialog/skins/default.css" />
+<script type="text/javascript" src="/hsytt/assets/fb04db1/jquery.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/jquery.artDialog.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/plugins/iframeTools.js"></script>
+<!--
+//图片按比例缩放
+var flag=false;
+function DrawImage(ImgD,iwidth,iheight){
+    //参数(图片,允许的宽度,允许的高度)
+    var image=new Image();
+    image.src=ImgD.src;
+    if(image.width>0 && image.height>0){
+    flag=true;
+    if(image.width/image.height>= iwidth/iheight){
+        if(image.width>iwidth){  
+        ImgD.width=iwidth;  ImgD.height=(image.height*iwidth)/image.width;
+        }else{
+        ImgD.width=image.width; ImgD.height=image.height;
+        }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    else{
+        if(image.height>iheight){    ImgD.height=iheight;
+        ImgD.width=(image.width*iheight)/image.height;        
+        }else{ ImgD.width=image.width; ImgD.height=image.height;
+        }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    }
+} 
+//-->
+</script>
+<script language="javascript">
+function killErrors() {
+    return true;
+}
+window.onerror = killErrors;
+</script>
+<title>{eyou:global name='web_title' /}_{eyou:global name='web_name' /}</title>
+<meta name="description" content="{eyou:global name='web_description' /}" />
+<meta name="keywords" content="{eyou:global name='web_keywords' /}" />
+<link href="{eyou:global name='web_ico' /}" rel="shortcut icon" type="image/x-icon" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{eyou:static file="skin/css/bootstrap.css" /}
+{eyou:static file="skin/css/font.css" /}
+{eyou:static file="skin/css/amazeui.min.css" /}
+{eyou:static file="skin/css/base.css" /}
+<style type="text/css">
+body, td, th {
+	font-family: "微软雅黑", Helvetica, Arial, Tahoma, SimSun, sans-serif;
+}
+</style>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+{eyou:static file="skin/js/html5shiv.min.js" /}
+{eyou:static file="skin/js/respond.min.js" /}      
+<![endif]-->
+</head><body>
+{eyou:include file="header.htm" /}
+<div class="post" style="display: none"><input type="text" value="1"></div>
+<!-- 左侧飘窗-->
+<div class="sider_left">
+  <div class="sl_online_box">
+    <div class="sl_online">
+      <h3 style="background-image: url(/static/index/images/online_iconnew2.png)"></h3>
+      <em>专家在线</em>
+    </div>
+  </div>
+  <div class="sl_area"> <div class="sl_name">
+      <dl> <dt>国际</dt>
+      <dd><ul>
+      <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;4fc608044644d5e2c7f0c20f8a43f33b&#39;}, &#39;gnpc-UpperLeft-Dubai&#39;,&#39;1&#39;,)">
+            阿联酋迪拜               </a>     </li>
+      <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;133bc4b394a31f056de990747de79229&#39;}, &#39;gnpc-UpperLeft-Sydney&#39;,&#39;1&#39;,)">
+            澳大利亚悉尼                </a>         </li>
+    
+               <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;bdd5bbccd0a5a0448434112a60af162b&#39;}, &#39;gnpc-UpperLeft-Duolunduo&#39;,&#39;1&#39;,)">            <p>加拿大多伦多</p>            </a>              </li>
+  </ul>        </dd>      </dl>
+   <dl>        <dt>国内</dt>        <dd>          <ul>
+      <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;b4927f81a99d57a1d318b7cd91fc0ff9&#39;}, &#39;gnpc-UpperLeft-Shenzhen&#39;,&#39;1&#39;,)">深圳</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;6eea51e77775fc9f085273b1aff3be7d&#39;}, &#39;gnpc-UpperLeft-Beijing&#39;,&#39;1&#39;,)">北京</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;45f3e71a7819c37db78e326b9c4ab53b&#39;}, &#39;gnpc-UpperLeft-Shanghai&#39;,&#39;1&#39;,)">上海</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;350a40f0fded5c932ca48597f54a2c3e&#39;}, &#39;gnpc-UpperLeft-Suzhou&#39;,&#39;1&#39;,)">苏州</a></li>
+  
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;0e6379e93b12c02eec9bcc24b4ba823c&#39;}, &#39;gnpc-UpperLeft-Hubei&#39;,&#39;1&#39;,)">武汉</a></li> </ul>        </dd>      </dl>
+    </div>  </div>
+  <div class="sl_close"></div>
+</div>
+
+
+<!-- 右侧弹窗-->
+
+<div class="wrap" style="opacity: 1; display: block;">
+    <ul>
+        <li>
+            <a href="javascript:;" onclick="parent.openMeiqia(null,&#39;upperRight&#39;,&#39;2&#39;,)">
+                在線諮詢
+            </a>
+
+        </li>
+        <!-- <li ><a target="_blank" href="/mark_gather.html&ycpc#pf">条件测评</a></li> -->
+
+    <li><a href="javascript:;" onclick="xxhz()">項目合作</a></li>
+
+        <li><a target="_blank" href="<?php echo $spath;?>/contrast.html&amp;ycpc">國家對比</a></li>
+        <!--<li ><a target="_blank" href="/sqzl.html&ycpc">免费材料</a></li>-->
+        <li class="oli" style="margin-top: 13px;">
+            <a href="<?php echo $spath;?>/zhongguoxianggang/index.html##">關註微信</a>
+            
+        </li>
+        <!-- <li ><a target="_blank" href="/contentus.html?ycpc">联系我们</a></li> -->
+        <li id="toTop" class="J_backTop" style="display: none;">
+            <span class="top"></span>
+            <a href="javascript:;">返回頂部</a>
+        </li>
+    </ul>
+</div>
+
+<!--项目合作弹窗-->
+
+
+
+
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {eyou:adv pid='1'}
+    <li data-target="#carousel-example-generic" data-slide-to="{$key}" {eyou:eq name='$i' value='1'}class="active"{/eyou:eq}></li>
+    {/eyou:adv}
+  </ol>
+  <div class="carousel-inner" role="listbox"> {eyou:adv pid='1'}
+    <div class="item {eyou:eq name='$i' value='1'}active{/eyou:eq}"> <img src="{$field.litpic}" alt="{$field.title}" onClick="location.href='{$field.links}'"> </div>
+    {/eyou:adv} </div>
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+<div class="container">
+  <div class="row"> {eyou:modelsartlist typeid='26'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><a href="{eyou:field name='typeurl' /}"><b>视频</b>中心</a><small>最新的活动 </small></h2>
+      <div style="background: white;">
+        <div class="video"> {eyou:artlist loop='1' titlelen='20'}
+          <video style="margin: 0 5%" width="90%" height="360" controls="controls" loop="loop">
+            <source src="{eyou:field aid='$field.aid' addfields='shipin' /}" type="video/mp4">
+            Your browser does not support the video tag. </video>
+          {/eyou:artlist} </div>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}" style="margin: 18px 20px;">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='2'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>亚非移居</b>动态<small>信息 </small></h2>
+      <div class="index02 white_bg"> {eyou:artlist limit='0,1' titlelen='15' flag='p'} <a href="{$field.arcurl}"><img src="{$field.litpic}" border="0" alt="{$field.title}" style="width:336px; height:150px;"></a> {/eyou:artlist}
+        <ul>
+          {eyou:artlist limit='1,7' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='5'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>热门地区</b>公告<small>信息 </small></h2>
+      <div class="index02 white_bg">
+        <ul>
+          {eyou:artlist loop='10' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist} </div>
+</div>
+{eyou:include file="hkgoods.htm" /}
+{eyou:include file="hkcase.htm" /}
+
+<div class="container">
+  <div class="row"> {eyou:modelsartlist typeid='7'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>欧洲移民</b>移民<small>信息</small></h2>
+      {eyou:artlist limit='0,1' titlelen='20' flag='p'} <a href="{$field.arcurl}"><img src="{$field.litpic}" border="0" alt="{$field.title}" style="width:376px; height:140px;"></a> {/eyou:artlist}
+      <div class="index02 white_bg index03">
+        <ul>
+          {eyou:artlist limit='1,7' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='27'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>大洋洲</b>移民<small>信息</small></h2>
+      <div class="index02 white_bg index03">
+        <ul>
+          {eyou:artlist loop='10' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='6'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>跨境服务</b>工作<small>信息 </small></h2>
+      {eyou:artlist limit='0,1' titlelen='20' flag='p'} <a href="{$field.arcurl}"><img src="{$field.litpic}" border="0" alt="{$field.title}" style="width:376px; height:140px;"></a> {/eyou:artlist}
+      <div class="index02 white_bg index03">
+        <ul>
+          {eyou:artlist limit='1,7' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist} </div>
+</div>
+{eyou:modelsartlist typeid='4'}
+<div class="activity pb30">
+  <h2 class="white fb f24 text-center pt30 pb20">{eyou:field name='typename' /}</h2>
+  <div class="am-slider am-slider-default am-slider-carousel"	data-am-flexslider="{itemWidth: 174, itemMargin: 10, slideshow: true, touch: true, move: 1}">
+    <ul class="am-slides">
+      {eyou:artlist titlelen='20'}
+      <li><a href="{$field.arcurl}"><img src="{$field.litpic}" alt="{$field.title}"></a></li>
+      {/eyou:artlist}
+    </ul>
+  </div>
+</div>
+{/eyou:modelsartlist}
+
+
+<div class="c_key">
+  <div class="main">
+    <div class="pub_title"><h1>專業團隊是申請成功的關鍵<span>—24小時爲您提供諮詢服務，根據您的實際需求制定專屬方案</span></h1>
+    </div>
+  <section class="fifth-module" id="changeAdvisor" style="display: block;">
+
+<div style="position:relative;padding-bottom:20px;">
+  <div style="position:  absolute;top: 18px;left: 22px;">
+    <em style="display:  block;height:  28px;line-height: 28px;font-size:  14px;font-weight:  bold;" class="showGW">國際：</em>
+    <em style="display: block;height: 28px;line-height: 28px;font-size: 14px;font-weight: bold;">國内：</em>
+  </div>
+
+<ul class="fhm-ul-t">
+<li class="fhm-li-t showGW" data-name="阿联酋迪拜" name="10029" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/Dubai.html" class="fhm-a-t" title="阿聯酋迪拜">阿聯酋迪拜</a></li><li class="fhm-li-t showGW" data-name="澳大利亚悉尼" name="10023" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/sydney.html" class="fhm-a-t" title="澳大利亞悉尼">澳大利亞悉尼</a></li><li class="fhm-li-t showGW" data-name="英国伦敦" name="10013" id="3"><a target="_blank" href="https://www.globevisa.com.cn/London.html" class="fhm-a-t" title="英國倫敦">英國倫敦</a></li><li class="fhm-li-t showGW" data-name="加拿大温哥华" name="123" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/wgh.html" class="fhm-a-t" title="加拿大溫哥華">加拿大溫哥華</a></li><li class="fhm-li-t showGW" data-name="新加坡" name="10000" id="3"><a target="_blank" href="https://www.globevisa.com.cn/xjp.html" class="fhm-a-t" title="新加坡">新加坡</a></li><li class="fhm-li-t showGW" data-name="马来西亚吉隆坡" name="10005" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/Malaysia.html" class="fhm-a-t" title="馬來西亞吉隆坡">馬來西亞吉隆坡</a></li><li class="fhm-li-t showGW" data-name="美国洛杉矶" name="10045" id="3"><a target="_blank" href="https://www.globevisa.com.cn/meiguo/news/64189.html" class="fhm-a-t" title="美國洛杉矶">美國洛杉矶</a></li><li class="fhm-li-t showGW" data-name="美国纽约" name="10047" id="3"><a target="_blank" href="https://www.globevisa.com.cn/zhongguoxianggang/index.html" class="fhm-a-t" title="美國紐約">美國紐約</a></li><li class="fhm-li-t showGW" data-name="加拿大多伦多" name="10001" id="3"><a target="_blank" href="https://www.globevisa.com.cn/zhongguoxianggang/index.html" class="fhm-a-t" title="加拿大多倫多">加拿大多倫多</a></li><li class="fhm-li-t showGW" data-name="深圳" name="3" id="3" style="clear:both">
+<a target="_blank" href="https://www.globevisa.com.cn/shenzhen.html" class="fhm-a-t" title="深圳">深圳</a></li><li class="fhm-li-t showGW" data-name="北京" name="13" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/beijing.html" class="fhm-a-t" title="北京">北京</a></li><li class="fhm-li-t showGW" data-name="上海" name="2" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/shanghai.html" class="fhm-a-t" title="上海">上海</a></li><li class="fhm-li-t showGW" data-name="苏州" name="4" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/jiangsu.html" class="fhm-a-t" title="蘇州">蘇州</a></li><li class="fhm-li-t showGW" data-name="南京" name="37" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/nanjing.html" class="fhm-a-t" title="南京">南京</a></li><li class="fhm-li-t showGW" data-name="青岛" name="14" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/qingdao.html" class="fhm-a-t" title="青島">青島</a></li><li class="fhm-li-t showGW" data-name="沈阳" name="7" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/shenyang.html" class="fhm-a-t" title="沈陽">沈陽</a></li><li class="fhm-li-t showGW" data-name="广州" name="16" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/guangzhou.html" class="fhm-a-t fhm-a-cur" title="廣州">廣州</a></li><li class="fhm-li-t showGW" data-name="杭州" name="12" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/hangzhou.html" class="fhm-a-t" title="杭州">杭州</a></li><li class="fhm-li-t showGW" data-name="重庆" name="10003" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/chongqing.html" class="fhm-a-t" title="重慶">重慶</a></li>  <li class="fhm-li-t showGW" data-name="成都" name="124" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/chengdu.html" class="fhm-a-t" title="成都">成都</a></li><li class="fhm-li-t showGW" data-name="大连" name="11" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/dalian.html" class="fhm-a-t" title="大連">大連</a></li><li class="fhm-li-t showGW" data-name="武汉" name="35" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/wuhan.html" class="fhm-a-t" title="武漢">武漢</a></li><li class="fhm-li-t showGW" data-name="中国香港" name="28" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/xianggang.html" class="fhm-a-t" title="中國香港">中國香港</a></li><li class="fhm-li-t showGW" data-name="无锡" name="10009" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/wuxi.html" class="fhm-a-t" title="無錫">無錫</a></li><li class="fhm-li-t showGW" data-name="济南" name="27" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/jinan.html" class="fhm-a-t" title="濟南">濟南</a></li>  <li class="fhm-li-t showGW" data-name="郑州" name="10002" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/zhengzhou.html" class="fhm-a-t" title="鄭州">鄭州</a></li>  <li class="fhm-li-t showGW" data-name="长沙" name="10011" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/changsha.html" class="fhm-a-t" title="長沙">長沙</a></li><li class="fhm-li-t showGW" data-name="天津" name="10007" id="3">
+<a target="_blank" href="https://www.globevisa.com.cn/tianjin.html" class="fhm-a-t" title="天津">天津</a></li></ul>
+</div>
+</section>
+
+<section class="fhm-corresponding" style="font-size: 14px">
+<section class="fhm-c-list pr   showGW" name="3">
+<ul class="pa fhm-cl-ul" style="width: 4212px; left: 0px;">
+<li class="pr fhm-cl-li">
+  <span class="fhm-cl-t">
+    <a target="_blank" href="https://www.globevisa.com.cn/gw-583-3.html"><img data-original="/ymcg/20191115-深圳Aimee贾静137X132.jpg" src="https://www.globevisa.com.cn/zhongguoxianggang/index.html" style="margin-left: 4px"></a>
+  </span>
+  <span class="fhm-cl-b">
+    <p class="tac" attr-token="206fe838c767c07b76e6f0bec19653ab">深圳-Aimee賈</p>
+    <ul><li><a href="javascript:;" onclick="Meiqia(&quot;206fe838c767c07b76e6f0bec19653ab&quot;,&quot;gnpc-lunbo-Shenzhen&quot;,&quot;3&quot;,)">在线咨询</a></li>
+      <li><a href="javascript:;">撥打電話</a></li>
+    </ul>
+  </span>
+  <span class="fhm-cl-p pa">
+    <img data-original="/ymcg/2021-04-15Aimee贾静137X132顾问企业微信二维码.jpg" class="fl" src="https://www.globevisa.com.cn/zhongguoxianggang/index.html">
+    <div class="info" style="color:#555">
+      <em style="color:#a67e3d;font-weight:bold;">深圳-Aimee賈</em><br>
+      <em style="color:#555">郵箱：</em>aimeejia@globevisa.com<br>
+<em style="color:#555">手機：</em>0086-18565653108<br>   </div>
+    <p class="fl" style="color:#555"><em style="color:#555">個人簡介：</em>10年移民留學從業經驗，精通全球各國移民政策，涉及30多個國家400多個項目。熟悉各項目操作細節及風險點，已成功幫助2000組家庭實現移民之夢。秉承專業，誠信，高效深受客戶信賴。</p></span></li>
+
+<li class="pr fhm-cl-li">
+  <span class="fhm-cl-t">
+    <a target="_blank" href="https://www.globevisa.com.cn/gw-703-3.html"><img data-original="/ymcg/2024-06-06Elva殷艳137X132中文官网头像.jpg" src="https://www.globevisa.com.cn/zhongguoxianggang/index.html" style="margin-left: 4px"></a>
+  </span>
+
+                      <span class="fhm-cl-b">
+                      <p class="tac" attr-token="f0f4e9f11469ce874fb44f663a88a045">深圳-Elva殷</p>
+                      <ul>
+    <li class="cur"><a class="cur" href="javascript:;" onclick="Meiqia(&quot;f0f4e9f11469ce874fb44f663a88a045&quot;,&quot;gnpc-lunbo-Shenzhen&quot;,&quot;3&quot;,)">留言给我</a></li>
+
+                        <li><a href="javascript:;">撥打電話</a></li>
+                      </ul>
+                    </span>
+                    <span class="fhm-cl-p pa">
+                      <img data-original="https://img.globevisa.com.cn/images/customers/00085bdd-0000-0000-0000-0000a8867a4c/2021041600000001086353/2021-04-16Elva殷艳137X132顾问企业微信二维码.jpg" class="fl" src="https://www.globevisa.com.cn/zhongguoxianggang/index.html">
+                      <div class="info" style="color:#555">
+                        <em style="color:#a67e3d;font-weight:bold;">深圳-Elva殷</em><br>
+                        <em style="color:#555">郵箱：</em>elvayin@globevisa.com<br>
+<em style="color:#555">手機：</em>0086-18575689300<br>
+                      </div>
+                      <p class="fl" style="color:#555"><em style="color:#555">個人簡介：</em>我是環球首席資深顧問Elva殷豔，從事移民行業近5年，每年服務上百組家庭。<br>擅長各國投資創業及留學移民、境外資産配置，稅務歸劃等<br>助您一步到位成爲全球公民，移路順暢</p>
+                                          </span>
+                  </li>
+
+</ul>
+</section>
+</section>
+
+</div>
+</div>
+
+
+
+<div class="container link">
+  <div class="col-md-12"> 友情链接： 
+    {eyou:links loop="24"  type="text" } <a href="{$field.url}" {$field.target} {$field.nofollow}>{$field.title}</a> {/eyou:links} </div>
+</div>
+{eyou:include file="footer.htm" /}
+</body>
+</html>

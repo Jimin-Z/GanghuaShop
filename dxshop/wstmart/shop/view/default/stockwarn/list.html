@@ -1,0 +1,35 @@
+{extend name="default/base" /}
+{block name="css"}
+<style>
+body{overflow-y:hidden;}
+td .layui-table-cell{height:60px !important;line-height: 60px;overflow: inherit!important;}
+td .laytable-cell-1-0-2{overflow:hidden!important;}
+.layui-table img{max-width:180px!important;}
+</style>
+{/block}
+{block name="main"}
+<div class="wst-page">
+<div class="wst-toolbar">
+    <select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">
+        <option value="">-请选择商品分类-</option>
+      {volist name=":WSTShopCats(0)" id="vo"}
+            <option value="{$vo['catId']}" >{$vo['catName']}</option>
+      {/volist}
+    </select>
+    <select name="cat2" id="cat2" class="s-query"><option value="">-请选择商品分类-</option></select>
+    <a class="s-btn btn btn-primary" onclick="loadGrid(0)"><i class="fa fa-search"></i>查询</a>
+</div>
+<div class='wst-grid'>
+    <div id="mmg" class="mmg"></div>
+</div>
+</div>
+
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/stockwarn/stockwarn.js?v={$v}'></script>
+<script>
+    $(function(){
+        stockByPage({$p});
+    });
+</script>
+{/block}

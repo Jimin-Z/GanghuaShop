@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript"> 
+<!--
+//图片按比例缩放
+var flag=false;
+function DrawImage(ImgD,iwidth,iheight){
+    //参数(图片,允许的宽度,允许的高度)
+    var image=new Image();
+    image.src=ImgD.src;
+    if(image.width>0 && image.height>0){
+    flag=true;
+    if(image.width/image.height>= iwidth/iheight){
+        if(image.width>iwidth){  
+        ImgD.width=iwidth;  ImgD.height=(image.height*iwidth)/image.width;
+        }else{    ImgD.width=image.width;    ImgD.height=image.height;  }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    else{
+        if(image.height>iheight){  
+        ImgD.height=iheight;  ImgD.width=(image.width*iheight)/image.height;        
+        }else{
+        ImgD.width=image.width;   ImgD.height=image.height;
+        }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    }
+} 
+//-->
+</script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{$eyou.field.seo_title}</title>
+<meta name="description" content="{$eyou.field.seo_description}" />
+<meta name="keywords" content="{$eyou.field.seo_keywords}" />
+<link href="{eyou:global name='web_ico' /}" rel="shortcut icon" type="image/x-icon" />
+{eyou:static file="skin/css/bootstrap.css" /}
+{eyou:static file="skin/css/font.css" /}
+{eyou:static file="skin/css/amazeui.min.css" /}
+{eyou:static file="skin/css/base.css" /}
+<style type="text/css">
+body, td, th {	font-family: "微软雅黑", Helvetica, Arial, Tahoma, SimSun, sans-serif;
+}
+</style>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+{eyou:static file="skin/js/html5shiv.min.js" /}
+{eyou:static file="skin/js/respond.min.js" /}      
+<![endif]-->
+</head><body>
+{eyou:include file="headerold.htm"/}
+<div class="pt10 container inside_nav"> 您的位置：{eyou:position/} </div>
+<div class="container">
+  <div class="con mt10 white_bg mb30">
+    <div class="text-center">
+      <h1>{$eyou.field.title}</h1>
+      <time>{$eyou.field.update_time|MyDate='Y/m/d',###}</time>
+      <hr >
+    </div>
+    <div> {$eyou.field.content} </div>
+          {$eyou.field.shipin}
+
+    <div class="pb50 gray38"> {eyou:prenext get='pre' titlelen='30'}
+      <p class="pb10">{eyou:lang name='sys11' /}：<a href='{$field.arcurl}'>{$field.title}</a></p>
+      {eyou:else /}
+      <p class="pb10">{eyou:lang name='sys11' /}：<a>{eyou:lang name='sys10' /}</a></p>
+      {/eyou:prenext}
+      {eyou:prenext get='next' titlelen='30'}
+      <p>{eyou:lang name='sys12' /}：<a href='{$field.arcurl}'>{$field.title}</a></p>
+      {eyou:else /}
+      <p>{eyou:lang name='sys12' /}：<a>{eyou:lang name='sys10' /}</a></p>
+      {/eyou:prenext} </div>
+  </div>
+</div>
+{eyou:include file="footer.htm" /}
+</body>
+</html>

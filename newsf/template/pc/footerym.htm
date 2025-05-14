@@ -1,0 +1,43 @@
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="./ymcg/layer1.js"></script>
+<script type="text/javascript" src="./ymcg/swiper1.js"></script>
+<script type="text/javascript" src="./ymcg/nav1.js"></script>
+<script type="text/javascript" src="./ymcg/warp_hq1.js"></script>
+<script type="text/javascript" src="./ymcg/window1.js"></script>
+<script type="text/javascript" src="./ymcg/functions1.js"></script>
+<script type="text/javascript" src="./ymcg/md5AndCaptcha.js"></script>
+<script type="text/javascript" id="domain" domain="0" src="./ymcg/main.js"></script>
+<script type="text/javascript" src="./ymcg/AjaxFormSubmit.js"></script>
+<script type="text/javascript" src="./ymcg/pctomobile1.js"></script>
+<script type="text/javascript" src="./ymcg/cost.js"></script>
+<!-- <script src="https://m.globevisa.com.cn/static/index/js/userInfo.js?1683710040225"></script> -->
+<footer>
+  <div class="container"> {eyou:models type="top" id="field" loop="6"}
+    <div class="col-md-2 col-xs-6">
+      <h2><a href="{$field.typeurl}">{$field.typename}</a></h2>
+     <p> {eyou:models name="$field.children" id="field2" loop="4"} <a href="{$field2.typeurl}">{$field2.typename}</a>{/eyou:models} </p>
+    </div>
+    {/eyou:models} </div>
+ 
+  <div class="container">
+<!--  <div class="container link">
+  <div class="col-md-12"> 友情链接： 
+    {eyou:links loop="24"  type="text" } <a href="{$field.url}" {$field.target} {$field.nofollow}>{$field.title}</a> {/eyou:links} </div>
+</div> -->
+
+    <div class="col-md-12 white footer01"> {eyou:global name='web_copyright' /} <br>
+      <!--
+      {eyou:global name='web_attrname_1' /}：{eyou:global name='web_attr_1' /}       {eyou:global name='web_attrname_2' /}：{eyou:global name='web_attr_2' /} <br>
+ 
+      {eyou:global name='web_attrname_3' /}：{eyou:global name='web_attr_3' /}       {eyou:global name='web_attrname_4' /}：{eyou:global name='web_attr_4' /}     {eyou:global name='web_attrname_5' /}：{eyou:global name='web_attr_5' /}
+   -->
+       </div>
+  </div>
+
+</footer>
+{eyou:static file="skin/js/jquery-3.7.0.min.js" /}
+{eyou:static file="skin/js/bootstrap.js" /}
+{eyou:static file="skin/js/amazeui.min.js" /} 
+<!-- 应用插件标签 start --> 
+{eyou:weapp type='default' /} 
+<!-- 应用插件标签 end -->

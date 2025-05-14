@@ -1,0 +1,113 @@
+<div class='invoice_box'>
+  <div class="invoice_item">
+    <div class="invoice_left">
+      发票类型：
+    </div>
+    <div class="invoice_right">
+      <ul class="inv_ul1 inv_type_ul">
+        <li class='inv_li1 {if($invoiceType==0)}inv_li_curr{/if}' onClick="changeInvoiceType('0',this)" invType="0">普通发票<i></i></li>
+        <li class='inv_li1 {if($invoiceType==1)}inv_li_curr{/if}' onClick="changeInvoiceType('1',this)" invType="1">专用发票<i></i></li>
+        <div calss="wst-clear"></div>
+      </ul>
+    </div>
+  </div>
+  <div class="invoice_item">
+      <div class="invoice_left">
+        发票抬头：
+      </div>
+      <div class="invoice_right">
+        <ul class="inv_ul">
+          <li class='inv_li {if($invoiceId==0)}inv_li_curr{/if}' onClick="changeInvoiceItem('0',this)" type="0" isPerson="1">个人<i></i></li>
+          {volist name='data' id="inv"}
+          <li class='inv_li {if($invoiceId==$inv["id"])}inv_li_curr{/if}' onClick="changeInvoiceItem('{$inv.id}',this)" type="{$inv.invoiceType}" >
+            <span id="invoiceHead_{$inv.id}" class="invoice_input">{$inv.invoiceHead}</span>
+            <input type="hidden" id="invoiceCode_{$inv.id}" value="{$inv.invoiceCode}"} />
+            <input type="hidden" id="invoiceAddr_{$inv.id}" value="{$inv.invoiceAddr}"} />
+            <input type="hidden" id="invoicePhoneNumber_{$inv.id}" value="{$inv.invoicePhoneNumber}"} />
+            <input type="hidden" id="invoiceBankName_{$inv.id}" value="{$inv.invoiceBankName}"} />
+            <input type="hidden" id="invoiceBankNo_{$inv.id}" value="{$inv.invoiceBankNo}"} />
+            <i></i>
+            <div class="inv_opabox">
+            </div>
+          </li>
+          {/volist}
+          <li class='inv_li' id='noNormalInvoice' onClick="javascript:location.href=WST.U('home/Invoices/invoiceList')" type="2" style="display:none;">
+              暂无普通发票，点击此处新增
+          </li>
+          <li class='inv_li' id='noSpecialInvoice' onClick="javascript:location.href=WST.U('home/Invoices/invoiceList')" type="2" style="display:none;">
+              暂无专用发票，点击此处新增
+          </li>
+        </ul>
+      </div>
+       <div class="wst-clear"></div>
+  </div>
+  <div class="invoice_item">
+    <div class="invoice_left">
+
+    </div>
+    <div class="invoice_right">
+
+    </div>
+  </div>
+
+
+  <div class="invoice_item inv_codebox">
+    <div class="invoice_left">
+        纳税人识别号：
+    </div>
+    <div class="invoice_right">
+      <input type="text" id="invoice_num" readonly/>
+    </div>
+  </div>
+  <div class="invoice_item inv_codebox2">
+    <div class="invoice_left">
+      注册地址：
+    </div>
+    <div class="invoice_right">
+      <input type="text" id="invoice_addr" readonly/>
+    </div>
+  </div>
+  <div class="invoice_item inv_codebox2">
+    <div class="invoice_left">
+      注册电话：
+    </div>
+    <div class="invoice_right">
+      <input type="text" id="invoice_phone_number" readonly/>
+    </div>
+  </div>
+  <div class="invoice_item inv_codebox2">
+    <div class="invoice_left">
+      开户银行：
+    </div>
+    <div class="invoice_right">
+      <input type="text" id="invoice_bank_name" readonly/>
+    </div>
+  </div>
+  <div class="invoice_item inv_codebox2">
+    <div class="invoice_left">
+      银行账户：
+    </div>
+    <div class="invoice_right">
+      <input type="text" id="invoice_bank_no" readonly/>
+    </div>
+  </div>
+
+  <div class="invoice_item">
+    <div class="invoice_left">
+        发票内容：
+    </div>
+    <div class="invoice_right">
+      <ul class="inv_ul1">
+        <li class='inv_li1 inv_li2 {if($isInvoice==0)}inv_li_curr{/if}' onClick="changeInvoiceItem1('0',this)">不开发票<i></i></li>
+        <li class='inv_li1 inv_li2 {if($isInvoice==1)}inv_li_curr{/if}' onClick="changeInvoiceItem1('1',this)">明细<i></i></li>
+        <div class="wst-clear"></div>
+      </ul>
+    </div>
+  </div>
+  <div class="invoice_item tc">
+    <a href="javascript:void(0)" class="inv_btn" onClick="saveInvoice()">保存</a>
+    <a href="javascript:void(0)" class="inv_btn inv_cancel" onclick='layerclose()'>取消</a>
+  </div>
+
+  <div class="wst-clear"></div>
+</div>

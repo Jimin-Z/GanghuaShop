@@ -1,0 +1,129 @@
+{extend name="base" /}
+{block name="js"}
+<script src="__ADMIN__/goodsappraises/goodsappraises.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<script type="text/javascript" src="__STATIC__/plugins/raty/jquery.raty.min.js"></script>
+<script>
+$(function(){
+
+});
+</script>
+<form id="goodsAppraisesForm2" autocomplete="off" onsubmit="return false;">
+<table class='wst-form wst-box-top'>
+  <tr>
+      <th width='150'>商品：</th>
+          <td>
+            <img src='__RESOURCE_PATH__/{:str_replace(".","_thumb.",$data["goodsImg"])}' width='50' style="float:left;" />&nbsp;
+            <p style="float:left;height:50px;line-height:25px;width:285px;overflow:hidden;margin-left:5px;">{$data['goodsName']}</p>
+          </td>
+       </tr>
+       <tr>
+          <th>所属订单：</th>
+          <td>
+              {$data['orderNo']}
+          </td>
+       </tr>
+       <tr>
+          <th>用户：</th>
+          <td>
+              {$data['loginName']}
+          </td>
+       </tr>
+       <tr>
+          <th>评价：</th>
+          <td>
+                <div style='width:500px;' class="wst-flex-row">
+                  <div style='float:left;width:70px;'>商品评分：</div>
+                  <div style='float:left;width:430px;'>
+                        {php}
+                              for($i=0;$i<$data['goodsScore'];++$i){
+                                echo "<img src='__ROOT__/wstmart/admin/view/goodsappraises/icon_score_yes.png'>";
+                              }
+                        {/php}
+                  </div>
+                </div>
+
+               <div style='width:500px;' class="wst-flex-row">
+                    <div style='float:left;width:70px;'> 时效评分：</div>
+                    <div style='float:left;width:430px;'>
+                        {php}
+                            for($i=0;$i<$data['timeScore'];++$i){
+                                echo "<img src='__ROOT__/wstmart/admin/view/goodsappraises/icon_score_yes.png'>";
+                            }
+                        {/php}
+                    </div>
+               </div>
+
+               <div style='width:500px;' class="wst-flex-row">
+                  <div style='float:left;width:70px;'>服务评分：</div>
+                  <div style='float:left;width:430px;'>
+                      {php}
+                          for($i=0;$i<$data['serviceScore'];++$i){
+                            echo "<img src='__ROOT__/wstmart/admin/view/goodsappraises/icon_score_yes.png'>";
+                          }
+                      {/php}
+                  </div>
+               </div>
+          </td>
+
+       </tr>
+       <tr>
+          <th>评论：</th>
+          <td>
+              {$data['content']}
+          </td>
+       </tr>
+        <tr>
+            <th>举报理由：</th>
+            <td>
+                {$data['reportContent']}
+            </td>
+        </tr>
+        <tr>
+            <th>举报时间：</th>
+            <td>{$data['reportTime']}</td>
+        </tr>
+       <tr>
+          <th>附件：</th>
+          <td>
+              <div id="appraise-img">
+              {if !empty($data['images'])}
+                {volist name="$data['images']" id="img"}
+                <img style='cursor:pointer' src="{:WSTUserPhoto(str_replace('.','_thumb.',$img),true)}" layer-src="{:WSTUserPhoto($img,true)}" width="50" />
+                {/volist}
+              {/if}
+            </div>
+          </td>
+       </tr>
+    <tr>
+        <th>举报结果<font color='red'>*</font>：</th>
+        <td class='layui-form'>
+            <label>
+                <input type='radio' class='ipt' name='reportStatus'  value='1' checked onclick='javascript:WST.showHide(0,"#trStatusDesc")' data-rule="举报结果:checked" title='举报成功'>
+            </label>
+            <label>
+                <input type='radio' class='ipt' name='reportStatus' id='reportStatus-1' value='-1'  onclick='javascript:WST.showHide(1,"#trStatusDesc")' title='举报失败'>
+            </label>
+        </td>
+    </tr>
+    <tr id='trStatusDesc' style='display:none'>
+    <th>举报失败原因<font color='red'>*</font>：</th>
+    <td><textarea id='reportDesc' class='ipt' style='width:500px;height:100px;' maxLength='100' data-rule="举报失败原因:required(#reportStatus-1:checked);"></textarea></td>
+    </tr>
+  <tr>
+     <td colspan='2' align='center' class="wst-bottombar">
+       <input type="hidden" name="id" id="id" class="ipt" value="{$data['id']+0}" />
+       <button type="submit"  class='btn btn-primary btn-mright' onclick='javascript:handle({$data["id"]},{$p})'><i class="fa fa-check"></i>确定</button>
+       <button type="button"  class='btn' onclick="javascript:WST.backPrePage();"><i class="fa fa-angle-double-left"></i>返回</button>
+     </td>
+  </tr>
+</table>
+</form>
+<script>
+$(function(){
+    WST.showPhotos("#appraise-img",true);
+});
+
+</script>
+{/block}

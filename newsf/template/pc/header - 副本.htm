@@ -1,0 +1,20 @@
+<div class="white_bg">
+  <div class="container">
+    <div class="row pt20 pb20">
+      <div class="col-md-6 index01"> <a href="{eyou:global name='web_basehost' /}"><img src="{eyou:global name='web_logo' /}" border="0"></a> </div>
+      <div class="col-md-6 text-right shou_no"> <img src="{eyou:global name='web_templets_pc' /}/skin/images/img01.png" > </div>
+    </div>
+  </div>
+</div>
+<div class="nav_bg">
+  <div class="container">
+    <ul class="clearfix">
+      <li><a {eyou:eq name='$Request.param.m' value='Index'} class="active"{/eyou:eq} href="{eyou:global name='web_basehost' /}">首页</a></li>
+      {eyou:models type="top" id="field" currentstyle="active" loop='8'}
+      <li><a class="{$field.currentstyle}" href="{$field.typeurl}">{$field.typename}</a> {eyou:notempty name="$field.children"}
+        <div class="xiala"> {eyou:models name="$field.children" id="field2"} <a href="{$field2.typeurl}">{$field2.typename}</a> {/eyou:models} </div>
+        {/eyou:notempty} </li>
+      {/eyou:models}
+    </ul>
+  </div>
+</div>

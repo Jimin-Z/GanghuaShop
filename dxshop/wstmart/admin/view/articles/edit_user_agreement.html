@@ -1,0 +1,118 @@
+{extend name="base" /}
+{block name="css"}
+{/block}
+{block name="js"}
+<script src="__STATIC__/plugins//kindeditor/NKeditor-all.js?v={$v}" type="text/javascript" ></script>
+<script src="__ADMIN__/articles/agreement.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="layui-tab layui-tab-brief" lay-filter="msgTab">
+	<ul class="layui-tab-title">
+		<li class="layui-this">注册协议</li>
+		<li >注销协议</li>
+	</ul>
+	<div class="layui-tab-content" >
+		<div class="layui-tab-item layui-show">
+			<input type='hidden' id='articleId1' class='ipt1' value='{$object["articleId"]}'/>
+
+			<table class='wst-form wst-box-top '>
+			   <tr>
+				   <td align='center'>用户注册协议</th>
+			   </tr>
+				   <td align='center'>
+					{if WSTGrant('YHRZXY_00')}
+					<textarea id='articleContent1' name='articleContent1' class="form-control ipt1" style='width:80%;'>{$object['articleContent']}</textarea>
+					{else}
+					<div style='width:80%;text-align:left;'>
+					{$object['articleContent']|htmlspecialchars_decode}
+					<div>
+					{/if}
+				   </td>
+				</tr>
+				{if WSTGrant('YHRZXY_02')}
+				<tr>
+				   <td align='center'>
+					<button type="button" class="btn btn-primary btn-mright" onclick="javascript:saveAgreement(1)"><i class="fa fa-check"></i>保&nbsp;存</button>
+					<button type="button" class="btn" onclick="javascript:clearHtml(1)"><i class="fa fa-refresh"></i>清&nbsp;除</button>
+				   </td>
+				</tr>
+				{/if}
+			</table>
+		</div>
+		<div class="layui-tab-item">
+			<input type='hidden' id='articleId2' class='ipt2' value='{$object2["articleId"]}'/>
+			<table class='wst-form wst-box-top '>
+				<tr>
+					<td align='center'>帐号注销协议</th>
+				</tr>
+				<td align='center'>
+					{if WSTGrant('YHRZXY_00')}
+					<textarea id='articleContent2' name='articleContent2' class="form-control ipt2" style='width:80%;'>{$object2['articleContent']}</textarea>
+					{else}
+					<div style='width:80%;text-align:left;'>
+						{$object2['articleContent']|htmlspecialchars_decode}
+						<div>
+							{/if}
+				</td>
+				</tr>
+				{if WSTGrant('YHRZXY_02')}
+				<tr>
+					<td align='center'>
+						<button type="button" class="btn btn-primary btn-mright" onclick="javascript:saveAgreement(2)"><i class="fa fa-check"></i>保&nbsp;存</button>
+						<button type="button" class="btn" onclick="javascript:clearHtml(2)"><i class="fa fa-refresh"></i>清&nbsp;除</button>
+					</td>
+				</tr>
+				{/if}
+			</table>
+		</div>
+{if WSTGrant('YHRZXY_02')}
+<script>
+var editor1 = editor2 = null;
+$(function(){
+  //编辑器
+    KindEditor.ready(function(K) {
+		editor1 = K.create('textarea[name="articleContent1"]', {
+			height:'600px',
+            uploadJson : WST.conf.ROOT+'/admin/articles/editorUpload',
+			allowFileManager : false,
+			allowImageUpload : true,
+            themeType : "default",
+		    items:[     'source', 'undo', 'redo',  'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+		                'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
+		                'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+		                'superscript', 'clearhtml', 'quickformat', 'selectall',  'fullscreen',
+		                'formatblock', 'fontname', 'fontsize',  'forecolor', 'hilitecolor', 'bold',
+		                'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', 'image','multiimage','media','table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+		                'anchor', 'link', 'unlink'
+		    ],
+			afterBlur: function(){ this.sync(); }
+		});
+		editor2 = K.create('textarea[name="articleContent2"]', {
+			height:'600px',
+			uploadJson : WST.conf.ROOT+'/admin/articles/editorUpload',
+			allowFileManager : false,
+			allowImageUpload : true,
+			themeType : "default",
+			items:[     'source', 'undo', 'redo',  'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
+				'plainpaste', 'wordpaste', 'justifyleft', 'justifycenter', 'justifyright',
+				'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+				'superscript', 'clearhtml', 'quickformat', 'selectall',  'fullscreen',
+				'formatblock', 'fontname', 'fontsize',  'forecolor', 'hilitecolor', 'bold',
+				'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', 'image','multiimage','media','table', 'hr', 'emoticons', 'baidumap', 'pagebreak',
+				'anchor', 'link', 'unlink'
+			],
+			afterBlur: function(){ this.sync(); }
+		});
+	});
+});
+function clearHtml(type){
+	if(type==1){
+		editor1.html("");
+	}else{
+		editor2.html("");
+	}
+
+}
+</script>
+{/if}
+{/block}

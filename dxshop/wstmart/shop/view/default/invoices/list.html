@@ -1,0 +1,30 @@
+{extend name="default/base" /}
+{block name="title"}我的发票 - {__block__}{/block}
+{block name="css"}
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<div class='wst-toolbar'>
+	<div class="wst-tips-box">
+	    <div class="icon"></div>
+	    <div class="tips">该功能主要用于管理商家账号的发票，最多新增20条发票信息。</div>
+	    <div style="clear:both"></div>
+	</div>
+    <div style="float:right;">
+        <a class="btn btn-primary" onclick="javascript:toAdd()"><i class="fa fa-plus"></i>新增发票</a>
+    </div>
+    <div class="f-clear"></div>
+</div>
+<div class='wst-grid'>
+    <div id="mmg" class="mmg"></div>
+</div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/invoices/invoices.js?v={$v}'></script>
+<script>
+$(function(){
+    initGrid({$p});
+});
+</script>
+{/block}

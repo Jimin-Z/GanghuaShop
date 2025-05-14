@@ -1,0 +1,78 @@
+{extend name="default/base" /}
+{block name="css"}
+{/block}
+{block name="main"}
+<div class="wst-page">
+<div id='tab' class="wst-tab-box">
+	<ul class="wst-tab-nav ">
+		<li id="wst-msg-li-0">结算信息<span style="display:none;"></span></li>
+		<li id="wst-msg-li-1">未结算订单<span style="display:none;"></span></li>
+		<li id="wst-msg-li-2">已结算订单<span style="display:none;"></span></li>
+	</ul>
+	<div class="wst-tab-content" style='width:100%;'>
+	    <div class='wst-tab-item'>
+	       <div class="wst-toolbar wst-toolbar1">
+	       <input type="text" id="settlementNo_0" style='width:120px;' autocomplete="off" placeholder="请输入结算单号"/>
+						<select id='isFinish_0' autocomplete="off">
+								<option value='-1'>结算状态</option>
+								<option value='0'>未结算</option>
+								<option value='1'>已结算</option>
+								</select>
+						<a class='s-btn btn btn-primary' onclick="loadGrid(0)"><i class="fa fa-search"></i>查询</a>
+		   </div>
+			<div class='wst-grid'>
+				<div id="mmg1" class="mmg1"></div>
+			</div>
+        </div>
+        {/** 待结算订单 **/}
+        <div class='wst-tab-item'>
+            <div class="wst-toolbar wst-toolbar2">
+                <input type="text" id="orderNo_1" style='width:120px;' autocomplete="off" placeholder="请输入订单号"/>
+                <input type="text" id="startDate" style='width:120px' name="startDate" class="laydate-icon j-ipt" maxLength="20" value='' placeholder='申请开始日期'/>
+至
+<input type="text" id="endDate" name="endDate" style='width:120px' class="laydate-icon j-ipt" maxLength="20" value='' placeholder='申请结束日期'/>
+				<a class='s-btn btn btn-primary' onclick="loadUnSettleGrid(0)"><i class="fa fa-search"></i>查询</a>
+            </div>
+			<div class='wst-grid'>
+				<div id="mmg2" class="mmg2"></div>
+			</div>
+        </div>
+        <div class='wst-tab-item'>
+            <div class="wst-toolbar wst-toolbar3">
+            	<input type="text" id="settlementNo_2" style='width:120px;' autocomplete="off" placeholder="请输入结算单号"/>
+				<input type="text" id="orderNo_2" style='width:120px;' autocomplete="off" placeholder="请输入订单号"/>
+				<select id='isFinish_2' autocomplete="off">
+							    <option value='-1'>结算状态</option>
+								<option value='0'>未结算</option>
+								<option value='1'>已结算</option>
+						  </select>
+				<a class='s-btn btn btn-primary' onclick="loadSettleGrid(0)"><i class="fa fa-search"></i>查询</a>
+            </div>
+			<div class='wst-grid'>
+				<div id="mmg3" class="mmg3"></div>
+			</div>
+        </div>
+	</div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/settlements/settlements.js?v={$v}'></script>
+	<script>
+        $(function(){
+            $('#tab').TabPanel({tab:0,callback:function(tab){
+                    switch(tab){
+                        case 0:getQueryPage({$p});break;
+                        case 1:getUnSettledOrderPage({$p});break;
+                        case 2:getSettleOrderPage({$p});break;
+                    }
+                }});
+            var laydate = layui.laydate;
+    laydate.render({
+        elem: '#startDate'
+    });
+    laydate.render({
+        elem: '#endDate'
+    });
+        });
+	</script>
+{/block}

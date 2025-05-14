@@ -1,0 +1,108 @@
+{extend name="default/base" /}
+{block name="css"}
+<link rel="stylesheet" href="__STORE__/css/index.css" type="text/css"/>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__STATIC__/js/rsa.js"></script>
+<script src="__STORE__/js/index.js?v={$v}"></script>
+{/block}
+{block name="main"}
+<input type='hidden' id='token' value='{:WSTConf("CONF.pwdModulusKey")}'/>
+<div class='wrapper'>
+   <div class='layout-top' style=''>
+      <div class='logo'>{:session('WST_STORE.storeName')}</div>
+      <ul class="layui-nav wstmenu">
+        {volist name='$sysMenus' key='key0' id='left0'}
+        <li class="layui-nav-item {if $key0==1}layui-this{/if}"><a href="javascript:showMenus({$left0['menuId']})">{$left0['menuName']}</a></li>
+        {/volist}
+      </ul>
+      <ul class="layui-nav nav layui-layout-right toMsg">
+        <li class="layui-nav-item"><a href="javascript:;" class="msgIco"><i class='fa fa-bell fa-lg'></i><span class='msg-num'></span></a>
+          <dl class="layui-nav-child">
+           {if WSTStoreGrant('store/messages/shopMessage')}
+                <div id='m-msg'><a href='javascript:void(0)' onclick='redirect(418)'>用户消息<span></span></a></div>
+                {/if}
+                {if WSTStoreGrant('store/orders/waitdelivery')}
+                <div id='m-371'><a href='javascript:void(0)' onclick='redirect(409)'>待发货订单</a><span></span></div>
+                {/if}
+                {if WSTStoreGrant('store/orders/waituserPay')}
+                <div id='m-370'><a href='javascript:void(0)' onclick='redirect(408)'>待付款订单</a><span></span></div>
+                {/if}
+          </dl>
+      </li>
+        <li class="layui-nav-item">
+          <a href="javascript:;"><img src="{:WSTUserPhoto(session('WST_STORE.staffPhoto'))}"  class="layui-nav-img">{if $Request.session.WST_STORE.userName!=''}{$Request.session.WST_STORE.userName}{else}{$Request.session.WST_STORE.loginName}{/if}</a>
+          <dl class="layui-nav-child">
+            <dd><a href="javascript:editPassBox();" class='' style='font-size:12px'><i class='fa fa-key'></i>修改密码</a></dd>
+            <hr>
+            <dd><a href="javascript:logout()" class='j-logout' style='font-size:12px'><i class='fa fa-power-off'></i>退出</a></dd>
+          </dl>
+        </li>
+      </ul>
+   </div>
+   <div class='layout-main'>
+      <div class='layout-sidebar'>
+         <ul class="layui-nav layui-nav-tree layui-inline sidebar">
+            {volist name='$sysMenus' key='key0' id='left0'}
+            {if !empty($left0['list'])}
+            {volist name="left0['list']" id='left1'}
+            <li class="layui-nav-item {if !empty($top['child'])}layui-nav-itemed{/if} menu menu{$left0['menuId']}" {if $key0>1}style='display:none'{/if}>
+              <a href="javascript:void(0);" class='sidebar-menus'><i class='fa fa-{$top['menuIcon']?$top['menuIcon']:'circle-o'} fai'></i>{$left1['menuName']}</a>
+              {if !empty($left1['list'])}
+              <dl class="layui-nav-child">
+                {volist name="left1['list']" id='left2'}
+                <dd>
+                {php} if(stripos($left2['menuUrl'],'http://')!==false || stripos($left2['menuUrl'],'https://')!==false ){ {/php}
+                <a href="javascript:void(0);" class='sidebar-menus menuItem{$left2['menuId']}' {if isset($left2['menuUrl'])}dataurl="{$left2['menuUrl']}{/if}">
+                {php} }else{ {/php}
+                <a href="javascript:void(0);" class='sidebar-menus menuItem{$left2['menuId']}' {if isset($left2['menuUrl'])}dataurl="{:url($left2['menuUrl'])}{/if}">
+                {php} } {/php}
+                {$left2['menuName']}
+                </a></dd>
+                {/volist}
+                <div style='clear:both;'></div>
+              </dl>
+              {/if}
+            </li>
+            {/volist}
+            {/if}
+            {/volist}
+          </ul>
+      </div>
+      <div class='layout-content'>
+        <iframe id='iframe' class="iframe" width="100%" height="100%" frameborder="0" src="{:url('store/index/main')}"></iframe>
+      </div>
+   </div>
+</div>
+<div id='editPassBox' style='display:none;padding-top:5px;'>
+  <form id='editPassFrom' autocomplete="off">
+   <table class='wst-form'>
+      <tr>
+         <th style='width:110px'>原密码：</th>
+         <td><input type='password' id='oldPass' name='oldPass' class='ipt' data-rule="原密码: required;" maxLength='16'/></td>
+      </tr>
+      <tr>
+         <th style='width:110px'>新密码：</th>
+         <td><input type='password' id='newPass' name='newPass' class='ipt' data-rule="新密码: required;length[6~]" maxLength='16'/></td>
+      </tr>
+      <tr>
+         <th style='width:110px'>确认密码：</th>
+         <td><input type='password' id='newPass2' name='newPass2' class='ipt' data-rule="确认密码: required;match(newPass);" maxLength='16'/></td>
+      </tr>
+   </table>
+  </form>
+</div>
+
+<input type='hidden' id='token' value='{:WSTConf("CONF.pwdModulusKey")}'/>
+<audio id='orderTipVoice' controls style='display:none' src="__STATIC__/images/order.mp3"></audio>
+{:hook('shopDocumentListener')}
+<script>
+var menus = {:json_encode($sysMenus)};
+function showImg(opt){
+  layer.photos(opt);
+}
+function showBox(opts){
+  return WST.open(opts);
+}
+</script>
+{/block}

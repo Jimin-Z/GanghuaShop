@@ -1,0 +1,673 @@
+{extend name="default/base" /}
+{block name="js"}
+<script src="__STATIC__/plugins/echarts/echarts.min.js?v={$v}" type="text/javascript"></script>
+<script>
+// 销售统计
+function saleCount(){
+	$.post(WST.U('shop/reports/getStatSales'),WST.getParams('.ipt'),function(data,textStatus){
+	    var json = WST.toJson(data);
+	    var myChart = echarts.init(document.getElementById('saleMain'));
+	    myChart.clear();
+	    $('#mainTable').hide();
+	    if(json.status=='1' && json.data){
+			var option = {
+			    tooltip : {
+			        trigger: 'axis'
+			    },
+			    calculable : true,
+			    xAxis : [
+			        {
+			            type : 'category',
+			            data : json.data.days
+			        }
+			    ],
+			    yAxis : [			        {      type : 'value'     }	    ],
+			    series : [
+			        {
+			            name:'销售额',
+			            type:'line',
+			            data:json.data.dayVals
+			        }
+			    ]
+			};
+			myChart.setOption(option);
+	    }
+	});
+}
+</script>
+{/block}
+{block name="css"}
+<link href="__SHOP__/css/main.css?v={$v}" rel="stylesheet">
+{/block}
+{block name="main"}
+<div>
+<div class="wst-shop-info">
+	<div class="wst-shop-na" >
+		<div class='wst-shop-name'><a target='_blank' href='{:Url("home/shops/index","shopId=".$data["shop"]["shopId"])}'>{$data['shop']['shopName']}</a></div>
+		<span class="wst-shop-img">
+	        <a target='_blank' href="{:url('home/shops/index',array('shopId'=>$data['shop']['shopId']))}">
+	            <img src="__RESOURCE_PATH__/{:WSTImg($data['shop']['shopImg'])}" title="{$data['shop']['shopName']|WSTStripTags}" alt="{$data['shop']['shopName']|WSTStripTags}">
+	        </a>
+	    </span>
+		<div class="wst-shop-na2">
+		<span class="accred">认证等级：
+		{volist name="$data['shop']['accreds']" id="sv"}
+		<img src="__RESOURCE_PATH__/{$sv['accredImg']}">
+		{/volist}
+	    </span>
+		{php}$isExpire = ((strtotime($data['shop']['expireDate'])-strtotime(date('Y-m-d')))<2592000)?true:false;{/php}
+		<span class="wst-shop-na3">用户名：{$Think.session.WST_USER.loginName}</span>
+		<div style="clear: both;"></div>
+		<span class="wst-shop-na3">上次登录：{:session('WST_USER.lastTime')}</span>
+		<div style="clear: both;"></div>
+		<span class="wst-shop-na3">店铺地址：{:WSTMSubstr($data['shop']['shopAddress'],0,10)}</span>
+		<div style="clear: both;"></div>
+		<span class="wst-shop-na3">店铺到期日期：<span style="float:none;{if $isExpire}color:red;{/if}">{$data['shop']['expireDate']}</span> <a href="{:url('shop/logmoneys/torenew')}">续费</a></span>
+		<div style="clear: both;"></div>
+		{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+
+		<div id="shopQrbox" style="position: relative;">
+		<div id="qrTitle" class="qrtitle"><i class="fa fa-qrcode"></i>&nbsp;店铺二维码</div></div>
+        <div id="shopQrcode" style="width: <?php echo ((WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='') && (WSTDatas('ADS_TYPE',5)!='')?460:223) ?>px;">
+           <div class='wst-form wst-box-top'>
+    			<div >
+			   		{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='')}
+			   		<div class="qritem j-qritem1">
+			   			<div>手机/微信二维码</div>
+						<div id="moQrcode" class="qcode"></div>
+			   		</div>
+			   		{/if}
+			   		{if(WSTDatas('ADS_TYPE',5)!='')}
+			   		<div class="qritem j-qritem2">
+			   			<div >小程序二维码</div>
+						<div id="weQrcode" class="qcode"></div>
+			   		</div>
+			   		{/if}
+			   		<div style="clear: both;"></div>
+			  	</div>
+           </div>
+        </div>
+        {/if}
+
+		</div>
+	</div>
+	<div class="wst-shop-score">
+    <div class='wst-shop-name'><a>店铺评分</a></div>
+	<div class="wst-shop-eva" style="margin-left: 8%">
+		<p>商品评分</p>
+		<div class="wst-shop-evai">
+		{for start="0" end="$data['shop']['scores']['goodsScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-on.png">
+		{/for}
+		{for start="1" end="6-$data['shop']['scores']['goodsScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-off.png">
+		{/for}
+		</div>
+	</div>
+	<div class="wst-shop-eva">
+		<p>时效评分</p>
+		<div class="wst-shop-evai">
+		{for start="0" end="$data['shop']['scores']['timeScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-on.png">
+		{/for}
+		{for start="1" end="6-$data['shop']['scores']['timeScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-off.png">
+		{/for}
+		</div>
+	</div>
+	<div class="wst-shop-eva">
+		<p>服务评分</p>
+		<div class="wst-shop-evai">
+		{for start="0" end="$data['shop']['scores']['serviceScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-on.png">
+		{/for}
+		{for start="1" end="6-$data['shop']['scores']['serviceScore']"}
+			<img src="__STATIC__/plugins/raty/img/star-off.png">
+		{/for}
+		</div>
+	</div>
+    </div>
+	<div class="wst-shop-con">
+		<div class='wst-shop-name' ><a>平台联系方式</a></div>
+		<p style="margin-left: 8%;"><span>电话：{$data['shop']['shopTel']}</span><span>QQ：{$data['shop']['shopQQ']}</span></p>
+		<p style="margin-left: 8%;"><span>邮箱：{:WSTConf('CONF.serviceEmail')}</span><span>服务时间：{php}echo date("H:i",strtotime($data['shop']['serviceStartTime']));{/php}-{php}echo date("H:i",strtotime($data['shop']['serviceEndTime']));{/php}</span></p>
+		<p></p>
+	</div>
+	<div class="f-clear"></div>
+</div>
+{if $Think.session.WST_USER.SHOP_MASTER==1 && $Think.session.WST_USER.isGuide==0}
+<div class='guide'>
+    <div class='top-title'><span class='c16_555'>新店经营指导</span></div>
+    <div style='padding: 0 20px;'>
+         <div class='top-head' id='topHead'>
+            <ul>
+                <li class='active' dataval='0'>
+                   <span class='no'>1</span>
+                   <span class='title'>开店筹备</span>
+                </li>
+                 <li dataval='1'>
+                   <span class='no'>2</span>
+                   <span class='title'>基础设置</span>
+                </li>
+                <li dataval='2'>
+                  <span class='no'>3</span>
+                  <span class='title'>测款试销</span>
+                </li>
+                <li dataval='3'>
+                  <span class='no'>4</span>
+                  <span class='title'>推广发布</span>
+                </li>
+            </ul>
+         </div>
+         <div class='sec-head' id='secHead'>
+             <ul id='sendHead0'>
+                <li class='active'>
+	                <span class='title'>店铺设置</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+	                <span class='title'>店铺风格</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+                	<span class='title'>客服设置</span>
+                </li>
+             </ul>
+
+             <ul id='sendHead1'>
+                <li class='active'>
+	                <span class='title'>设置商品分类</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+	                <span class='title'>设置商品运费</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+	                <span class='title'>设置商品规格属性</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+                	<span class='title'>上架商品</span>
+                </li>
+             </ul>
+
+             <ul id='sendHead2'>
+                <li class='active'>
+	                <span class='title'>选择营销手段</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+	                <span class='title'>基础评价搭建</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+                	<span class='title'>售后服务</span>
+                </li>
+             </ul>
+
+             <ul id='sendHead3'>
+                <li class='active'>
+	                <span class='title'>推广渠道</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                 <li>
+	                <span class='title'>客户维护</span>
+	                <span class='guide-line'>
+	                   <span class='fa fa-chevron-circle-right pos'></span>
+	                </span>
+                </li>
+                <li>
+	                <span class='title'>数据分析优化</span>
+                </li>
+             </ul>
+         </div>
+         <div id='panel-box'>
+         	<!-- 开店筹备 -->
+            <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                <div>在<a href='{:url("shop/shops/info")}'>店铺资料</a>设置具有识别度的店名以及店铺Logo，设置好相应的客服QQ以及旺旺信息。</div>
+                        <div>在<a href='{:url("shop/shopconfigs/toshopcfg")}'>店铺设置</a>设置好店铺相关热搜，店铺街背景，店铺相应的广告图等等。</div>
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                <div>在<a href='{:url("shop/shopstyles/index")}'>风格设置</a>选择合适店铺的风格。</div>
+		                {if(WSTConf('WST_ADDONS.shopcustompage')!='')}
+                        <div>在<a href='{:addon_url("shopcustompage://shop/index")}'>自定义页面</a>装修店铺电脑和移动端风格。</div>
+                        {/if}
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                <div>在<a href='{:url("shop/shops/info")}'>店铺资料</a>中设置相应的客服QQ以及旺旺信息。</div>
+		                {if(WSTConf('WST_ADDONS.wstim')!='')}
+                        <div>在<a href='{:addon_url("wstim://shopservices/index")}'>客服管理</a>里设置店铺的客服人员，有客户联系时将由此处的客服人员进行接收对话信息。</div>
+                        {/if}
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+
+            <!-- 基础设置 -->
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                 按照店铺经营的品类，在<a href='{:url("shop/shopcats/index")}'>商品分类</a>中合理规划店铺的商品分类，让消费者快捷找到商品。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='#' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                在<a href='{:url("shop/express/index")}'>运费模板</a>中设置店铺商品的运费，新增商品的时候选择该商品适用的运费模板，或者商家包邮。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                系统会有默认的商品规格属性，如果商家对商品有自己的规格或者属性则可以在<a href='{:url("shop/speccats/index")}'>商品规格</a>以及<a href='{:url("shop/attributes/index")}'>商品属性</a>中进行设置。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                <div>在<a href='{:url("shop/goods/add")}'>新增商品</a>中上架商品，对商品进行管理。可以手工新增商品或者通过Excel导入商品。</div>
+		                {if(WSTConf('WST_ADDONS.collection')!='')}
+                        <div>如果是天猫、淘宝、京东的商品还可以通过<a href='{:addon_url("collection://collection/index")}'>商品采集</a>功能进行导入外部商品。</div>
+                        {/if}
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+
+             <!-- 营销试款 -->
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                关注<a href='javascript:void(0)'>促销管理</a>菜单下的促销方式，选择合适自己商品的促销方式进行销量破零，打造爆款商品。也可以联系平台购买平台的广告位、商品排名、商品搜索关键字等方式对商品进行曝光。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                请已购消费者评价商品展示买家秀，在<a href='{:url("shop/goodsappraises/index")}'>商品评价</a>和<a href='{:url("shop/goodsconsult/shopreplyconsult")}'>商品咨询</a>中和消费者达成良好互动关系。若在<a href='{:url("shop/ordercomplains/shopcomplain")}'>投诉订单</a>中接到订单投诉，建议商家与消费者达成良好沟通，尽可能和平解决订单纠纷，否则将交由平台进行仲裁。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                消费者提交的售后信息将展示在<a href='{:url("shop/orderservices/index")}'>售后申请</a>中，商家应了解退换货流程及应对技巧，根据店铺情况完成退换货操作。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+
+            <!-- 推广发布 -->
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                研究<a href='javascript:void(0)'>促销管理</a>规则，选择若干商品搭建促销活动，通过平台广告位，或者自有渠道如微博，微信，直播等传播方式引流。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                对新老客户进行<a href='{:url("shop/shopmembergroups/index")}'>会员分组</a>，通过在商品中设置各分组的优惠额度，促进新老客户的成交。也可以对关注和下单客户进行优惠券赠送等方式进行促进成交。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	        <div class='panel'>
+	            <div class='leftp'>
+		             <div class='tit'></div>
+		             <div class='cont'>
+		                通过对<a href='javascript:void(0)'>报表统计</a>的变化监控，不断优化营销方式以及提升新老客户的下单率。
+		             </div>
+		        </div>
+                <div class='rightp'>
+                 	<a href='javascript:closeGuide()' class='fbtn'>关闭指引</a>
+                </div>
+	        </div>
+	    </div>
+    </div>
+</div>
+<script>
+$('#topHead li').click(function(){
+	var topLi = $(this);
+	topLi.addClass('active').siblings().removeClass('active');
+	var index = topLi.attr('dataval');
+	$('#sendHead'+index).css('display','inline-flex').siblings().css('display','none');
+	$('#sendHead'+index+' li').eq(0).click();
+});
+$('#secHead li').click(function(){
+    var secLi = $(this);
+    secLi.siblings().removeClass('active');
+    var uls = secLi.parent().siblings();
+    uls.each(function(){
+    	$(this).find('li').removeClass('active');
+    })
+    secLi.addClass('active');
+    // var title = secLi.find('.title').html();
+    var index = secLi.attr('dataval');
+    var panel = $('#panel-box .panel').eq(index);
+    // panel.find('.tit').html(title);
+    panel.show().siblings().hide();
+})
+function closeGuide(){
+	$('.guide').slideUp(600);
+	$.post(WST.U('shop/index/closeGuide'),WST.getParams('.ipt'),function(data,textStatus){});
+}
+$(function(){
+	var index = 0;
+	$('#secHead li').each(function(){
+		$(this).attr('dataval',index);
+		index++;
+	});
+	$('#topHead li').eq(0).click();
+})
+</script>
+{/if}
+<div class="main">
+	<div class="main_middle">
+		<ul class="main_mid_box">
+			<li class="mid_l">
+				<div class="mid_l_item">
+					<div class="main_title">
+						<div class="wst-lfloat">
+
+							<span class="c16_555">订单提示</span>
+						</div>
+						<div class="f-clear"></div>
+					</div>
+					<div class="mid_main">
+						<ul class="order_info">
+							{if WSTShopGrant('shop/ordercomplains/shopcomplain')}
+							<li><a id="menuItem25" href="{:url('shop/ordercomplains/shopcomplain')}" dataid="25">
+								<div class="complain_num">{$data['stat']['complainNum']}</div>
+								<div>待回应投诉</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orders/delivered')}
+							<li><a id="menuItem53" href="{:url('shop/orders/delivered')}" dataid="53">
+								<div class="complain_num">{$data['stat']['waitReceiveCnt']}</div>
+								<div>待收货</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orders/waitdelivery')}
+							<li><a id="menuItem24" href="{:url('shop/orders/waitdelivery')}" dataid="24">
+								<div class="complain_num">{$data['stat']['waitDeliveryCnt']}</div>
+								<div>待发货</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orders/waituserpay')}
+							<li><a id="menuItem55" href="{:url('shop/orders/waituserpay')}" dataid="55">
+								<div class="complain_num">{$data['stat']['orderNeedpayCnt']}</div>
+								<div>待付款</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orders/failure')}
+							<li><a id="menuItem45" href="{:url('shop/orders/failure')}" dataid="45">
+								<div class="complain_num">{$data['stat']['cancel']}</div>
+								<div>取消/拒收</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orders/failure')}
+							<li><a id="menuItem45" href="{:url('shop/orders/refund')}" dataid="45">
+								<div class="complain_num">{$data['stat']['orderRefundCnt']}</div>
+								<div>待退款</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/orderservices/index')}
+							<li><a id="menuItem45" href="{:url('shop/orderservices/index')}" dataid="45">
+								<div class="complain_num">{$data['stat']['orderServicesCnt']}</div>
+								<div>售后</div>
+							</a></li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+
+				<div class="mid_l_item" style="margin-top:10px;">
+					<div class="main_title">
+						<div class="wst-lfloat">
+							<span class="c16_555">商品信息</span>
+						</div>
+					</div>
+					<div class="f-clear"></div>
+					<div class="mid_main">
+						<ul class="order_info">
+							{if WSTShopGrant('shop/goods/store')}
+							<li><a id="menuItem34" href="{:Url('shop/goods/store')}" dataid="34">
+								<div class="complain_num">{$data['stat']['unSaleCnt']}</div>
+								<div>仓库中</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/goods/stockwarnbypage')}
+							<li><a id="menuItem54" href="{:Url('shop/goods/stockwarnbypage')}" dataid="54">
+								<div class="complain_num">{$data['stat']['stockWarnCnt']}</div>
+							    <div >预警库存</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/goods/sale')}
+							<li><a id="menuItem32" href="{:Url('shop/goods/sale')}" dataid="32">
+								<div class="complain_num">{$data['stat']['onSaleCnt']}</div>
+								<div>出售中</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/goods/audit')}
+							<li><a id="menuItem33" href="{:Url('shop/goods/audit')}" dataid="33">
+								<div class="complain_num">{$data['stat']['waitAuditCnt']}</div>
+								<div>待审核</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/goods/illegal')}
+							<li><a id="menuItem56" href="{:Url('shop/goods/illegal')}" dataid="56">
+								<div class="complain_num">{$data['stat']['illegalCnt']}</div>
+							    <div>违规商品</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/goodsconsult/shopReplyConsult')}
+							<li><a id="menuItem102" href="{:Url('shop/goodsconsult/shopReplyConsult')}" dataid="102">
+								<div class="complain_num">{$data['stat']['consult']}</div>
+							    <div>待回复咨询</div>
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/reports/statfavorites')}
+							<li><a href="{:Url('shop/reports/statfavorites')}">
+								<div class="complain_num">{$data['stat']['collectionCnt']}</div>
+								收藏数
+							</a></li>
+							{/if}
+							{if WSTShopGrant('shop/reports/statcarts')}
+							<li><a href="{:Url('shop/reports/statcarts')}">
+								<div class="complain_num">{$data['stat']['cartCnt']}</div>
+								添加购物车数
+							</a></li>
+							{/if}
+						</ul>
+					</div>
+				</div>
+			</li>
+
+			<li class="mid_r">
+
+				<div class='mid_r_rbottom' style="margin-bottom: 10px;">
+					<div class="main_title">
+						<div class="wst-lfloat">
+
+							<span class="c16_555">商家帮助</span>
+						</div>
+						<div class="f-clear"></div>
+					</div>
+					<div class="rbottom_main">
+						<ul class="shop_tips">
+							{wst:article cat="300" id="vo" num="8"}
+							<li class="wst-textover"><a href="{:url('home/news/view',['id'=>$vo['articleId']])}" target="_blank" title="{$vo.articleTitle}"><i></i>{$key+1}、{$vo.articleTitle}</a><span>{:date('Y-m-d',strtotime($vo['createTime']))}</span></li>
+							{/wst:article}
+						</ul>
+					</div>
+				</div>
+				<div class='mid_r_rbottom'>
+					<div class="main_title">
+						<div class="wst-lfloat">
+
+							<span class="c16_555">商家公告</span>
+						</div>
+						<div class="f-clear"></div>
+					</div>
+					<div class="rbottom_main">
+						<ul class="shop_tips2">
+							{wst:article cat="51" id="vo" num="5"}
+							<li class="wst-textover"><a href="{:url('home/news/view',['id'=>$vo['articleId']])}" target="_blank" title="{$vo.articleTitle}">{$key+1}、{$vo.articleTitle}</a><i>NEWS</i>&nbsp;&nbsp;&nbsp;&nbsp;<span>{:date('Y-m-d',strtotime($vo['createTime']))}</span></li>
+							{/wst:article}
+						</ul>
+					</div>
+				</div>
+			</li>
+			<div style='clear:both'></div>
+			{if WSTShopGrant('shop/reports/topSaleGoods')}
+			<li class="mid_c">
+				<div class="index-right">
+					<div class="index-right-item">
+						<div class="main_title" style="padding-left:10px;">
+							<div class="wst-lfloat">
+
+								<span class="c16_555">最近30天销售排行</span>
+							</div>
+							<div class="f-clear"></div>
+						</div>
+						<ul class="right-list-tit">
+							<li class="c12_555">序号</li>
+							<li class="c12_555">商品</li>
+							<li class="c12_555">数量</li>
+						</ul>
+						{volist name="$data['stat']['goodsTop']" id="glist" key="gkey" length="10"}
+						<ul class="right-list-tit right-list">
+							<li class="c14_ff66">
+								<div class="gTop{$gkey} top-num">{$gkey}</div>
+							</li>
+							<li class="wst-textover"><a class="c14_ff90 atop{$gkey}" target="_blank" href="{:url('home/goods/detail',['goodsId'=>$glist.goodsId])}">{$glist.goodsName}</a></li>
+							<li class="c14_ff66 gTop{$gkey}">{$glist.goodsNum?:0}</li>
+						</ul>
+						{/volist}
+
+					</div>
+				</div>
+			</li>
+			{/if}
+			{if WSTShopGrant('shop/reports/statSales')}
+			<li class="mid_r">
+				<div class="sale_info">
+					<div class="main_title">
+						<div class="wst-lfloat">
+
+							<span class="c16_555">近30天销售情况</span>
+						</div>
+						<div class="f-clear"></div>
+					</div>
+					<div id="saleMain" style="width:100%;height:335px;"></div>
+				</div>
+			</li>
+			<script>$(function(){saleCount()});</script>
+			{/if}
+		</ul>
+	</div>
+<div class="f-clear"></div>
+
+</div>
+</div>
+{/* 近30天 */}
+<input type="hidden"  id="startDate"  class="ipt" value='{:date("Y-m-d",strtotime("-30 day"))}'/>
+<input type="hidden" id="endDate" class="ipt" value='{:date("Y-m-d")}'/>
+
+<script type="text/javascript">
+{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+$(function(){
+	var qtop = $("#qrTitle").offset().top;
+	var qleft = $("#qrTitle").offset().left;
+	$("#shopQrbox").on({
+		click : function(){
+			$("#shopQrcode").css({'top':(qtop+30)+"px",'left':qleft+"px"}).toggle();
+		}
+	}) ;
+	{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='')}
+	WST.createShopQrcode(1);
+	{/if}
+	{if(WSTDatas('ADS_TYPE',5)!='')}
+	WST.createShopQrcode(2);
+	{/if}
+});
+{/if}
+</script>
+{/block}

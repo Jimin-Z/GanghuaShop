@@ -1,0 +1,37 @@
+{extend name="base" /}
+{block name="css"}
+<style>
+    td .layui-table-cell{height:50px !important;line-height: 50px !important;overflow: inherit!important;}
+    td .laytable-cell-1-0-2{overflow:hidden!important;}
+    .layui-table img{max-width:180px!important;}
+    td .laytable-cell-1-0-3{color: red;}
+    td .laytable-cell-1-0-4{color: #31c15a;}
+    td .laytable-cell-1-0-5{color: #1890ff;}
+    td .laytable-cell-1-0-6{color: red}
+</style>
+{/block}
+{block name="js"}
+<script src="__ADMIN__/reports/top_sale_shop.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="wst-toolbar">
+<input type="text" id="startDate" name="startDate" class="laydate-icon ipt" maxLength="20" value='{$startDate}' placeholder='开始日期'/>
+至
+<input type="text" id="endDate" name="endDate" class="laydate-icon ipt" maxLength="20" value='{$endDate}' placeholder='结束日期'/>
+<button class="btn btn-primary" onclick='javascript:loadGrid(0)'><i class='fa fa-search'></i>查询</button>
+{if WSTGrant('REPORTSDPXS_05')}
+<button class="btn btn-primary f-right" style='margin-top:0px;' onclick='javascript:toExport(0)'><i class="fa fa-sign-in"></i>导出</button>
+{/if}
+</div>
+<div class="wst-tips-box">
+    <div class="icon"></div>
+    <div class="tips">该统计只统计确认收货的订单</div>
+    <div style="clear:both"></div>
+</div>
+<div class='wst-grid'>
+<div id="mmg" class="mmg"></div>
+</div>
+<script>
+$(function(){initSaleGrid({$p});})
+</script>
+{/block}

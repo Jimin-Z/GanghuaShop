@@ -1,0 +1,12 @@
+{extend name="default/base" /}
+{block name="css"}
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<div class='wst-toolbar'>
+<button type="button" class="btn f-right" onclick="javascript:WST.backPrePage();"><i class="fa fa-angle-double-left"></i>返&nbsp;回</button>
+<div style='clear:both'></div>
+</div>
+   {$data['msgContent']}
+</div>
+{/block}

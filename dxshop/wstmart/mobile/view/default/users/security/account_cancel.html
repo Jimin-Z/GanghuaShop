@@ -1,0 +1,105 @@
+{extend name="default/base" /}
+{block name="title"}帐号注销 - {__block__}{/block}
+{block name="css"}
+<link rel="stylesheet"  href="__MOBILE__/css/user.css?v={$v}">
+<style>
+	body{background:#fff}
+	.frame-head{text-align: center}
+	.warn-tit{font-size: 0.18rem;text-align: center;padding: 0.1rem;}
+	.warn-desc{line-height: 25px;padding: 0 30px 30px 0;
+		color: #888;
+		font-size: 0.14rem;
+		text-align: left;
+		margin-top: 0.2rem;
+	}
+	.ui-dialog .ui-dialog-cnt {height: auto;}
+	.wst-protocol {
+		overflow: scroll;
+		padding: 10px 20px 0 10px;
+		color: #333;
+		font-family: Arial,"宋体",Lucida,Verdana,Helvetica,sans-serif;
+		font-size: 12px;
+		height: calc(100vh - 80px);
+	}
+	.wst-protocol h4{line-height: 30px;margin:0px;}
+	.wst-protocol p{line-height: 20px;margin:0px;}
+	.wst-protocol strong{margin-right:2px;}
+</style>
+{/block}
+{block name="header"}
+<header style="background:#ffffff;" class="ui-header ui-header-positive wst-header">
+	<i id="return" class="ui-icon-return" onclick="javascript:history.go(-1)" ></i><h1 id="login-w">帐号注销</h1>
+</header>
+{/block}
+{block name="footer"}
+{/* 大加载 */}
+<div class="ui-loading-block" id="Loadl">
+	<div class="ui-loading-cnt">
+		<i class="ui-loading-bright"></i>
+		<p id="j-Loadl">正在加载中...</p>
+	</div>
+</div>
+{/block}
+{block name="main"}
+<section class="ui-container" id="login2">
+	<div class="wst-lo-frame">
+		<div class="frame-head">
+			<div><img src="__MOBILE__/img/warning.png" style="width: 0.5rem;"/></div>
+			<div class='warn-tit'>帐号注销须知</div>
+		</div>
+		<div class="warn-desc">
+			<p>（1）您自愿放弃{:WSTConf('CONF.mallName')}的所有权益</p>
+			<p>（2）请确保账户内无未完成的订单和服务</p>
+			<p>（3）请确保账户钱包余额为0</p>
+			<p>（4）本帐号在{:WSTConf('CONF.mallName')}无使用该账户激活店铺和供货商</p>
+			<p>（5）本帐号当前为有效帐户，非冻结状态</p>
+		</div>
+	</div>
+	<div class="wst-lo-agreement">
+		<i id="defaults2" class="ui-icon-chooses ui-icon-success-block wst-active" onclick="javascript:inAgree(this,2)"></i>我已阅读并同意<span onclick="javascript:wholeShow('protocol');">《{:WSTConf('CONF.mallName')}帐号注销须知》</span>
+	</div>
+	<div class="wst-lo-button">
+		<button id="regButton" class="button" onclick="toApply();">申请注销</button>
+	</div>
+</section>
+{/block}
+{block name="include"}
+
+{include file="default/dialog" /}<!-- 对话框模板 -->
+{/* 帐号注销须知 */}
+<div class="wst-fr-protocol" id="protocol">
+	<div class="title"><span>《{:WSTConf('CONF.mallName')}帐号注销须知》</span><i class="ui-icon-close-page" onclick="javascript:wholeHide('protocol');"></i><div class="wst-clear"></div></div>
+	<div class="wst-protocol">
+		{$data['articleContent']}
+	</div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__MOBILE__/js/jquery.min.js'></script>
+<script type='text/javascript' src='__MOBILE__/js/login.js?v={$v}'></script>
+<script>
+	//申请注销
+	function toApply(){
+		if($('#defaults2').hasClass('ui-icon-unchecked-s')){
+			WST.msg('请阅读帐号注销须知','info');
+			return false;
+		}
+		WST.dialog('您确定要申请注销该帐号吗?','applyCancelAcc()')
+	}
+	function applyCancelAcc(){
+		$('#wst-di-prompt').dialog("hide");
+		WST.load('正在提交数据...');
+		$.post(WST.U('mobile/users/applyCancelAcc'),{},function(data,textStatus){
+			WST.noload();
+			var json = WST.toJson(data);
+			if(json.status=='1'){
+				location.href=WST.U('mobile/index/index');
+			}else{
+				WST.msg(json.msg,{icon:2});
+			}
+		});
+
+	}
+</script>
+
+{/block}

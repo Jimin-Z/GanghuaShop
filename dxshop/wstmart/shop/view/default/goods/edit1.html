@@ -1,0 +1,43 @@
+<div id="selMouldBox" style='display:none'>
+模板：
+<div id="mouldCol1" style="display: inline-block;">
+	<input id="mouldId" type="hidden" name="mouldId"/>
+	<div id="mouldBox">
+		<div id="mouldTitleBox" style=""><span id="mouldTitle">请选择规格属性模板</span> <i class="fa fa-angle-left jright" style=""></i></div>
+		<div id="mouldItemBox">
+			
+		</div>
+	</div>
+</div>
+<button id="updateMould" type="button" class="btn" onclick="toUpdateMould()" style="margin-left: 10px;">更新模板</button>
+<button id="addMould" type="button" class="btn" onclick="toSaveMould(0)" style="margin-left: 10px;">存为新模板</button>
+</div>
+<div id='specsAttrBox'></div>
+<div id='specTips' style='display:none'>
+<div class='wst-tips-box' style='margin-left:0px;'>1.若改动商品规格时，销售规则表将会重新绘制，填写销售规格表前前选择好商品规格</div>
+</div>
+<div id='specMouldBox' style='display:none'>
+	<div id="specMouldForm">
+	    <input type='hidden' id='catId' class='ipt'/>
+		<table class='wst-form wst-box-top'>
+		  <tr>
+		       <tr>
+		          <th>模板名称<font color='red'>*</font>：</th>
+		          <td>
+		              <input type="text" id="mouldName" name="mouldName" class="ipt" maxLength='20' />
+		          </td>
+		       </tr>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$("#mouldTitleBox").on({
+		click : function(){
+			$("#mouldItemBox").toggle();
+		}
+	});
+	
+});
+
+</script>

@@ -1,0 +1,109 @@
+{extend name="default/base" /}
+{block name="title"}我的发票 - {__block__}{/block}
+{block name="css"}
+<link href="__STATIC__/plugins/validator/jquery.validator.css?v={$v}" rel="stylesheet">
+<style>
+    .j-tax{
+        display: none;
+    }
+    .wst-form tr>td>input[type='text'] {
+        width: 339px;
+    }
+</style>
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<form name="invoiceForm"  id="invoiceForm" autocomplete="off" onsubmit="return false">
+    <table class='wst-form uinfo-form wst-box-top' >
+        <tr>
+            <th width="100" height='25'>发票类别<font color='red'>*</font>：</th>
+            <td class="layui-form">
+                <div class="radio-box">
+                    <label><input type="radio" class="ipt wst-radio" id="invoiceType-1"  lay-filter="invoiceType" name="invoiceType" {if $data['invoiceType']==1}checked{/if} value="1" title="增值税专用发票"/></label>
+                    <label><input type="radio" class="ipt wst-radio" id="invoiceType-0"  lay-filter="invoiceType" name="invoiceType" {if $data['invoiceType']==0}checked{/if} value="0" title="普通发票" /></label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>发票抬头<font color='red'>*</font>：</th>
+            <td>
+                <input type="text" class="ipt" id="invoiceHead" name="invoiceHead" value="{$data['invoiceHead']}"
+                       placeholder="您的发票抬头" maxlength="30" data-rule="发票抬头: required"/>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                发票税号<font color='red'>*</font>：
+            </th>
+            <td>
+                <input type="text" class="ipt" id="invoiceCode" name="invoiceCode" value="{$data['invoiceCode']}"
+                       placeholder="发票税号" maxlength="20" data-rule="发票税号: required"/>
+            </td>
+        </tr>
+        <tr class="j-tax">
+            <th>
+                注册地址<font color='red'>*</font>：
+            </th>
+            <td>
+                <input type="text" class="ipt" id="invoiceAddr" name="invoiceAddr" value="{$data['invoiceAddr']}"
+                       placeholder="注册地址" data-rule="注册地址: required(#invoiceType-1:checked)">
+            </td>
+        </tr>
+        <tr class="j-tax">
+            <th>
+                注册电话<font color='red'>*</font>：
+            </th>
+            <td>
+                <input type="text" class="ipt" id="invoicePhoneNumber" name="invoicePhoneNumber" value="{$data['invoicePhoneNumber']}"
+                       placeholder="注册电话" data-rule="注册电话: required(#invoiceType-1:checked)">
+            </td>
+        </tr>
+        <tr class="j-tax">
+            <th>
+                开户银行<font color='red'>*</font>：
+            </th>
+            <td>
+                <input type="text" class="ipt" id="invoiceBankName" name="invoiceBankName" value="{$data['invoiceBankName']}"
+                       placeholder="开户银行" data-rule="开户银行: required(#invoiceType-1:checked)">
+            </td>
+        </tr>
+        <tr class="j-tax">
+            <th>
+                银行账户<font color='red'>*</font>：
+            </th>
+            <td>
+                <input type="text" class="ipt" id="invoiceBankNo" name="invoiceBankNo" value="{$data['invoiceBankNo']}"
+                       placeholder="银行账户" data-rule="银行账户: required(#invoiceType-1:checked)">
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2' class='wst-bottombar'>
+                <button type="button" class="btn btn-primary btn-mright" onclick="javascript:edit({$p})"><i class="fa fa-check"></i>保&nbsp;存</button>
+                <button type="button" class="btn" onclick="javascript:WST.backPrePage();"><i class="fa fa-angle-double-left"></i>返&nbsp;回</button>
+                <input type="hidden" name="id" id="id" class="ipt" value="{$data['id']}" />
+            </td>
+        </tr>
+    </table>
+</form>
+</div>
+<script>
+    var defalutInvocieType = "{$data['invoiceType']}";
+    var _t = $('.j-tax');
+    if (defalutInvocieType == 1) _t.show();
+    var form;
+    $(function(){
+        form = layui.form;
+        form.on('radio(invoiceType)', function(data){
+            if($(this).val()==0){
+                $('.j-tax').hide();
+            }else{
+                $('.j-tax').show();
+            }
+        });
+    });
+</script>
+{/block}
+{block name="js"}
+<script type="text/javascript" src="__STATIC__/plugins/validator/jquery.validator.min.js?v={$v}"></script>
+<script type='text/javascript' src='__SHOP__/invoices/invoices.js?v={$v}'></script>
+{/block}

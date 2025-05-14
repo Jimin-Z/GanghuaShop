@@ -1,0 +1,59 @@
+{extend name="base" /}
+{block name="js"}
+<script src="__ADMIN__/areas/areas.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<style>
+body{overflow:auto;padding:5px;}
+.h-container{
+    padding: 24px;
+}
+.hc-list{min-height: 50px;}
+.hc-item{ display: inline-block; margin-right: 10px; margin-bottom: 10px; }
+.hc-item span{ cursor: pointer; }
+.city-item{ display: inline-block; margin-right: 10px; margin-bottom: 10px; cursor: pointer; width: 200px;}
+</style>
+<div class="h-container">
+    <fieldset class="layui-elem-field layui-field-title">
+		<legend>热门城市</legend>
+        <div class="hot-city">
+            <div class="hc-list">
+                {volist name="citys" id="hotItem" }
+                    {if(in_array($hotItem['areaId'], $chkIds))}
+                        <div class="hc-item" id="hot_city_{$hotItem['areaId']}">
+                            {$hotItem['areaName']} <span id="{$hotItem['areaId']}" onclick="disCheck(this)">x</span>
+                        </div>
+                    {/if}
+                {/volist}
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="layui-elem-field layui-field-title">
+		<legend>请选择城市</legend>
+        <di id="citys">
+            {volist name="citys" id="item" }
+            <div class="city-item">
+              <input type="checkbox" 
+              {if(in_array($item['areaId'], $chkIds))}
+              checked
+              {/if}
+              class="ipt" id="chk_{$item['areaId']}" value="{$item['areaId']}" name="" title="{$item['areaName']}" lay-skin="primary">
+              {$item['areaName']}
+            </div>
+            {/volist}
+        </div>
+    </fieldset>
+    <div style='text-align: center;padding-top:10px'>
+        <button type="submit" class="btn submit-btn ajax-post btn-primary btn-mright" onclick="commit()" ><i class="fa fa-check"></i>确 定</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button type="button"  class='btn' onclick="history.go(-1)"><i class="fa fa-angle-double-left"></i>返回</button>
+    </div>
+</div>
+
+<script>
+    $(function(){
+        hotCityInit();
+    })
+    
+</script>
+{/block}
+

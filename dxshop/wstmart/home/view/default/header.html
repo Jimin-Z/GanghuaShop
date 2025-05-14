@@ -1,0 +1,82 @@
+<div class='wst-search-container'>
+   <div class='wst-logo'>
+    <?php $mallName = WSTConf('CONF.mallName'); ?>
+   <a href='{$Request.root.true}' title="{$mallName|WSTStripTags}" >
+      <img src="__RESOURCE_PATH__/{:WSTConf('CONF.mallLogo')}" height="120" width='240' title="{$mallName|WSTStripTags}" alt="{$mallName|WSTStripTags}">
+   </a>
+   </div>
+   <div class="wst-search-box">
+      <div class='wst-search'>
+          <input type="hidden" id="search-type" value="{:isset($keytype)?1:0}"/>
+          <ul class="j-search-box">
+            <li class="j-search-type">
+              搜<span>{if isset($keytype)}店铺{else}商品{/if}</span>&nbsp;<i class="arrow"> </i>
+            </li>
+            <li class="j-type-list">
+            {if isset($keytype)}
+              <div data="0">商品</div>
+              {else}
+            <div data="1">店铺</div>
+              {/if}
+            </li>
+          </ul>
+        <input type="text" id='search-ipt' class='search-ipt' placeholder='{:WSTConf("CONF.adsGoodsWordsSearch")}' value='{:isset($keyword)?$keyword:""}'/>
+        <input type='hidden' id='adsGoodsWordsSearch' value='{:WSTConf("CONF.adsGoodsWordsSearch")}'>
+        <input type='hidden' id='adsShopWordsSearch' value='{:WSTConf("CONF.adsShopWordsSearch")}'>
+        <div id='search-btn' class="search-btn" onclick='javascript:WST.search(this.value)'>搜索</div>
+      </div>
+      <div class="wst-search-keys">
+      {php}$searchKeys = WSTSearchKeys();{/php}
+      {volist name="$searchKeys" id="vo"}
+       <a href='{:Url("home/goods/search","keyword=".$vo)}'>{$vo}</a>
+       {if $i< count($searchKeys)}&nbsp;&nbsp;|&nbsp;&nbsp;{/if}
+      {/volist}
+      </div>
+   </div>
+   <div class="wst-cart-box">
+   <a href="{:url('home/carts/index')}" target="_blank" onclick="WST.currentUrl('{:url("home/carts/index")}');"><span class="word j-word">我的购物车<span class="num" id="goodsTotalNum" style='display:none'>0</span></span></a>
+    <div class="wst-cart-boxs hide">
+      <div id="list-carts"></div>
+      <div id="list-carts2"></div>
+      <div id="list-carts3"></div>
+      <div class="wst-clear"></div>
+    </div>
+   </div>
+{/* 购物车 */}
+<script id="list-cart" type="text/html">
+{{# for(var i = 0; i < d.list.length; i++){ }}
+  <div class="goods" id="j-goods{{ d.list[i].cartId }}">
+      <div class="imgs"><a href="{{ WST.U('home/goods/detail','goodsId='+d.list[i].goodsId) }}"><img class="goodsImgc" data-original="__RESOURCE_PATH__/{{ d.list[i].goodsImg }}" title="{{ d.list[i].goodsName }}"></a></div>
+      <div class="number"><p><a  href="{{ WST.U('home/goods/detail','goodsId='+d.list[i].goodsId) }}">{{WST.cutStr(d.list[i].goodsName,26)}}</a></p><p>数量：{{ d.list[i].cartNum }}</p></div>
+      <div class="price"><p>￥{{ d.list[i].shopPrice }}</p><span><a href="javascript:WST.delCheckCart({{ d.list[i].cartId }})">删除</a></span></div>
+  </div>
+{{# } }}
+</script>
+</div>
+<div class="wst-clear"></div>
+{/* 左侧菜单栏 */}
+<div class="wst-nav-menus">
+   <div class="nav-w" style="position: relative;">
+      <div class="w-spacer"></div>
+      <div class="dorpdown {if isset($hideCategory)}j-index{/if}" id="wst-categorys">
+
+      {/* 横栏菜单 */}
+      <div id="wst-nav-items">
+           <ul>
+               {volist name=":WSTNavigations(0)" id='vo'}
+               <li class="fore1">
+                    <a href="{$vo['navUrl']}" {if $vo['isOpen']==1}target="_blank"{/if}>{$vo['navTitle']}</a>
+               </li>
+               {/volist}
+           </ul>
+      </div>
+      <script>
+          $(document).keypress(function(e) { 
+          if(layerMapIndex == 0 && e.which == 13) {  
+            $('#search-btn').click();  
+          }
+        }); 
+      </script>
+</div>
+<div class="wst-clear"></div>
+</div>

@@ -1,0 +1,89 @@
+{extend name="default/base" /}
+{block name="css"}
+<style>
+body{overflow-y:hidden;}
+td .layui-table-cell{height:60px !important;line-height: 60px;overflow: inherit!important;}
+td .laytable-cell-1-0-2{overflow:hidden!important;}
+.layui-table img{max-width:180px!important;}
+</style>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/goods/goods.js?v={$v}'></script>
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/webuploader.js?v={$v}'></script>
+<script>    var mmg;
+$(function(){saleByPage({$p})})
+</script>
+{/block}
+{block name="main"}
+<div class="wst-page">
+<div class="wst-toolbar">
+    <select name="cat1" id="cat1" onchange="getCat(this.value)" class="s-query">
+        <option value="">-请选择商品分类-</option>
+      {volist name=":WSTShopCats(0)" id="vo"}
+            <option value="{$vo['catId']}" >{$vo['catName']}</option>
+      {/volist}
+    </select>
+    <select name="cat2" id="cat2" class="s-query"><option value="">-请选择商品分类-</option></select>
+  <select id='goodsType' class="s-query">
+     <option value=''>全部商品类型</option>
+     <option value='0'>实物商品</option>
+     <option value='1'>虚拟商品</option>
+  </select>
+    <input type="text" name="goodsName" id="goodsName" class="s-query" placeholder='商品名称/商品编号'/>
+    <select id='goodsAttr' class="s-query" style='width:80px'>
+        <option value='-1'>全部</option>
+        <option value='0'>推荐</option>
+        <option value='3'>新品</option>
+        <option value='2'>精品</option>
+        <option value='1'>热销</option>
+  </select>
+    <a class="s-btn btn btn-primary" onclick="loadGrid(0)"><i class="fa fa-search"></i>查询</a>
+</div>
+<div class="wst-toolbar wst-toolbar2"> 
+   <div class="s-menu">
+      <button type="button" class="btn btn-primary" onclick="changeSale(0,'sale')" >下架</button>
+      <button type="button" class="btn btn-primary" onclick="changeGoodsStatus('isRecom','sale')" >推荐</button>
+      <button type="button" class="btn btn-primary" onclick="changeGoodsStatus('isNew','sale')" >新品</button>
+      <button type="button" class="btn btn-primary" onclick="changeGoodsStatus('isBest','sale')" >精品</button>
+      <button type="button" class="btn btn-primary mra" onclick="changeGoodsStatus('isHot','sale')" >热销</button>
+      <div class="flex1"></div>
+   
+      {if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+      <button type="button" class="btn btn-primary" onclick="toExplode()">
+        <span><i class='fa fa-cloud-download'></i>导出商品二维码</span>
+      </button>
+      {/if}
+      <button type="button" class="btn btn-primary" onclick="toAdd('sale')">
+        <span><i class="fa fa-plus"></i>新增</span>
+      </button>
+
+      <button type="button" class="btn btn-danger" onclick="benchDel('sale')">
+        <span><i class="fa fa-trash-o"></i>删除</span>
+      </button>
+   </div>
+</div>
+<div class='wst-grid'>
+    <div id="mmg" class="mmg"></div>
+    <div id="pg" style="text-align: right;margin: 10px 0px 20px;"></div>
+</div>
+<input type='hidden' id='goodsId' class='j-ipt' value=''/>
+<div id='goodsBox' style='display:none'>
+  <div id='specsAttrBox' style="padding:10px;"></div>
+</div>
+
+{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+<div id="exportBox" style="display: none;text-align: center;padding-top: 30px;">
+  请选择类型:<select id="vtype" style="width: 200px;">
+            {if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='')}
+            <option value="1">手机/微信端</option>
+            {/if}
+            {if(WSTDatas('ADS_TYPE',5)!='')}
+            <option value="2">小程序端</option>
+            {/if}
+           </select>
+</div>
+{/if}
+
+</div>
+{:hook('shopDocumentGoodsList')}
+{/block}  

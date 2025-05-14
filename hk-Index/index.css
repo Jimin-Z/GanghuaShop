@@ -1,0 +1,779 @@
+*{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    /* color: ; */
+}
+
+/* 公共 */
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+ 
+
+.flex--column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper--gobal{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.wrapper--px{
+    width: 1200px;
+    margin: 0 auto; 
+}
+
+.wrapper--percent{
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 总布局 */
+/* 每个板块打算设置100vh，但是目前是auto */
+
+.hkIndex__container{
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+
+/* 头部 */
+.hkIndex__header{
+    width: 100%;
+    /* height: 100vh; */
+    background-image: url(/hkshop/hk-Index/images/header__bgc.png);
+}
+
+.header__title{
+    border-radius: 20px;
+    box-sizing: border-box;
+    /* width: 1400px; */
+    padding: .5em 1em;
+    background-color: #fff;
+    font-size: 28px;
+    justify-content: space-around;
+    position: relative;
+    /* justify-content: start; */
+}
+
+.header__text--underline{
+    border-bottom: 5px solid #601173;
+}
+
+.header__text--chinese{
+    /* font-size: 28px; */
+}
+
+/* 头部的切换语言 */
+.lang__box{
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    font-size: 16px;
+}
+
+.lang--en{
+    color: #000;
+}
+
+.lang--en:hover{
+    color:goldenrod;
+}
+
+/* header-items */
+.header-items{
+    /* margin-top: 100px; */
+    width: 100%;
+    /* justify-content: space-around; */
+    /* justify-content: none; */
+    justify-content: space-around;
+}
+
+.header-item{
+    /* width: 250px; */
+    width: 24%;
+    /* padding-top: 100px; */
+    padding-top: 20px;
+    height: auto;
+    align-items: end;
+    border-right: 3px solid #000;
+}
+
+.header-item__link{
+    color: #000;
+    font-size: 16px;
+    transition: transform .3s linear;
+    align-self: center;
+    margin-bottom: 1em;
+}
+
+.header-item__link:hover{
+    transform: scale(1.2);
+    color: gold;
+}
+
+.header-item__text{
+    width: 100%;
+    height: 80px;
+    align-items: start;
+    justify-content: end;
+}
+
+.header-item__details{
+    order: 1;
+    width: 200px;
+    font-size: 14px;
+    display: -webkit-box;               /* 必须结合 -webkit-box 才能使用 -webkit-line-clamp */
+    -webkit-box-orient: vertical;       /* 设置盒子为垂直方向布局 */
+    -webkit-line-clamp: 3;              /* 限制显示的行数，3行为例 */
+    overflow: hidden;                   /* 溢出部分隐藏 */
+    text-overflow: ellipsis;            /* 溢出时显示省略号 */
+    
+}
+
+.header-item__title{
+    font-size: 20px;
+    writing-mode: vertical-lr;
+    order: 2;
+    margin: 0 .5em;
+}
+
+.header-item__img{
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    /* margin-top: 20px; */
+}
+
+/* banner */
+.hkIndex__banner{
+    width: 100%;
+}
+
+.hkIndex__banner-swiper{
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.hkIndex__banner-swiper-items{
+    display: flex;
+    height: 100%;
+}
+
+.hkIndex__banner-swiper-items:hover{
+    cursor: pointer;
+}
+
+.hkIndex__banner-swiper-item{
+    /* flex: 1; */
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100%;
+}
+
+.hkIndex__banner-swiper-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* arrow */
+.hkIndex__banner-arrow{
+    width: 100px;
+    height: 100px;
+    background-color: #000;
+}
+
+
+/* zodiac 生肖部分 */
+.hkIndex__zodiac{
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(12,50px);
+    grid-gap: 20px;
+}
+
+.hkIndex__zodiac-item{
+    width: 50px;
+    height: 50px;
+}
+
+.hkIndex__zodiac-img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+}
+
+/* main */
+.hkIndex__main{
+    /* background-color: gray; */
+    text-align: center;
+    margin-bottom: 100px;
+}
+
+/* module */
+.module__block--main{
+    width: 100%;
+    border-top: 5px solid #000 ;
+    padding-top: 20px;
+    margin-top: 30px;
+    height: auto;
+}
+
+.module__header--main{
+    padding: 1em;
+}
+
+/* header--main */
+.header__title--main{
+    font-size: 36px;
+}
+
+.header__link--main{
+    font-size: 20px;
+}
+
+.header__link--main:hover{
+    color: gold;
+}
+
+.module__subtitle{
+    font-size: 28px;
+    /* margin: 0 auto; */
+}
+
+/* module__item */
+.module__item{
+    margin-top: 2em;
+    justify-content: space-around;
+}
+
+.module__item-img{
+    width: 400px;
+    height: 400px;
+    /* margin-right: 100px; */
+}
+
+.module__item-description{
+    font-size: 16px;
+    text-align: start;
+    margin-bottom: 1em;
+    width: 700px;
+}
+
+.module__item-description:nth-last-child(1){
+    margin-bottom: 0;
+}
+
+.desc__details--small{
+    font-size: 20px;
+}
+
+/* migrant */
+.module__item-content--top{
+    align-self: self-start;
+}
+
+.migrant__item-img{
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+}
+
+/* migrant 移民作用 */
+.migrant__item-subtitle{
+    margin-top: 50px;
+    background-color: #fff;
+    color: orange;
+    box-shadow: 0 0 5px  rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    font-size: 36px;
+    /* width: fit-content; */
+    box-sizing: border-box;
+    padding: .2em 0;
+    padding-left:3em;
+    width:100%;
+    text-align: start;
+    position: relative;
+    /* z-index: 2; */
+}
+
+.migrant__item-subtitle::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -46px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-width: 20px 23px;
+    border-right:23px solid rgba(0, 0, 0, .5);
+}
+
+.migrant__item-subtitle::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -36px;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-width: 20px 20px;
+    border-right:20px solid #fff;
+}
+
+.subtitle__text--special{
+    background-color: #000;
+    color: #fff;
+    /* position: relative; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%) skew(-20deg);
+    /* top: -30px; */
+    /* right: -50px; */
+    display: inline-block;
+    height: 60px;
+    line-height: 60px;
+    padding:0 1em;
+    /* transform: skewX(-20deg); */
+}
+
+.subtitle__text--special::before,.subtitle__text--special::after{
+    /* content: ''; */
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.subtitle__text--special::before{
+    top:0;
+    left: 0;
+    border-top: 30px solid #fff;
+    border-left: 20px solid #fff;
+    border-bottom: 30px solid transparent;
+    border-right: 20px solid transparent;
+    z-index: 0;
+}
+
+.subtitle__text--special::after{
+    top:0;
+    right: 0;
+    border-bottom: 30px solid #fff;
+    border-right: 20px solid #fff;
+    border-top: 30px solid transparent;
+    border-left: 20px solid transparent;   
+}
+
+/* hkShop 跨境电商 */
+/* 电商标题 */
+.hkShop__block--main{
+    position: relative;
+}
+
+.hkShop__header--main{
+    position: absolute;
+    top:50px;
+    left: 40%;
+    z-index: 1;
+    /* z-index: 0; */
+}
+
+.header__title--hkShop{
+    position: relative;
+    /* z-index: 1; */
+    width: 150px;
+    height: 150px;
+    line-height: 150px;
+    font-size: 24px;
+    border-radius: 50%;
+    background: linear-gradient(to right,rgb(255,177,9),rgb(240,137,42));
+    color: #fff;
+}
+
+.header__title--hkShop::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 180px;
+    height: 180px;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 50%;
+}
+
+.header__title--hkShop::after{
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 200px;
+    height: 200px;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 50%;
+}
+
+/* 电商图片 */
+.hkShop__item-img{
+    width: 650px;
+    height: 350px;
+}
+
+/* 电商文字内容 */
+.hkShop__item-desc{
+    width: 400px;
+}
+
+.desc__title--hkShop{
+    font-size: 24px;
+}
+
+.desc__details--hkShop{
+    font-size: 16px;
+}
+
+
+
+/* medical */
+.desc__title--medical{
+    width: fit-content;
+    padding: .3em .5em;
+    border-radius: 5px;
+    margin-bottom: .5em;
+}
+
+.bgc--orange{
+    background: linear-gradient(to right, rgb(253,183,5),rgb(236,123,47));
+}
+
+.bgc--orange-red{
+    background: linear-gradient(to right, rgb(235,122,47),rgb(198,92,21));
+}
+
+.bgc--gray{
+    background: linear-gradient(to right, rgb(164,164,164),rgb(136,136,136));
+}
+
+/* 医疗图片 */
+.medical__imgs{
+    width: 400px;
+}
+
+.medical__item-img{
+    margin-bottom: 20px;
+}
+
+.medical__item-img:nth-last-child(1){
+    margin-bottom: 0;
+}
+
+/* 医疗内容 */
+.medical__content{
+    width: 700px;
+}
+
+/* 医疗头部 */
+.module__header--medical{
+    /* align-items: start; */
+    text-align: start;
+}
+
+/* 医疗副标题 */
+.medical__subtitle{
+    font-size: 20px;
+    font-weight: 200;
+}
+
+/* 医疗阴影盒子 */
+.medical__item--shadow{
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+    padding: 1em 2em;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.medical__subtitle--orange{
+    color: orange;
+    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 1em;
+}
+
+.medical__item-desc{
+    width: fit-content;
+    color: gray;
+}
+
+
+
+/* 媒体查询 */
+@media (min-width: 768px) and (max-width: 991px) {
+    /* 平板设备 */
+    /* header */
+    .header__text--underline{
+        font-size: 28px;
+    }
+
+    .header__text--chinese{
+        font-size: 36px;
+    }
+
+    .header-item__link{
+        font-size: 20px;
+    }
+
+    .header-item__text{
+        /* justify-content: space-around; */
+    }
+
+    .header-item__details{
+        font-size: 16px;
+        -webkit-line-clamp: 4;
+    }
+
+    .header-item__title{
+        font-size: 20px;
+    }
+
+    .header-item__img{
+        width: 100px;
+        height: 100px;
+        margin-right: -50px;
+    }
+
+    /* main */
+    .module__block--main{
+        border-top: 3px solid #000;
+        padding-top: 10px;
+    }
+
+    /* title */
+
+    .header__title--main{
+        font-size: 28px;
+    }
+
+    .module__subtitle {
+        font-size: 24px;
+    }
+
+    /* 内容 */
+    .module__item-img{
+        width: 200px;
+        height: 200px;
+    }
+
+    .module__item-description{
+        font-size: 16px;
+        width: 350px;
+    }
+
+    /*电商 */
+    /* 圆形的样式 电商标题 */
+    .hkShop__header--main{
+        left: 20%;
+    }
+
+    .header__title--hkShop{
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        font-size: 16px;
+    }
+
+    .header__title--hkShop::before{
+        width: 90px;
+        height: 90px;
+    }
+
+    .header__title--hkShop::after{
+        width: 100px;
+        height: 100px;
+    }
+
+    /* 医疗 */
+    .medical__subtitle{
+        font-size: 16px;
+    }
+    /* shadow 阴影盒子 */
+    .medical__item--shadow{
+        padding: .5em 1em;
+    }
+
+    .module__item{
+        margin-top: 1em;
+    }
+
+    .medical__subtitle--orange{
+        font-size: 20px;
+    }
+
+    .desc__details--small{
+        font-size: 14px;
+    }
+}
+
+/* 中型设备样式 */
+/* @media (min-width: 769px) and (max-width: 1023px) {
+    
+} */
+
+@media (min-width:992px) and (max-width: 1200px) {
+    /* 大型设备样式 */
+
+    /* header */
+    .header__title{
+        font-size: 48px;
+    }
+
+    .header__text--chinese{
+        font-size: 64px;
+    }
+
+    .header-item__link{
+        font-size: 24px;
+    }
+
+
+    .header-item__img{
+        width: 150px;
+        height: 150px;
+        margin-right: -75px;
+    }
+
+    .header-item__title{
+        font-size: 28px;
+    }
+
+    .header-item__details{
+        width: 100px;
+        font-size: 20px;
+    }
+
+    /* module-item */
+    .header__title--main{
+        font-size: 36px;
+    }
+
+    .module__subtitle{
+        font-size: 28px;
+    }
+
+    .module__item-img{
+        width: 250px;
+        height: 250px;
+    }
+
+    .module__item-description{
+        width: 500px;
+        font-size: 20px;
+    }
+    
+    /* migrant 移民 */
+    .migrant__item-subtitle{
+        font-size: 28px;
+        padding-left: .5em;
+        /* margin-top: 50px; */
+    }
+
+    /* 平行四边形 */
+    .subtitle__text--special{
+        padding: 0 .5em;
+    }
+
+    /* 电商 */
+    /* 电商图片 */
+    .hkShop__item-img{
+        width: 500px;
+        height: 300px;
+    }
+
+    /* 电商文字内容 */
+    .hkShop__item-desc{
+        width: 200px;
+    }
+
+    .desc__title--hkShop{
+        font-size: 20px;
+    }
+    
+    .desc__details--hkShop{
+        font-size: 14px;
+    }
+
+    .hkShop__header--main{
+        top: 100px;
+        left: 50%;
+        /* transform: translate(-50%); */
+    }
+
+    .header__title--hkShop{
+        font-size: 24px;
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .header__title--hkShop::before{
+        width: 125px;
+        height: 125px;
+    }
+
+    .header__title--hkShop::after{
+        width: 150px;
+        height: 150px;
+    }
+
+    /* 医疗 */
+    /* 副标题 */
+    .medical__subtitle{
+        font-size: 16px;
+    }
+
+    .medical__subtitle--orange{
+        font-size: 24px;
+    }
+
+    .desc__details--small{
+        font-size: 16px;
+    }
+    
+    /* 医疗图片 */
+    .medical__item-img{
+            width: 300px;
+            height: 300px;
+    }
+
+    /* 医疗内容 */
+    .medical__content{
+        width: 500px;
+    }
+
+    .medical__item-desc{
+        width: fit-content;
+    }
+}
+
+@media (min-width: 1201px) {
+    /* 超大型设备样式 */
+}

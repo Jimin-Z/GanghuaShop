@@ -1,0 +1,23 @@
+{extend name="base" /}
+{block name="css"}
+{/block}
+{block name="js"}
+<script src="__ADMIN__/brands/brands.js?v={$v}" type="text/javascript"></script>
+<script>
+$(function(){
+    initGrid4({$p});
+});
+</script>
+{/block}
+{block name="main"}
+<input type="hidden" id="brandId" value="{$brandId}">
+    <div class="wst-toolbar">
+        <input type='text' id='key4' placeholder='店铺名称'/>
+        <button class="btn btn-primary" onclick='javascript:loadGrid4(0)'><i class='fa fa-search'></i>查询</button>
+        <button type="button" class="btn f-right" onclick="javascript:location.href='{:Url(\'admin/brands/index\',\'p=\'.$p)}'"><i class="fa fa-angle-double-left"></i>返&nbsp;回</button>
+        <div style='clear:both'></div>
+    </div>
+    <div class='wst-grid'>
+        <div id="mmg4" class="mmg4"></div>
+    </div>
+{/block}

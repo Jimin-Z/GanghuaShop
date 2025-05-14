@@ -1,0 +1,1034 @@
+
+<!DOCTYPE html>
+<head>
+  <meta name="baidu-site-verification" content="SoQ0DR1Aps" /><!-- 百度资源搜索平台，C老师让加的，20.10.28 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <link rel="shortcut icon" target="_blank" href="https://www.globevisa.com.cn/favicon.ico">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/reset1.css">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/common1.css?25624">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/window1.css?86882">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/advisers1.css">
+  <script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/jquery/1.9.1/jquery.min1.js"></script>
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/flag_window.css">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/flag.css">
+  
+  
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/flag.css?75253">
+  <link rel="stylesheet" type="text/css" href="https://www.globevisa.com.cn/static/index/css/fix_flex.css?82897">
+  <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/company/index2.css?10463">
+    <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/swiper/swiper.css">
+    <link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/company/jinrErweima.css">
+
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/font.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/jquery.fallr/jquery.fallr.css" />
+<link rel="stylesheet" type="text/css" href="/hsytt/static/admin/js/artDialog/skins/default.css" />
+<script type="text/javascript" src="/hsytt/assets/fb04db1/jquery.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/jquery.artDialog.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/plugins/iframeTools.js"></script>
+
+  <!-- End Google Tag Manager -->
+  <!-- 美恰代码 -->
+  <script type='text/javascript'>
+    (function(a, b, c, d, e, j, s) {
+      a[d] = a[d] || function() {
+        (a[d].a = a[d].a || []).push(arguments)
+      };
+      j = b.createElement(c),
+          s = b.getElementsByTagName(c)[0];
+      j.async = true;
+      j.charset = 'UTF-8';
+      j.src = 'https://static.meiqia.com/widget/loader.js';
+      s.parentNode.insertBefore(j, s);
+    })(window, document, 'script', '_MEIQIA');
+    _MEIQIA('entId', '957e34975a78a7c54892fec1cc077db3');
+
+
+    // 获取聊天窗口可见性
+
+    var timer = null;
+    var times =1;
+
+   // setTimeout(function(){  _MEIQIA('showPanel'); }, 30000);//访客进来5s后打开聊天窗口
+ //   _MEIQIA('getPanelVisibility', yourFunction);
+    function yourFunction(visibility) {
+      if (visibility === 'visible') {
+        clearInterval(timer);
+        console.log('聊天窗口处于显示状态');
+      } else {
+        if(times==1){
+          setTimeout(function(){  _MEIQIA('showPanel')}, 60000);
+          times++;
+          return false;
+        }else{
+          setTimeout(function(){  _MEIQIA('showPanel')}, 90000);
+        }
+
+      }
+    }// 美洽聊天窗口没有显示后，多长时间弹出美洽聊天窗口  （可选项，各自项目人员自己选择）
+    function openMeiqia(assignParams, fromParams,clickPlaceType='',pageType='') {
+      MeiqiaRecord(clickPlaceType,pageType);
+      /*
+                美恰区分，此步骤第一步先走IP判断，国内的reCode 不等于 1  不走分配机制，国外的reCode 是0 提前随机该地区对应分配给的分公司取一个，返回group_token 根据三个参数，IP、cookieID和时间戳，返回是否已咨询，存在则返回旧的group_token
+            */
+      $.post("/api/api/meiqiaAllot", function(msg) {
+      },'json')
+          .complete(function(msg) {
+            var groupToken;
+            if (msg.responseText != undefined && msg.responseText.indexOf('reCode') != -1 && eval('(' + msg.responseText + ')').reCode == 0) {
+              groupToken = eval('(' + msg.responseText + ')').reMsg.group_token;
+            }else{
+              console.log(eval('(' + msg.responseText + ')').reMsg);
+            }
+            var params, extra;
+            if (assignParams && assignParams.agent_token){
+              params = {agentToken: assignParams    .agent_token};
+            } else if (assignParams && assignParams.group_token){
+              params = {groupToken: assignParams.group_token};
+            } else if (groupToken){
+              params = {groupToken:groupToken}
+            }
+            var mqCookie = $(".mqCookie").html();
+            if (fromParams){
+              _MEIQIA('metadata', {from: fromParams,// gender:mqCookie
+              });
+            }
+            _MEIQIA('showPanel', params);
+          });
+    }
+
+    //美恰咨询 弹窗  执行具体人员
+    function Meiqia(token,fromParams,clickPlaceType='',pageType='') {
+      // 设置 fallback
+      _MEIQIA('fallback', 2);
+      console.log('正常执行: '+token+' 点击位置: '+clickPlaceType+' 点击页面: '+pageType);
+      MeiqiaRecord(clickPlaceType,pageType);
+      if (fromParams){ _MEIQIA('metadata', {from: fromParams, // gender:mqCookie
+        });
+      }
+      // 指定客服
+      _MEIQIA('showPanel', {  agentToken: token,});
+    }
+    //美恰咨询 弹窗  执行具体客服组
+    function MeiqiaGroup(token,clickPlaceType='',pageType='') {
+      MeiqiaRecord(clickPlaceType,pageType);
+      // 指定客服组
+      _MEIQIA('showPanel', {  groupToken: token,  });
+    }
+    //记录点击美恰
+    function MeiqiaRecord(clickPlaceType='',pageType='') {
+      //调用记录方法
+      recordUserAction('2');
+      //clickPlaceType 点击位置   pageType 点击页面
+      if (clickPlaceType !='' && pageType !=''){
+        $.ajax({
+          url:'https://www.globevisa.com.cn/globevisapc/index/MeiqiaRecord',
+          type:'post',
+          data:'clickPlaceType='+clickPlaceType+"&pageType="+pageType+"&type=1"+"&url="+window.location.href ,
+          dateType:'json',
+          success:function(msg){  console.log(msg.status);}
+        })
+      }else{
+        console.log("参数不完整!");
+      }
+    }
+  </script>
+  <!-- 美恰代码 -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-T3TLZVV3" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <script>
+    !(function(c,b,d,a){c[a]||(c[a]={});c[a].config=
+        {
+          pid:"cg1fd@263414299dee23c",
+          urlHelper:[/\/$/],  appType:"web",
+          imgUrl:"https://arms-retcode.aliyuncs.com/r.png?",
+          sendResource:true,  enableLinkTrace:true,behavior:true
+        };
+      with(b)with(body)with(insertBefore(createElement("script"),firstChild))setAttribute("crossorigin","",src=d)
+    })(window,document,"https://retcode.alicdn.com/retcode/bl.js","__bl");
+  </script>
+<script>
+   // $product=$('#product');
+   // 'http://116.205.242.68/welive/kefu.php?a=6168
+  function bweline(){
+ //   $.dialog.data('id', 0);
+    $.dialog.open('http://116.205.242.68/welive/kefu.php?a=6168',{
+            id:'xiajia',
+            lock:true,
+            opacity:0.3,
+            title:'在线咨询',
+            width:'80%',
+            height:'70%',
+             autoOpen: false,
+    position: {
+      my: 'right top',
+      at: 'right top',
+      of: window
+    },
+            close: function() {
+
+        }
+    });
+   }
+
+</script>
+<input type="hidden" value="" id="iotest">
+<input type="hidden" value="" id="yxgj_">
+<input type="hidden" value="" id="ymmd_">
+<span class="mqCookie" style="display:none"></span>
+<!-- 头部 -->
+<style>
+  .gskh{  position: absolute; left: 0px;  }
+  .gskhs{   position: absolute;   margin-left: 600px;   margin-top: 0px;  }
+  .zzfu{  margin-top: 153px;  margin-left: -200px;}
+  .nav_addS_imgs {margin-top: 10px;width: 270px;background: #F6EEE1;box-sizing: border-box;
+    padding: 10px;}
+  .sel_country{display:none;  /* width: 210px; */
+            margin-left: 15px;
+            /* margin-top: 10px; */
+          }
+          .sel_country div{
+            /* display:inline-block; */
+            border:1px solid #EDE1C9;height:36px;line-height:36px;border-radius:25px;}
+          .sel_country ul{
+            position: absolute;
+            top: 37px;
+            left: 14px;
+            border: 1px solid #EDE1C9;
+            background: #f1efeb;
+            width: 88px;
+            padding: 4px 0px;
+          }
+          .sel_country ul li{ font-size: 14px;height:26px;line-height:26px;text-align:center;}
+          .sel_country ul li a:hover{ color:#990000;  }
+          .sel_country ul li:hover{
+            /* background:#a67f3e; */
+            color:#990000;}
+          .search_type{width: 49px;text-align: right; padding-right: 13px;
+            font-size: 12px;float: left;height: 100%;border-right: #EDE1C9 1px solid;
+            background:url("https://www.globevisa.com.cn/static/index/images/header_xl.png") no-repeat right;
+          }
+          #ac:hover .sel_country {display: block; text-decoration:none;}
+          .ureg.zt {display: none !important; }
+
+</style>
+<script>
+  $(function(){
+  var zc = zh_getLang();
+
+  if(zc){
+    document.getElementById('ft').className += " zt"
+    document.getElementById('jt').className = "ureg";
+  }else{
+    document.getElementById('jt').className += " zt"
+    document.getElementById('ft').className = "ureg";
+  }
+})
+</script>
+<link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/fifth_module.css?24421449">
+<link rel="stylesheet" href="https://www.globevisa.com.cn/static/index/css/mqgwReset.css">
+<style type="text/css">
+.fhm-cl-p{height:220px;}
+.fhm-cl-p .info{ width: 236px;  height: 124px;  color: rgba(255,255,255,1);
+    overflow: hidden;   margin-top: -3px;   line-height: 25px;}
+.fhm-cl-p p{    width: 355px;height:85px;margin:0;overflow:hidden}
+.videomq{display:none;width:125px;height:36px;top:90px;left:5px;background:rgba(0,0,0,0.5) url('/static/index/images/customer/video1.png') no-repeat 14px center;border-radius:20px 5px 5px 20px;color:#f00;line-height:36px;text-indent:36px;font-size:14px;text-decoration:underline;color:#BA1F1B}
+.videomq:hover{color:#f00}
+.videoImg{display:none;width:32px;height:32px;top:92px;left:7px;transition:ease-in 0.4s;transform:rotate(0deg);-webkit-transform:rotate(0deg);z-index:4;}
+
+.fhm-cl-b li {  width:115px;height:28px;line-height:30px;border-radius:5px; background-color:#a67e3d;}
+
+.fhm-cl-b li:last-child a {
+  text-align: center;
+  text-indent:20px;
+  /*background:url(/static/index/images/customer/areaCode.png) no-repeat;*/
+  background:url(/static/index/images/customer/tel.png) no-repeat;
+  background-position: 7px 10px;
+  letter-spacing:6px;
+  font-size:14px;
+}
+
+.fhm-cl-b li:first-child a {
+  text-indent:30px;
+  background:url(/static/index/images/customer/weixin.png) no-repeat;
+  background-position: 8px 8px;
+  letter-spacing:6px;
+  font-size:14px;
+}
+.c_keys{padding: 60px 0;background: #fff;}
+</style>
+<div class="c_keys">
+  <div class="main">
+  <a href="javascript:;" onclick="bweline();"> 在线咨询</a>
+  <div class="pub_title"><h1 class="index_tit"><b>專業團隊是申請成功的關鍵</b><span><font size='4'>—24小時爲您提供諮詢服務，根據您的實際需求制定專屬方案name=4</font></span></h1>
+    <section class="fifth-module" id="changeAdvisor" style="margin-top:20px;"></section>
+    <section class="fhm-corresponding" style="font-size: 14px">
+    <section class="fhm-c-list pr showGW" name="4" >
+    <ul class="pa fhm-cl-ul">
+
+
+
+<li class="pr fhm-cl-li">
+  <span class="fhm-cl-t">
+    <a target="_blank" href="/gw-543-4.html"><img  src="https://zyguwen.oss-cn-hangzhou.aliyuncs.com/000b246b-0000-0000-0000-00006b06688e/2019041200000000805668/20190412-沈阳Apple刘小芳137X132.jpg" style="margin-left: 4px"/></a>
+  </span>
+    <span class="fhm-cl-b">
+    <p class="tac"  attr-token="8565ddd53707dd25b52b08929567c0e3">苏州-Apple刘</p>
+    <ul>
+    <li class="cur"><a class="cur" href="javascript:;" onclick='Meiqia("8565ddd53707dd25b52b08929567c0e3","3",3)'>留言给我</a></li>
+      <li><a href="javascript:;">拨打电话</a></li>
+    </ul>
+  </span>
+  <span class="fhm-cl-p pa">
+    <img src="https://img.globevisa.com.cn/images/customers/000b246b-0000-0000-0000-00006b06688e/2022112500000001224569/2022-11-25Apple刘小芳137X132顾问企业微信二维码.jpg" class="fl" />
+    <div class="info"  style="color:#555">
+      <em style="color:#a67e3d;font-weight:bold;">苏州-Apple刘</em><br />
+      <em style="color:#555">邮箱：</em>appleliu@globevisa.com<br />
+            <em> WhatsApp：<a class="WhatsAppClick" target="_blank" style="display: inline-block;color: #00f" href="https://api.whatsapp.com/send?phone=8618120060129&text=&source=&data=&app_absent=">8618120060129</a></em><br />
+      <em style="color:#555">手机：</em>0086-17768001465<br />
+    </div>
+    <p class="fl" style="color:#555"><em style="color:#555">个人简介：</em>环球首席咨询顾问，从事移民行业10余年，熟知各国移民政策和法案，亲自办理的移民、留学及海外资产配置客户300余户，带领团队完成的移民客户超过1000户。欢迎您的咨询。</p>
+  </span>
+</li>
+
+</ul>
+</section>
+  
+<section class="fhm-c-list pr dbk showGW" name="13" >
+    <ul class="pa fhm-cl-ul"> 
+<li class="pr fhm-cl-li">
+  <span class="fhm-cl-t">
+    <a target="_blank" href="/gw-1368-13.html"><img  src="https://zyguwen.oss-cn-hangzhou.aliyuncs.com/000748cd-0000-0000-0000-00006b28a5af/2019022500000000777328/苏州Lottie郑亚南137X132.jpg" style="margin-left: 4px"/></a>
+  </span>
+      <!-- <a style="display:inline"  href="javascript:;"><img class="pa videoImg a"  data-original="https://www.globevisa.com.cn/static/index/images/customer/video2.png"/></a>
+    <a class="videomq pa" href="javascript:;">视频更新中</a> -->
+
+    <span class="fhm-cl-b">
+    <p class="tac"  attr-token="a62c35649826cc58f748bbd674a44387">苏州s-Lottie郑</p>
+    <ul>
+              <li class="cur"><a class="cur" href="javascript:;" onclick='Meiqia("a62c35649826cc58f748bbd674a44387","3",3)'>留言给我</a></li>
+            <!--<li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=2881130827&site=qq&menu=yes">2881130827</a></li>-->
+      <!--<li><a href="javascript:;">18501547810</a></li>-->
+      <li><a href="javascript:;">拨打电话</a></li>
+    </ul>
+  </span>
+  <span class="fhm-cl-p pa">
+    <!-- <img  data-original="https://img.globevisa.com.cn/images/customers/000748cd-0000-0000-0000-00006b28a5af/2022112500000001224709/2022-11-25Lottie郑亚南137X132顾问企业微信二维码.jpg" class="fl" src="" /> -->
+    <img src="https://img.globevisa.com.cn/images/customers/000748cd-0000-0000-0000-00006b28a5af/2022112500000001224709/2022-11-25Lottie郑亚南137X132顾问企业微信二维码.jpg" class="fl" />
+    <div class="info"  style="color:#555">
+      <em style="color:#a67e3d;font-weight:bold;">苏州-Lottie郑</em><br />
+      <em style="color:#555">邮箱：</em>lottiezheng@globevisa.com<br />
+            <!-- <em style="color:#f5ead6">微信：</em><br /> -->
+      <!--<em style="color:#555">手机：</em>18501547810<br />-->
+      <!--<em style="color:#555">手机：</em>0086-18501547810<br />-->
+      <em style="color:#555">手机：</em>0086-18501547810<br />
+    </div>
+    <p  style="color:#555"><em style="color:#555">个人简介：</em>入职环球10年，从事管理岗7年。曾担任项目总监，为近千位客户进行过移民规划和方案定位，成功移民并定居海外。熟知各国移民政策，擅长为不同需求客户提供量身定制方案。移路有我，移路相伴！</p>
+      </span>
+</li>
+            </ul>
+            </section>
+    </section>
+  </div>
+</div>
+
+<!--表单-->
+
+<section class="g-center-block ke_xs_z clearfix">
+  <div class="ke_xs_w">
+    <div class="ke_xs">
+      <div class="swiper-wrapper" >
+<div class="swiper-slide">
+          <a target="_blank" href="/thanks/292.html">
+            <span>十几年前的叔叔和如今的我，都证明了选择环球没有错！一T女士</span>
+          </a>
+          <p>感谢环球出国苏州团队，历经3年半，坚持帮助我办理加拿大自雇移民项目并且成功拿到加拿大PR。在我经历了前几年，心情特别波动的时候，也专门派人从苏州来到上海和我聊天给我信心。办理过程中的答疑都特别的专业，我朋友的叔叔在十几年前选择环球成功移民，到如今的我，都证明了选择环球移民没有错。</p>
+          <a target="_blank" href="/thanks/292.html"><em>详情</em></a>
+        </div>
+<div class="swiper-slide">
+          <a target="_blank" href="/thanks/281.html">
+            <span>她们每个都很敬业，责任心强，态度积极主动一Y女士</span>
+          </a>
+          <p>
+  今天已经在你们环球出国的Summer陈盈颖，Rachel陈婷婷，Sharon李璇等所有成员的帮助下办好了所有菲律宾SRRV项目的有关内容。在此想对这个服务群中的所有成员表达真诚的感谢和赞赏。她们出色的能力和出色的职业素养，让人印象深刻，为你们公司的口碑增添了色彩，她们每个都很敬业，责任心强，态度积极主动，作为团队又很有凝聚力和合作沟通能力，且善于与他人沟通和协调，让我们客户非常省心省力，在此深表感谢！
+</p>
+          <a target="_blank" href="/thanks/281.html"><em>详情</em></a>
+        </div>
+<div class="swiper-slide">
+          <a target="_blank" href="/thanks/270.html">
+            <span>感谢你们耐心为我答疑解惑，并帮我成功获批一L先生</span>
+          </a>
+          <p>
+  几年前的机缘巧合，我认识了贵司的Lottie郑亚南小姐，当时我已经在别的公司办理了加拿大投资移民，但郑亚南小姐依然热心的帮我答疑解惑，让我感受了她和环球的专业和热情。随后我们委托环球办理了亲戚家孩子已被拒的学签，最终顺利拿到学签开启了留学生涯。 这次我的EB1A项目在环球几位同事的辛勤工作之下，顺利获批，非常感谢环球出国Lottie郑亚南、Cassia吴越、Jessie何娟、Snowy薛四位女士，尤其是Lottie郑亚南、Cassia吴越还有之前的Carl三位女士，她们专业、高效的服务态度是我能这么快获批的根本保证。 再次向本次项目部致以诚心的感谢！祝她们工作顺利！家庭幸福！笑靥如花！
+</p>
+          <a target="_blank" href="/thanks/270.html"><em>详情</em></a>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+</section>
+<!--成功案例-->
+<!-- 弹窗 -->
+<!-- 选择公司弹窗 -->
+<style>
+  .xq_phone{
+    width: 410px;
+    height: 40px;
+    box-sizing: border-box;
+    line-height: 38px;
+    border: 1px solid #D2D2D2;
+    background:#FFFFFF;
+    color: #D2D2D2;
+    font-size: 16px;
+  }
+  .xq_phone select{
+    height: 38px;
+    width: 204px;
+    box-sizing: border-box;
+    padding-left: 20px;
+    float: left;
+    line-height: 38px;
+    border-right: 1px solid #D2D2D2;
+    font-size: 16px;
+  }
+  .xq_phone input{
+    width: 204px;
+    height: 38px;
+    font-size: 16px;
+    float: left;
+    padding-left: 19px;
+  }
+
+
+
+/* 国编样式 */
+.ul-select-window::-webkit-scrollbar-track {    border-radius:0;}
+.ul-select-window::-webkit-scrollbar-thumb {    border-radius:0; }
+  .flex_window{   float: left;  }
+  .ul-select-window li{   margin-top: -5px; }
+  .jt_window{        top: 18px;   right: 2px;    }
+    .flex_father{        border: 0 !important;    }
+    .flex_window dt {
+        /* flex-shrink: 0; */
+        margin-right: 10px;
+        /* text-align: right; */
+        font-size: 16px;
+        color: #fff;
+        display: inline-block;
+        /* vertical-align: middle; */
+    }
+
+    .flex_window dd .select-i-window:not(:last-of-type) {        margin-right: 30px;    }
+
+    .ul-select-window {
+    padding-top:10px;
+        width: 205px;
+        top: 41px;
+    left: -1px;
+    padding-left: 22px;
+    background-color: rgba(254,253,253,.9);
+    border: 1px solid #D2D2D2;
+    border-radius: 0;
+    }
+    .select-i-window {        position: relative;        width: 194px;    }
+    .select-i-window .input-txt-window {
+    margin-top:-2px;
+        height: 38px;
+        line-height: 38px;
+        /* background-color: rgba(254,253,253,.9); */
+        color: #626262;
+        vertical-align: middle;
+        box-sizing: border-box;
+        display: inline-block;
+        margin-left: 10px;
+        text-indent: 10px;
+        width: 100%;
+    border: 0;
+    border-radius: 0;
+        /* border-radius: 4px; */
+        font-size: 14px;
+        border-right: 1px solid #BFBFBF;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        cursor: pointer;
+    }
+  .gfc_left_gg>ul li input{ height: 38px;   line-height: 39px;}
+
+</style>
+<div id="windows_comanySelect">
+  <i class="company_close"></i>
+  <img class="company_top_img" src="https://www.globevisa.com.cn/static/index/images/country/info_top_iconnew2.png">
+  <p class="company_desc">请选择为您致电的公司</p>
+  <div class="company_middle">
+    <input type="hidden" name="SSGS">
+    <input type="hidden" name="SSGSSS" value="">
+    <p>国内公司</p><ul class="clearfix ssgs_gn"></ul>
+    <p>国际公司</p><ul class="clearfix ssgs_hw"></ul>
+  </div>
+  <a class="company_btn" href="javascript:;">确认</a>
+</div>
+<!-- 右侧弹窗-->
+
+<div class = "wrap">
+    <ul>
+        <li><a href="javascript:;" onclick="bweline();"> 在线咨询</a> </li>
+        <!-- <li ><a target="_blank" href="/mark_gather.html&ycpc#pf">条件测评</a></li> -->
+    <li ><a href="javascript:;" onclick="xxhz()">项目合作</a></li>
+        <li ><a target="_blank" href="/contrast.html&ycpc">国家对比</a></li>
+        <!--<li ><a target="_blank" href="/sqzl.html&ycpc">免费材料</a></li>-->
+        <li class="oli" style="margin-top: 13px;"> <a href="##" id="btn" class="btn">关注微信</a>
+            <img src="https://www.globevisa.com.cn/static/index/images/wx1new2.jpg" alt="" class="pic2" style="width:78px;">
+        </li>
+        <!-- <li ><a target="_blank" href="/contentus.html?ycpc">联系我们</a></li> -->
+        <li id="toTop" class="J_backTop"><span class="top"></span><a href="javascript:;">返回顶部</a></li>
+    </ul>
+</div>
+
+<!--项目合作弹窗-->
+<section class="xxhz">
+  <em></em>
+  <img  src="https://www.globevisa.com.cn/static/index/images/index/xx_03new2.png" class="xx_img2">
+  <span>项目合作, 请您联系:</span>
+  <img  src="https://www.globevisa.com.cn/static/index/images/zhaopin/8new2_1.png" class="qrcode">
+  <ul>
+    <!-- <li>邮箱: luohuadeng@globevisa.com</li> -->
+    <li>邮箱: bellaluo@globevisa.com</li>
+    <!-- <li>微信号: Hq_13051479093</li>
+    <li>联系电话: 400-630-8353转1883</li> -->
+  </ul>
+</section>
+<!-- 给您回电弹窗  -->
+<!-- 表单弹窗 -->
+<!-- 短信弹窗 -->
+<div class="wind"></div>
+<div class="windowsimgall">
+  <a target="_blank" href="https://www.globevisa.com.cn/"><img class="windowsimg" src="" onclick="onurl('','')"/></a>
+  <!--<a target="_blank" href=""><img class="windowsimg" style="width: 675px;height:417px " src=""/></a>-->
+  <!--<a href="https://www.globevisa.com.cn/event/409.html" target="_blank" class="openurl"></a>-->
+  <div class="closewind"></div>
+  <!--<a id="top" target="_blank" href="https://www.globevisa.com.cn/event/409.html"></a>-->
+  <!--<a id="xai" target="_blank" href="https://www.globevisa.com.cn/event/409.html"></a>-->
+</div>
+<div class="post" style="display: none"><input type="text" value="1"></div>
+<!-- 左侧飘窗-->
+<!-- 底部弹窗 {eyou:include file="showbottomWindows.htm" /}-->
+
+<!-- 公共隐藏域 -->
+<input type="hidden" id="G_IP" value="">
+<input type="hidden" id="G_LOGIN_STATUS" value="">
+<input type="hidden" id="G_LOGIN_PERSON" value="">
+<input type="hidden" id="G_LOGIN_USERNAME" value="">
+<input type="hidden" id="G_LOGIN_COUNTRY_CODE" value="">
+<input type="hidden" id="G_YMGJ" value="">
+<input type="hidden" id="G_YMMD" value="">
+<!-- 公共隐藏域 -->
+<!-- 尾部 -->
+<style>
+    #footer {
+        height: 616px;
+        padding-bottom: 30px;
+        padding-top: 50px;
+        box-sizing: border-box;
+        background-color:#7c7c7c
+    }
+    #footer .foot-bottom p{        color: #b0b0b0;    }
+    #footer .foot-bottom p a {        color: #b0b0b0 !important;    }
+    #footer .width {        color: #fff !important;    }
+    #footer .width a:not(.beian2 a){        color: #fff !important;    }
+
+    #footer .width .footerCountrys_new h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .footerCountrys_flex {
+        display: flex;
+        gap: 50px;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+        box-sizing: border-box;
+        padding-bottom: 20px;
+    }
+
+    #footer .width .footerCountrys_new h3 span {    font-size: 14px;   }
+
+    #footer .width .footerCountrys_new2 {
+        height: 250px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-content: flex-start;
+    }
+
+    #footer .width .footerCountrys_new2 div {  font-size: 14px; margin-bottom: 10px;  }
+    #footer .width .yazhou div,
+    #footer .width .ouzhou div {  margin-right: 30px;  }
+    #footer .width .ouzhou div:last-of-type { margin-right: 0  }
+    #footer .email_bj {
+        background: url(/static/index/images/email_bj.png) no-repeat center;
+        background-size: 100%;
+        font-size: 12px;
+        color: #fff;
+        height: 22px;
+        line-height: 22px;
+        width: 215px;
+        text-indent: 26px;
+        margin-top: 10px;
+    }
+
+    #footer .project_cooperate img,
+    #footer .join_globevisa img {    margin-left: 10px;    }
+
+    #footer .join_globevisa_f,
+    #footer .project_cooperate_f,
+    #footer .brand_cooperate_f {        position: relative;    }
+
+    #footer .join_globevisa,
+    #footer .project_cooperate,
+    #footer .brand_cooperate {display:flex;flex-direction:column; gap:10px;position:absolute;top: -76px;left:60px;}
+    #footer .brand_cooperate {display:flex;flex-direction:column;gap:10px;position:absolute;top:-10px;left:60px;}
+    #footer .join_globevisa,
+    #footer .project_cooperate,
+    #footer .brand_cooperate {        display: none;    }
+    #footer .footerCountrys_new2 p {        font-size: 12px;    }
+    #footer .qrcode_footer { display: flex; flex-direction: column; align-items: center; width: 100px; gap: 10px; }
+    #footer .qrcode_footer:last-of-type {        width: 96px;    }
+    #footer .width .footerCountrys_new:last-of-type {      margin-left: auto    }
+    #footer .width .footerCountrys_new3 {        display: flex;        gap: 22px;    }
+    #footer .foot-bottom {  border-top: unset; padding-top: unset; }
+    #footer .social_icon{display: flex; justify-content: space-between;
+        margin-top: 30px; align-items: center; margin-bottom: 80px; }
+    #footer .social_icon div:first-of-type img{
+        /* width: 122px;
+        image-rendering:pixelated */
+    }
+    #footer .social_icon div:last-of-type{
+        /* display: flex;
+        gap: 16px;
+        align-items: center; */
+    }
+
+    #footer .social_icon .social_icon_list{display: flex; gap: 16px;align-items: center;}
+
+    #footer .social_icon div:last-of-type img{ /* width: 35px; */ }
+    #footer .china-number{  margin-top: 25px; font-size: 17px;  }
+    #footer .footer_media_bj{      position: relative;  }
+    #footer .footer_media_shipinhao_content,#footer .footer_media_douyinhao_content{
+        position: absolute;
+        background: url(/static/index/images/footer_media_bj.png) no-repeat center;
+        background-size: 100%;
+        width: 224px;
+        height: 100px;
+        top: -107px;
+        left: -133px;
+        display: flex;
+        align-items: center;
+
+        
+    }
+    #footer .douyinhao{  display: none;  }
+    #footer .shipinhao{  display: none;  }
+    #footer .footer_media_shipinhao_content img,#footer .footer_media_douyinhao_content img{
+        margin:9px 9px 14px 9px
+    }
+
+    #footer .xuanchuanhao .p2{   font-size: 12px; }
+    #footer .xuanchuanhao{
+        /* margin: 30px auto; */
+        font-size: 13px;  color: black;  display: flex; flex-direction: column; }
+    #footer .social_icon .social_icon_list{    z-index:1  }
+</style>
+
+<section id="footer">  <div class="width">   </div></section>
+<script>
+    $('.footer_shipin').mouseenter(function () {  $('.shipinhao').css('display','flex') });
+    $('.footer_shipin').mouseleave(function () {    $('.shipinhao').hide()   });
+    $('.footer_douyin').mouseenter(function () {  $('.douyinhao').css('display','flex')  });
+    $('.footer_douyin').mouseleave(function () {    $('.douyinhao').hide() });
+    $('.project_cooperate_f').mouseenter(function () {
+        $('.project_cooperate').show();
+        $('#footer .email_bj').css({     'width':'200',  'text-indent':'22px'     });    })
+    $('.project_cooperate_f').mouseleave(function () {
+        $('.email_bj').mouseleave(function () {
+            $('.project_cooperate').hide()
+        })
+        $('.project_cooperate').hide()
+
+    })
+
+    $('.join_globevisa_f').mouseenter(function () {
+        $('#footer .email_bj').css({
+            'width':'218px',
+            'text-indent':'26px'
+        })
+        $('.join_globevisa').show()
+    })
+    $('.join_globevisa_f').mouseleave(function () {
+        $('.email_bj').mouseleave(function () {
+            $('.join_globevisa').hide()
+        })
+
+        $('.join_globevisa').hide()
+    })
+
+    $('.brand_cooperate_f').mouseenter(function () {
+        $('#footer .email_bj').css({
+            'width':'158px',
+            'text-indent':'22px'
+        })
+        $('.brand_cooperate').show()
+    })
+    $('.brand_cooperate_f').mouseleave(function () {
+        $('.email_bj').mouseleave(function () {
+            $('.brand_cooperate').hide()
+        })
+
+        $('.brand_cooperate').hide()
+    })
+</script>
+<script>
+  var signature = "1726455250,kHp7PiOha,6da312684f60010ec459048cfebd582e";
+</script>
+<input type="hidden" id="F_M" value="">
+<input type="hidden" id="F_C" value="">
+<input type="hidden" id="F_A" value="">
+<input type="hidden" id="F_PARAM" value='a:0:{}'>
+<input type="hidden" id="F_CLIENT_ID" value=''>
+<input type="hidden" id="F_CLIENT_IP" value=''>
+<input type="hidden" id="DEPTH_Y" value='0'>
+<input type="hidden" id="DEPTH_T" value='0'>
+<input type="hidden" id="RETRY_T" value='0'>
+<!--_footer 作为公共模版分离出去  为v
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/jquery/1.9.1/jquery.min1.js"></script> -->
+<!--<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/layer/2.4/layer1.js?3214"></script> -->
+
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/swiper/swiper1.js"></script>
+
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/nav1.js?134275"></script>
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/warp_hq1.js"></script>
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/window1.js?21315"></script>
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/functions1.js"></script>
+
+ 
+<script type="text/javascript" src="https://main.globevisa.com.cn/main/md5AndCaptcha.js"></script>
+<script type="text/javascript" id="domain" domain="0" src="https://main.globevisa.com.cn/main/main.js?65240"></script>
+<script type="text/javascript" src="https://main.globevisa.com.cn/main/AjaxFormSubmit.js?76500"></script>
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/pctomobile1.js"></script>
+<script type="text/javascript" src="https://main.globevisa.com.cn/main/cost.js?70058"></script>
+<script src="https://m.globevisa.com.cn/static/index/js/userInfo.js?1683710040225"></script> 
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/lang1.js"></script>
+<script type="text/javascript" src="https://www.globevisa.com.cn/static/index/js/jquery.lazyload1.js"></script>
+<script> 
+  (function (w, d, s, i, v, j, b) {
+    w[i] = w[i] || function () {
+      (w[i].v = w[i].v || []).push(arguments)
+    };
+    j = d.createElement(s),
+        b = d.getElementsByTagName(s)[0];
+    j.async = true;
+    j.charset = "UTF-8";
+    j.src = "//main.globevisa.com.cn/main/bigdata.js?1683710040225";
+    b.parentNode.insertBefore(j, b);
+  })(window, document, "script", "_VISIT");
+  _VISIT();
+</script>
+
+<!-- 国编数据 -->
+<script>
+
+  /*定义加载国编函数*/
+// var loadCountryWindow = function(fn){
+//  var _url = ApiUrl + "/Web/GetSheets";
+//  $.getJSON(_url,function(msg) {
+//    if (msg.ret == 200) {
+//      fn(msg.data)
+//    }
+//  })
+// }
+$(function(){
+
+    //TODO:接口站异常临时处理
+  var _url = ApiUrl + "/Web/GetSheets";
+  var gwurl = BaseUrl+"/api/api/GetSheets";
+  $.ajax({
+    type: "GET",
+    url:_url,
+    dataType:'json',
+    success: function(msg) {
+      if (msg.ret == 200) { loadCountryWindow(msg.data) }
+    },
+    error: function(XMLHttpRequest, textStatus, errorThrown){
+      $.getJSON(gwurl,function(msg) {
+        if (msg.ret == 200) { loadCountryWindow(msg.data) }
+      })
+    }
+  })
+
+
+  /**模拟下拉框点击事件*/
+  $(".select-i-window .input-txt-window,.select-i-window i").on('click', function (event) {
+    var $this = $(this);
+    $(".select-i-window .input-txt-window").each(function () {
+      if($this.attr("id") != $(this).attr("id")){
+        console.log('点击了下拉框1');
+        hideULWindow($(this));
+      }
+    })
+    var jt = $this.next(".jt_window").andSelf('.jt_window');
+    if (jt.hasClass('up')){
+      jt.removeClass('up');
+      $('#countryCodeWindow').slideUp().addClass("un-fold-window");
+    }else{
+      jt.addClass('up');
+      $('#countryCodeWindow').slideDown().removeClass("un-fold-window");
+    }
+    /*阻止冒泡*/
+    event.stopPropagation();
+  });
+  /**当下拉框失去焦点时收起下拉框*/
+  $("body").on("click",function () {  hideULWindow($('#countryCodeWindow'));  });
+  /**下拉列表展开时点击li的事件  项目页只显示编码不显示国家名称*/
+  $(".select-i-window").on("click","ul li",function(){
+    var is_only_show_code = $('input[name="is_only_show_code"]').val()
+    var cnumber = $(this).find('strong').text()
+    if(is_only_show_code == 1 ){  cnumber = '+'+$(this).attr('data-value');}
+    $(this).parent("ul").siblings(".input-txt-window").text(cnumber);
+    var countryCodeWindow = '00'+$(this).attr("data-value")
+    $(this).parent("ul").siblings(".input-txt-window").attr("data-value",countryCodeWindow);
+    $('input[name="countrycode"]').val(countryCodeWindow)
+    //已选元素添加选中样式
+    var selectTxt = $('.select-i-window .input-txt-window').text();
+    if (selectTxt && selectTxt !='请选择国编') {
+      $('.select-i-window .ul-select-window strong.selected').removeClass('selected');
+      $('.select-i-window .ul-select-window strong:contains("' + selectTxt + '")').addClass('selected');
+      $("[name = 'countrycode']").children('option').removeAttr('selected');
+      $("[name = 'countrycode']").children('option:contains("' + selectTxt + '")').attr('selected',true);
+    }
+    hideULWindow($(this).parent());
+  });
+
+  /**加载国家*/
+  // 精灵图的国旗 <div class="flag-box"><div class="iti-flag ${data[i].abbreviation}"></div></div>
+
+  function loadCountryWindow(data){
+    var html = "";
+    for (var i = 0; i < data.length; i++) {
+      html +=
+      `<li data-value="${data[i].InternationalTel}">
+      <div style="display:inline-block; vertical-align: middle;">
+        <img src="${data[i].img}" width="20" alt="">
+      </div>
+      <strong>${data[i].country}+${data[i].InternationalTel}</strong>
+      </li>`;
+    }
+    $("#countryCodeWindow").html(html);
+
+    if (!isNaN(S_Query.type)){
+      if (S_Query.type == 0 || S_Query.type == 1 || S_Query.type == 2 || S_Query.type == 10) {
+        $('li[data-value="86"]').click();
+      } else if (S_Query.type == 5 || S_Query.type == 6 || S_Query.type == 7 || S_Query.type == 8){
+        $('li[data-value="65"]').click();
+      }
+    }
+  }
+});
+/**隐藏ul*/
+function hideULWindow(obj) {
+  if(obj.siblings(".jt_window").hasClass('up')){
+    $('.jt_window').removeClass("up");
+    $('#countryCodeWindow').slideUp().addClass("un-fold-window");
+    // obj.siblings(".jt").removeClass('up').siblings("ul").addClass("un-fold");
+  }
+}
+</script>
+<!-- 导航错位 -->
+<script>
+  var add_s_time="";
+  /*左侧加入三个标签 nav_column 用来控制纵向*/
+  var nav_column="<div class='nav_column'></div>";
+  var nav_kj="<div class='nav_kj_column'></div>";
+  $(".nav_loop").each(function () {
+    for(var i=0;i<5;i++){ $(this).append(nav_column); }
+  });
+  $(".nav_kj_item").each(function () {
+    for(var i=0;i<2;i++){
+      $(this).find(".nav_kj_loop").append(nav_kj);
+    }
+  });
+</script>
+
+<script>
+  //懒加载方法（目前有一个很大的问题，就是时间循环，此方法问题很大，但是没有什么好的办法解决）
+  $(function() {
+
+    $("img").lazyload({
+      effect: "fadeIn",
+      failure_limit : 10,
+      //skip_invisible : false
+    });
+    var time=0;
+    $("body li").mouseover(function(){
+
+      //$("img").trigger("sporty");
+
+      if($(this).closest("ul").hasClass("fhm-ul-t")){
+        //if(time==0){
+        //time=30;
+        var index= $(this).attr("name");
+        console.log(index);
+        $("section[name='"+index+"']").find(".fhm-cl-li").each(function(){
+          var gg_org = $(this).find(".fhm-cl-t").find("a").find("img").attr("data-original");
+          var gg_src = $(this).find(".fhm-cl-t").find("a").find("img").attr("src");
+          var wx_org = $(this).find(".fhm-cl-p").find("img").attr("data-original");
+          if(gg_src ==""){
+            $(this).find(".fhm-cl-t").find("a").find("img").attr("src",gg_org);
+            $(this).find(".fhm-cl-p").find("img").attr("src",wx_org);
+          }
+        });
+
+      }else{  $(this).trigger("scroll");}
+  });
+
+
+
+    var id=0;
+    var idArr =new Array();
+    //timer();
+    function timer(){
+      if(time>0){
+        console.log(time);
+        $("img").lazyload();
+        id = window.setTimeout(timer,1000);
+        time--;
+        idArr[time]=id;
+
+      }
+      if(time==0){
+        for(var i=0;i<idArr.length;i++){
+            clearTimeout(idArr[i]);
+        }
+        idArr =[];
+
+      }
+
+
+    }
+
+
+    $(".search_type").click(function(){ $(".g-hd-search").find("ul").show();});
+    $(".g-hd-search").find("ul").find("li").click(function(){
+      $(".search_type").html($(this).html());
+      $(".g-hd-search").find("ul").hide();
+    });
+
+    $(".header_search").click(function(){
+      var searchResult = $(".searchResult").val();
+      var searchType = $(".search_type").html();
+
+      if(window.location.host=="https://www.huanqiuchuguo.com"){
+        var hwzwLink = "/cn";
+      }else{
+        var hwzwLink = "";
+      }
+
+
+      if(searchType=="国家"){
+        if(searchResult){
+          getSearchLink(searchResult);
+        }else{
+          layer.msg("请填写搜索词");
+        }
+
+      }else if(searchType=="新闻"){
+        window.location.href=hwzwLink+"/category/171.html?keyword="+searchResult;
+      }else if(searchType=="活动"){
+        window.location.href=hwzwLink+"/event_gather.html?keyword="+searchResult;
+
+      }else{
+        window.location.href=hwzwLink+"/news.html?keyword="+searchResult;
+      }
+
+    })
+    //setInterval(function() {
+    //$("img").lazyload();
+    // }, 1000);
+
+  });
+
+
+</script>
+
+  <script  src="https://www.globevisa.com.cn/static/index/js/flash.js"></script>
+  <script  src="https://www.globevisa.com.cn/static/index/js/swiper/swiper1.js"></script>
+  <script  src="https://www.globevisa.com.cn/static/index/js/company2.js?72429"></script>
+  <script type="text/javascript"  src="https://www.globevisa.com.cn/static/index/js/advisers.js"></script>
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=0Fe8a1e79a2b773b91b3bcffe67b71b8&s=1"></script> 
+  <script type="text/javascript">
+    $(function() {
+      $('.bo_hot_city>ul').addClass('flex flex-w');
+
+      $(".show_btn").click(function() {
+        if ($(this).parents('dl').hasClass('on')) {
+          $(this).parents('dl').removeClass('on');
+          $(this).html('展开评价<i></i>');
+          $(this).prev('.content').html($(this).attr('data-h'));
+
+        }else{
+          $(this).parents('dl').addClass('on');
+          $(this).html('收起评价<i></i>');
+          $(this).prev('.content').html($(this).attr('data-s'));
+        }
+      });
+    });
+
+    var map_lon = "120.679203";
+    var map_lat = "31.32106";
+    if(map_lon && map_lat){
+      var map = new BMap.Map("bdMapLoc");
+      map.centerAndZoom(new BMap.Point(map_lon, map_lat), 17);  //前边是左边。后边是
+      map.enableScrollWheelZoom();
+      var marker = new BMap.Marker(new BMap.Point(map_lon, map_lat));
+      map.addOverlay(marker);
+      var licontent = "<p style='font-size:14px;padding:0;margin:0;height: 24px;font-weight:700'>环球苏州</p>";
+      licontent += "<span style='line-height:17px;'><strong>地址:</strong> 苏州市工业园区苏州大道西9号中海财富中心西塔2306-2307室 </span><br>";
+
+      var hiddeninput = "<input type=\"hidden\" value=\"" + '苏州' + "\" name=\"region\" /><input type=\"hidden\" value=\"html\" name=\"output\" /><input type=\"hidden\" value=\"driving\" name=\"mode\" /><input type=\"hidden\" value=\"latlng:" + marker.getPosition().lat + "," + marker.getPosition().lng + "|name:" + "\" name=\"destination\" />";
+      var content1 = "<form id=\"gotobaiduform\" action=\"https://api.map.baidu.com/direction\" target=\"_blank\" method=\"get\">" + licontent + hiddeninput + "</form>";
+      var opts1 = { width: 400 };
+
+      var infoWindow = new BMap.InfoWindow(content1, opts1);
+      marker.openInfoWindow(infoWindow);
+      marker.addEventListener('click', function () { marker.openInfoWindow(infoWindow); });
+
+      function gotobaidu(type) {
+        if ($.trim($("input[name=origin]").val()) == "") {
+          alert("请输入起点！");
+          return;
+        } else {
+          if (type == 1) {
+            $("input[name=mode]").val("transit");
+            $("#gotobaiduform")[0].submit();
+          } else if (type == 2) {
+            $("input[name=mode]").val("driving");
+            $("#gotobaiduform")[0].submit();
+          }
+        }
+      }
+    }else{
+      $('.dtxs').hide();
+    }
+</script>
+
+<!--请在上方写此页面业务相关的脚本-->
+</body>
+</html>

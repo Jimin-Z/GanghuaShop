@@ -1,0 +1,35 @@
+{extend name="base" /}
+{block name="css"}
+<style>
+	td .layui-table-cell{height:60px !important;line-height: 60px !important;overflow: inherit!important;}
+	td .laytable-cell-1-0-2,td .laytable-cell-1-0-3,td .laytable-cell-1-0-4{overflow:hidden!important;}
+	.layui-table img{max-width:150px!important;}
+</style>
+{/block}
+{block name="js"}
+<script src="__ADMIN__/goodsconsult/goodsconsult.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="wst-toolbar">
+	<div id="query" style="float:left;">
+		<select id="type" name='type' class='query'>
+		  <option value="0">-咨询类别-</option>
+		  	{volist name=":WSTDatas('COUSULT_TYPE')" id="vo"}
+        	<option value="{$vo['dataVal']}">{$vo['dataName']}</option>
+        	{/volist}
+		</select>
+		<input type="text" name="consultKey" placeholder='咨询内容' id="consultKey" class="query" />
+		<button type="button"  class='btn btn-primary btn-mright'onclick="javascript:loadGrid(0)" ><i class="fa fa-search"></i>查询</button>
+	</div>
+   <div style="clear:both"></div>
+</div>
+<div class='wst-grid'>
+ <div id="mmg" class="mmg layui-form"></div>
+</div>
+<script>
+$(function(){
+	initGrid({$p});
+});
+</script>
+
+{/block}

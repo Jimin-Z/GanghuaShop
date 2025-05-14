@@ -1,0 +1,15 @@
+{extend name="base" /}
+{block name="css"}
+{/block}
+{block name="js"}
+<script src="__ADMIN__/payments/payments.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class='wst-grid'>
+<div id="mmg" class="mmg"></div>
+</div>
+<script>
+  $(function(){initGrid()});
+</script>
+
+{/block}

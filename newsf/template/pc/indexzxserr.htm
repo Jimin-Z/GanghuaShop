@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script language="javascript"> 
+<!--
+//图片按比例缩放
+var flag=false;
+function DrawImage(ImgD,iwidth,iheight){
+    //参数(图片,允许的宽度,允许的高度)
+    var image=new Image();
+    image.src=ImgD.src;
+    if(image.width>0 && image.height>0){
+    flag=true;
+    if(image.width/image.height>= iwidth/iheight){
+        if(image.width>iwidth){  
+        ImgD.width=iwidth;  ImgD.height=(image.height*iwidth)/image.width;
+        }else{
+        ImgD.width=image.width; ImgD.height=image.height;
+        }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    else{
+        if(image.height>iheight){    ImgD.height=iheight;
+        ImgD.width=(image.width*iheight)/image.height;        
+        }else{ ImgD.width=image.width; ImgD.height=image.height;
+        }
+        ImgD.alt=image.width+"×"+image.height;
+        }
+    }
+} 
+//-->
+</script>
+<script>
+   // $product=$('#product');
+   // 'http://116.205.242.68/welive/kefu.php?a=6168
+   console.log('line 556kkkka');
+  function bweline(){
+     console.log('line 556');
+ //   $.dialog.data('id', 0);
+    $.dialog.open('http::/127.0.0.1/welive/index.php',{
+            id:'xiajia',
+            lock:true,
+            opacity:0.3,
+            title:'选择下架商品',
+            width:'50%',
+            height:'50%',
+            close: function() {
+
+        }
+    });
+    console.log('line 556c');
+   }
+     console.log('line 51kkke');
+</script>
+
+<script language="javascript">
+function killErrors() {    return true;}
+window.onerror = killErrors;
+</script>
+<title>{eyou:global name='web_title' /}_{eyou:global name='web_name' /}</title>
+<meta name="description" content="{eyou:global name='web_description' /}" />
+<meta name="keywords" content="{eyou:global name='web_keywords' /}" />
+<link href="{eyou:global name='web_ico' /}" rel="shortcut icon" type="image/x-icon" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{eyou:static file="skin/css/bootstrap.css" /}
+{eyou:static file="skin/css/font.css" /}
+{eyou:static file="skin/css/amazeui.min.css" /}
+{eyou:static file="skin/css/base.css" /}
+<style type="text/css">
+body, td, th {	font-family: "微软雅黑", Helvetica, Arial, Tahoma, SimSun, sans-serif;
+}
+</style>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+{eyou:static file="skin/js/html5shiv.min.js" /}
+{eyou:static file="skin/js/respond.min.js" /}    
+{eyou:include file="header.htm" /}
+
+<![endif]-->
+
+<script type="text/javascript" src="/hsytt/assets/fb04db1/jquery.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.nicescroll.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.fallr/jquery.fallr.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/ueditor/ueditor.parse.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.datetimepicker/jquery.datetimepicker.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.uploadifive/jquery.uploadifive.min.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/My97DatePicker/WdatePicker.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/jquery.artDialog.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/artDialog/plugins/iframeTools.js"></script>
+
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.contextMenu/jquery.ui.position.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/jquery.contextMenu/jquery.contextMenu.js"></script>
+<script type="text/javascript" src="/hsytt/static/admin/js/public.js"></script>
+
+</head><body>
+<div class="post" style="display: none"><input type="text" value="1"></div>
+<!-- 左侧飘窗-->
+<div class="sider_left">
+  <div class="sl_online_box">
+    <div class="sl_online">
+      <h3 style="background-image: url(/static/index/images/online_iconnew2.png)"></h3>
+      <em>专家在线</em>
+    </div>
+  </div>
+  <div class="sl_area"> <div class="sl_name">
+      <dl> <dt>国际</dt>
+      <dd><ul>
+      <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;4fc608044644d5e2c7f0c20f8a43f33b&#39;}, &#39;gnpc-UpperLeft-Dubai&#39;,&#39;1&#39;,)">
+            阿联酋迪拜               </a>     </li>
+      <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;133bc4b394a31f056de990747de79229&#39;}, &#39;gnpc-UpperLeft-Sydney&#39;,&#39;1&#39;,)">
+            澳大利亚悉尼                </a>         </li>
+    
+               <li class="li1"><a class="a1" href="javascript:;" onclick="openMeiqia({group_token: &#39;bdd5bbccd0a5a0448434112a60af162b&#39;}, &#39;gnpc-UpperLeft-Duolunduo&#39;,&#39;1&#39;,)">            <p>加拿大多伦多</p>            </a>              </li>
+  </ul>        </dd>      </dl>
+   <dl>        <dt>国内</dt>        <dd>          <ul>
+      <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;b4927f81a99d57a1d318b7cd91fc0ff9&#39;}, &#39;gnpc-UpperLeft-Shenzhen&#39;,&#39;1&#39;,)">深圳</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;6eea51e77775fc9f085273b1aff3be7d&#39;}, &#39;gnpc-UpperLeft-Beijing&#39;,&#39;1&#39;,)">北京</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;45f3e71a7819c37db78e326b9c4ab53b&#39;}, &#39;gnpc-UpperLeft-Shanghai&#39;,&#39;1&#39;,)">上海</a></li>
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;350a40f0fded5c932ca48597f54a2c3e&#39;}, &#39;gnpc-UpperLeft-Suzhou&#39;,&#39;1&#39;,)">苏州</a></li>
+  
+        <li><a class="a2" href="javascript:;" onclick="openMeiqia({group_token: &#39;0e6379e93b12c02eec9bcc24b4ba823c&#39;}, &#39;gnpc-UpperLeft-Hubei&#39;,&#39;1&#39;,)">武汉</a></li> </ul>        </dd>      </dl>
+    </div>  </div>
+  <div class="sl_close"></div>
+</div>
+
+
+<!-- 右侧弹窗-->
+
+
+<!--项目合作弹窗-->
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    {eyou:adv pid='1'}
+    <li data-target="#carousel-example-generic" data-slide-to="{$key}" {eyou:eq name='$i' value='1'}class="active"{/eyou:eq}></li>
+    {/eyou:adv}
+  </ol>
+  <div class="carousel-inner" role="listbox"> {eyou:adv pid='1'}
+    <div class="item {eyou:eq name='$i' value='1'}active{/eyou:eq}"> <img src="{$field.litpic}" alt="{$field.title}" onClick="location.href='{$field.links}'"> </div>
+    {/eyou:adv} </div>
+  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>
+<div class="container">
+  <div class="row"> {eyou:modelsartlist typeid='26'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>视频</b>中心<small>最新的活动 </small></h2>
+      <div style="background: white;">
+        <div class="video"> {eyou:artlist loop='1' titlelen='20'}
+          <video style="margin: 0 5%" width="90%" height="360" controls="controls" loop="loop">
+            <source src="{eyou:field aid='$field.aid' addfields='shipin' /}" type="video/mp4">
+            Your browser does not support the video tag. </video>
+          {/eyou:artlist} </div>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}" style="margin: 18px 20px;">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='2'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>亚非移居</b>动态<small>信息 </small></h2>
+      <div class="index02 white_bg"> {eyou:artlist limit='0,1' titlelen='15' flag='p'} <a href="{$field.arcurl}"><img src="{$field.litpic}" border="0" alt="{$field.title}" style="width:336px; height:150px;"></a> {/eyou:artlist}
+        <ul>
+          {eyou:artlist limit='1,7' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist}
+    {eyou:modelsartlist typeid='5'}
+    <div class="col-md-4">
+      <h2 class="index_tit"><b>热门地区</b>公告<small>信息 </small></h2>
+      <div class="index02 white_bg">
+        <ul>
+          {eyou:artlist loop='10' titlelen='20'}
+          <li><a href="{$field.arcurl}">{$field.title}</a></li>
+          {/eyou:artlist}
+        </ul>
+        <a class="btn btn-default" href="{eyou:field name='typeurl' /}">查看更多</a> </div>
+    </div>
+    {/eyou:modelsartlist} </div>
+</div>
+<!--
+{eyou:include file="hkgoods.htm" /}
+{eyou:include file="hkcase.htm" /}
+-->
+{eyou:include file="showman.htm" /}
+<div class="container link">
+  <div class="col-md-12"> 友情链接： 
+    {eyou:links loop="24"  type="text" } <a href="{$field.url}" {$field.target} {$field.nofollow}>{$field.title}</a> {/eyou:links} </div>
+</div>
+<!--
+{eyou:include file="footer.htm" /} -->
+</body>
+</html>

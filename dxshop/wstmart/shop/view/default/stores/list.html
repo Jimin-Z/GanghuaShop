@@ -1,0 +1,40 @@
+{extend name="default/base" /}
+{block name="css"}
+<style type="text/css">
+   td .layui-table-cell{height:50px !important;line-height: 40px !important;overflow: inherit!important;}
+   td .laytable-cell-1-0-3{overflow:hidden!important;}
+   .layui-table img{padding-bottom:8px;}
+</style>
+{/block}
+{block name="main"}
+<div class="wst-page">
+<div class='wst-toolbar'>
+
+   <select id="areaId" class="j-areas" level="0" onchange="WST.ITAreas({id:'areaId',val:this.value,isRequire:true,className:'j-areas'});">
+      <option value="">-所在地-</option>
+      {php}
+      $areas = WSTTable('areas',['isShow'=>1,'dataFlag'=>1,'parentId'=>0],'areaId,areaName',100,'areaSort desc');
+      foreach($areas as $aky => $area){
+      {/php}
+      <option value="{$area['areaId']}">{$area['areaName']}</option>
+      {php}}{/php}
+  	</select>
+  	<input type='text' id="loginName" class="s-query"  placeholder='帐号名'/>
+   <input type='text' id="storeName" class="s-query"  placeholder='门店名称'/>
+   <a class="btn btn-primary" onclick="loadGrid(0)"><i class="fa fa-search"></i>查询</a>
+   <a class="btn btn-success" style="float:right;" href='javaScript:toAdd()'><i class="fa fa-plus"></i>添加</a>
+</div>
+<div class='wst-grid'>
+    <div id="mmg" class="mmg layui-form"></div>
+</div>
+</div>
+{/block}
+{block name="js"}
+<script src="__STATIC__/plugins/ztree/jquery.ztree.all-3.5.js?v={$v}"></script>
+<script type='text/javascript' src='__SHOP__/stores/list.js?v={$v}'></script>
+<script>
+    $(function(){
+        initGrid({$p});
+    });
+</script>
+{/block}

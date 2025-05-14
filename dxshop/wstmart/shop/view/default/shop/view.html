@@ -1,0 +1,365 @@
+{extend name="default/base" /}
+{block name="css"}
+<link rel="stylesheet" type="text/css" href="__STATIC__/plugins/webuploader/webuploader.css?v={$v}" />
+<style>
+    .webuploader-pick{background:#1890ff;}
+</style>
+{/block}
+{block name="main"}
+<style>
+label{margin-right:10px;}
+th{height:25px;}
+</style>
+<div class='wst-page'>
+<div id='tab' class="layui-tab layui-tab-brief">
+    <ul class="layui-tab-title">
+        <li class="layui-this">店铺信息</li>
+        <li>银行信息</li>
+		<li>经营信息</li>
+        {if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+        <li>店铺二维码</li>
+        {/if}
+    </ul>
+    <div class="layui-tab-content" style='width:99%;margin-bottom: 10px;'>
+        <div class="layui-tab-item layui-show wst-box-top" style="position: relative;">
+           <table id='vinfo_1' class='wst-form'>
+			  <tr>
+			     <th width='150'>店铺编号：</th>
+			     <td><span style='padding: 0px 8px;'>{$object['shopSn']}</span>
+                 <a class="btn btn-blue" onclick="javascript:toEdit(1)" style='height:18px;line-height:18px'><i class="fa fa-pencil"></i>编辑</a>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺名称：</th>
+			     <td>{$object['shopName']}</td>
+			  </tr>
+			  <tr>
+			     <th>公司紧急联系人：</th>
+			     <td>{$object['shopkeeper']}</td>
+			  </tr>
+			  <tr>
+			     <th>公司紧急联系人手机：</th>
+			     <td>{$object['telephone']}</td>
+			  </tr>
+			  <tr>
+			     <th>公司名称：</th>
+			     <td>{$object['shopCompany']}</td>
+			  </tr>
+			  <tr>
+			     <th>店铺联系电话：</th>
+			     <td>{$object['shopTel']}</td>
+			  </tr>
+			  <tr>
+			     <th>店铺图标：</th>
+			     <td>
+			     <img id='v_shopImg' width='150' height='150' src='__RESOURCE_PATH__/{$object["shopImg"]}'/>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>客服QQ：</th>
+			     <td id='v_shopQQ'>{$object['shopQQ']}</td>
+			  </tr>
+			  <tr>
+			     <th>阿里旺旺：</th>
+			     <td id='v_shopWangWang'>{$object['shopWangWang']}</td>
+			  </tr>
+			  <tr>
+			     <th>店铺地址：</th>
+			     <td>
+			       {$object['areaName']}
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺详细地址：</th>
+			     <td>{$object['shopAddress']}</td>
+			  </tr>
+			  <tr>
+			     <th>是否提供开发票：</th>
+			     <td id='v_isInvoice'>
+			        {if $object['isInvoice']==1}提供发票{/if}
+			        {if $object['isInvoice']==0}不提供发票{/if}
+			     </td>
+			  </tr>
+			  <tr id='tr_isInvoice' {if $object['isInvoice']==0}style='display:none'{/if}>
+			     <th>发票说明：</th>
+			     <td id='v_invoiceRemarks'>{$object['invoiceRemarks']}</td>
+			  </tr>
+			  <tr>
+			     <th>营业状态：</th>
+			     <td><span id='v_shopAtive'>{if $object['shopAtive']==1}营业中{else}休息中{/if}</span>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>服务时间：</th>
+			     <td><span id='v_serviceStartTime'>{$object['serviceStartTime']}</span>至<span id='v_serviceEndTime'>{$object['serviceEndTime']}</span>
+			     </td>
+			  </tr>
+           </table>
+           <form id='editFrom_1' autocomplete="off">
+           <table id='einfo_1' class='wst-form hide'>
+           	 <tr>
+			     <th>店铺名称<font color='red'>*</font>：</th>
+			     <td><input type='text' id='shopName' class='ipt_1' value="{$object['shopName']}" data-rule="店铺名称:required" style="width: 500px; float: left;" /></td>
+			  </tr>
+			  <tr>
+			     <th>公司紧急联系人<font color='red'>*</font>：</th>
+			     <td><input type='text' id='shopkeeper' class='ipt_1' value="{$object['shopkeeper']}" data-rule="公司紧急联系人:required" style="width: 500px; float: left;" /></td>
+			  </tr>
+			  <tr>
+			     <th>公司紧急联系人手机<font color='red'>*</font>：</th>
+			     <td><input type='text' id='telephone' class='ipt_1' value="{$object['telephone']}" data-rule="公司紧急联系人手机:required" style="width: 500px; float: left;" /></td>
+			  </tr>
+			  <tr>
+			     <th>公司名称<font color='red'>*</font>：</th>
+			     <td><input type='text' id='shopCompany' class='ipt_1' value="{$object['shopCompany']}" data-rule="公司名称:required" style="width: 500px; float: left;" /></td>
+			  </tr>
+			  <tr>
+			     <th>店铺联系电话<font color='red'>*</font>：</th>
+			     <td><input type='text' id='shopTel' class='ipt_1' value="{$object['shopTel']}" data-rule="店铺联系电话:required" style="width: 500px; float: left;" /></td>
+			  </tr>
+			  <tr>
+			     <th width='150'>店铺图标<font color='red'>*</font>：</th>
+			     <td>
+			     	<input type='text' id='shopImg' class='ipt_1' value='{$object["shopImg"]}' style="width: 500px; float: left;" />
+			     	<div id='shopImgPicker' style='float: left;'>上传</div><span id='uploadMsg'></span>
+			     	<div id='shopImgBox' style='margin-bottom:5px; float: left; height: 30px; margin-left: 5px;'>
+			     		<span class='weixin'>
+			     			<img class='img' style='height:16px;width:18px;' src='__STATIC__/images/upload-common-select.png'>
+			     			<img class='imged'  id='preview'  style='max-height:150px;max-width: 200px; border:1px solid #dadada; background:#fff' src="__RESOURCE_PATH__/{if $object['shopImg']!=''}{$object['shopImg']}{else}{:WSTConf('CONF.goodsLogo')}{/if}">
+			     		</span>
+			     	</div>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺地址：</th>
+			     <td>
+					<input type='hidden' id='areaIdPath1' value='{$object['areaIdPath']}'/>
+					<select id="areaIdPath_0" class="j-areaIdPath" data-name="areaIdPath" level="0" onchange="WST.ITAreas({id:'areaIdPath_0',val:this.value,isRequire:true,className:'j-areaIdPath'});" data-value='{$object["areaIdPath"]}'>
+	                    <option value="">-请选择-</option>
+	                    {php}
+	                    $areas = WSTTable('areas',['isShow'=>1,'dataFlag'=>1,'parentId'=>0],'areaId,areaName',100,'areaSort desc');
+	                    foreach($areas as $aky => $area){
+	                    {/php}
+	                    <option value="{$area['areaId']}">{$area['areaName']}</option>
+	                    {php}}{/php}
+	                </select>
+
+             		{if(WSTConf('CONF.mapKey'))}
+             		<button type='button' class='btn btn-primary' data-name="areaIdPath" onclick="javascript:mapCity(this)" style="top: 8px;font-size: 14px;font-weight: 400;"><i class='fa fa-map-marker'></i>地图定位</button>
+             		<div id="container"  style='width:700px;height:400px'></div>
+
+             		{/if}
+             		<input type='hidden' id='mapLevel' class='ipt_1'  value="{$object['mapLevel']}"/>
+                    <input type='hidden' id='longitude' class='ipt_1'  value="{$object['longitude']}"/>
+                    <input type='hidden' id='latitude' class='ipt_1'  value="{$object['latitude']}"/>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>店铺详细地址：</th>
+			     <td><input type='text' id='shopAddress' class='ipt_1' value='{$object["shopAddress"]}' data-rule="店铺详细地址:required" style="width: 500px; float: left;"/></td>
+			  </tr>
+			  <tr>
+			     <th>客服QQ：</th>
+			     <td>
+			     	<input class="ipt_1" id="shopQQ" value="{$object['shopQQ']}" type="text">
+			     </td>
+			  </tr>
+			  <tr>
+			     <th> </th>
+			     <td>
+			     	<span style='color:gray;'>做为客服接收临时消息的QQ,需开通<a target="_blank" href="http://shang.qq.com/v3/index.html">QQ推广功能</a> -> '首页'-> '推广工具'-> '立即免费开通'</span>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>阿里旺旺：</th>
+			     <td><input class="ipt_1" id="shopWangWang" value="{$object['shopWangWang']}" type="text"></td>
+			  </tr>
+			  <tr>
+			     <th>是否提供开发票<font color='red'>*</font>：</th>
+			     <td class="layui-form">
+			        <label>
+			        	<input type='radio' value='1' class="ipt_1" name='isInvoice' onclick='javascript:WST.showHide(1,"#trInvoice")' {if $object['isInvoice']==1}checked{/if} title='提供'/>
+			        </label>
+			        <label>
+			        	<input type='radio' value='0' class="ipt_1" name='isInvoice' onclick='javascript:WST.showHide(0,"#trInvoice")' {if $object['isInvoice']==0}checked{/if} title='不提供'/>
+			        </label>
+			     </td>
+			  </tr>
+			  <tr id='trInvoice' {if $object['isInvoice']==0}style='display:none'{/if}>
+			     <th>发票说明<font color='red'>*</font>：</th>
+			     <td><input class="ipt_1" id="invoiceRemarks" value="{$object['invoiceRemarks']}" type="text" data-rule="发票说明:required(#isInvoice1:checked)"></td>
+			  </tr>
+			  <tr>
+			     <th>营业状态<font color='red'>*</font>：</th>
+			     <td class="layui-form">
+			        <label>
+			        	<input type='radio' value='1' class="ipt_1" name='shopAtive' {if $object['shopAtive']==1}checked{/if} title='营业中'/>
+			        </label>
+			        <label>
+			        	<input type='radio' value='0' class="ipt_1" name='shopAtive' {if $object['shopAtive']==0}checked{/if} title='休息中'/>
+			        </label>
+			     </td>
+			  </tr>
+			  <tr>
+			     <th>服务时间<font color='red'>*</font>：</th>
+			     <td>
+			     <select class='ipt_1' id='serviceStartTime' v="{$object['serviceStartTime']}"></select>
+		         至
+		         <select class='ipt_1' id='serviceEndTime' v="{$object['serviceEndTime']}"></select>
+			     </td>
+			  </tr>
+			  <tr>
+			  	<td colspan='2' style="padding-left: 155px;">
+                    <button type="button" class="btn btn-primary btn-mright" onclick="javascript:editInfo()"><i class="fa fa-check"></i>保&nbsp;存</button>
+                    <button type="button" class="btn" onclick="javascript:toCancel(1)" style="margin-left: 10px;"><i class="fa fa-angle-double-left"></i>返&nbsp;回</button>
+			  	</td>
+			  </tr>
+           </table>
+           </form>
+        </div>
+
+        <div class="layui-tab-item" style="display:none;">
+           <table id='vinfo_2' class='wst-form wst-box-top'>
+              <tr>
+			     <th width='150'>开卡银行：</th>
+			     <td>{$object['bankName']}<button class="btn btn-blue" type="button" onclick="javascript:toEdit(2)"><i class="fa fa-pencil"></i>编辑</button></td>
+			  </tr>
+			  <tr>
+			     <th width='150'>开卡地区：</th>
+			     <td>{$object['bankAreaName']}</td>
+			  </tr>
+              <tr>
+			     <th>卡号：</th>
+			     <td>{$object['bankNo']}</td>
+			  </tr>
+			  <tr>
+			     <th>持卡人：</th>
+			     <td>{$object['bankUserName']}</td>
+			  </tr>
+           </table>
+
+		   <form id='editFrom_2' autocomplete="off">
+			<table id='einfo_2' class='wst-form wst-box-top' style='display: none'>
+			   <tr>
+				  <th width='150'>开卡银行：</th>
+				  <td>
+					 <select id='bankId' class='ipt_2' data-rule="开卡地区: required;">
+						 <option value=''>请选择</option>
+						 {volist name="banks" id="vo"}
+						 <option value='{$vo["bankId"]}' {if $object['bankId'] == $vo['bankId']}selected{/if}>{$vo["bankName"]}</option>
+						 {/volist}
+					 </select>
+				  </td>
+			   </tr>
+			   <tr>
+				  <th width='150'>开卡地区：</th>
+				  <td>
+					   <input type='hidden' id='areaIdPath2' value='{$object['bankAreaIdPath']}'/>
+					  <select id="bankAreaIdPath_0" class='j-bankAreaIdPath ipt_2' level="0" onchange="WST.ITAreas({id:'bankAreaIdPath_0',val:this.value,isRequire:true,className:'j-bankAreaIdPath'});" data-rule="开卡地区: required;">
+						 <option value="">请选择</option>
+						 {foreach $areas as $a}
+						   <option value="{$a['areaId']}">{$a['areaName']}</option>
+						 {/foreach}
+					  </select>
+				  </td>
+			   </tr>
+			   <tr>
+				  <th>卡号：</th>
+				  <td><input type='text' id='bankNo' class='ipt_2' value='{$object['bankNo']}' style='width:250px' data-rule="卡号: required;"/></td>
+			   </tr>
+			   <tr>
+				  <th>持卡人：</th>
+				  <td><input type='text' id='bankUserName' class='ipt_2' value='{$object["bankUserName"]}' style='width:250px' data-rule="持卡人: required;"/></td>
+			   </tr>
+			   <tr>
+				   <td colspan='2' style="padding-left: 155px;">
+					 <button type="button" class="btn btn-primary btn-mright" onclick="javascript:editBankInfo()"><i class="fa fa-check"></i>保存</button>
+					 <button type="button" class="btn" onclick="javascript:toCancel(2)" style="margin-left: 10px;"><i class="fa fa-angle-double-left"></i>返回</button>
+				   </td>
+			   </tr>
+			</table>
+			</form>
+
+        </div>
+
+		<div class="layui-tab-item" style="display:none;">
+			<table class='wst-form' style='margin-top:5px'>
+			   <tr>
+				  <th width='150'>经营类目：</th>
+				  <td>
+				   {volist name="$object['catshopNames']" id="vo"}
+				   <div style='width:200px;float:left;line-height: 18px;'>
+					   {$vo}
+				   </div>
+				   {/volist}
+				  </td>
+			   </tr>
+			   <tr>
+				  <th>所属行业：</th>
+				  <td>
+				   {$object['tradeName']}
+				  </td>
+			   </tr>
+			   <tr>
+				  <th>认证类型：</th>
+				  <td>
+					{php}$accredLen = count($object['accreds']);{/php}
+					{volist name="$object['accreds']" id="vo"}
+					{$vo["accredName"]}{if $i < $accredLen }、{/if}
+					{/volist}
+				  </td>
+			   </tr>
+			</table>
+		 </div>
+
+
+        {if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='' || WSTDatas('ADS_TYPE',5)!='')}
+        <div class="layui-tab-item" style="display:none;">
+           <table class='wst-form wst-box-top'>
+           	{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='')}
+    			<tr>
+			   		<th width='150'>手机/微信二维码</th>
+			   		<td>
+						<div id="moQrcode" style="margin: 10px;"></div>
+			   		</td>
+			  	</tr>
+            {/if}
+            {if(WSTDatas('ADS_TYPE',5)!='')}
+    			<tr>
+			   		<th width='150'>小程序二维码</th>
+			   		<td>
+						<div id="weQrcode" style="margin: 10px;"></div>
+			   		</td>
+			  	</tr>
+            {/if}
+           </table>
+        </div>
+        {/if}
+    </div>
+</div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__STATIC__/plugins/webuploader/webuploader.js?v={$v}'></script>
+<script type="text/javascript" src="__STATIC__/plugins/validator/jquery.validator.min.js?v={$v}"></script>
+<script charset="utf-8" src="{:WSTProtocol()}map.qq.com/api/js?v=2.exp&key={:WSTConf('CONF.mapKey')}"></script>
+<script type='text/javascript' src='__SHOP__/shop/shops.js?v={$v}'></script>
+<script>
+$(function(){
+	{if(WSTDatas('ADS_TYPE',2)!='' || WSTDatas('ADS_TYPE',3)!='')}
+	WST.createShopQrcode(1);
+	{/if}
+	{if(WSTDatas('ADS_TYPE',5)!='')}
+	WST.createShopQrcode(2);
+	{/if}
+
+	if(window.conf.MAP_KEY){
+        var longitude = $('#longitude').val();
+        var latitude = $('#latitude').val();
+        var mapLevel = $('#mapLevel').val();
+        initQQMap(longitude,latitude,mapLevel);
+    }
+
+})
+</script>
+{/block}

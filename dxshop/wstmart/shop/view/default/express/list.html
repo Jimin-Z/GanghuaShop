@@ -1,0 +1,22 @@
+{extend name="default/base" /}
+{block name="css"}
+{/block}
+{block name="main"}
+<div class='wst-page'>
+<div class="wst-toolbar">
+  <input type="text" name="expressName" id="expressName" class="s-query" placeholder='快递名称'/>
+  <a class="s-btn btn btn-primary" onclick="loadGrid1(0)"><i class="fa fa-search"></i>查询</a>
+</div>
+<div class='wst-grid'>
+    <div id="mmg" class="mmg layui-form"></div>
+</div>
+</div>
+{/block}
+{block name="js"}
+<script type='text/javascript' src='__SHOP__/express/express.js?v={$v}'></script>
+<script>
+    $(function(){
+        initGrid1({$p});
+    });
+</script>
+{/block}

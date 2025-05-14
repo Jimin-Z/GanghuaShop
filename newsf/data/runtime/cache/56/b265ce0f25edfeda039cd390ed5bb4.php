@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+s:628:"D:\wamp8\www\newsf/data/runtime/cache\e6\06bfaaa034cc2b964c5200b6abfede.php,D:\wamp8\www\newsf/data/runtime/cache\99\f637ef089664e43ce4cca832f0e4dd.php,D:\wamp8\www\newsf/data/runtime/cache\f6\d56cbbb2f0721231fda4f212f0ce6d.php,D:\wamp8\www\newsf/data/runtime/cache\27\02fb59fb5bc52182c5f80d0be3ef4f.php,D:\wamp8\www\newsf/data/runtime/cache\72\ba387db72db62bb4ce17c43dd2d1ba.php,D:\wamp8\www\hkshop\newsf/data/runtime/cache\6f\02d54641a935a933f5800d890189ae.php,D:\wamp8\www\hkshop\newsf/data/runtime/cache\e2\0c0efedd9704f06caba0828edd22fa.php,D:\wamp8\www\hkshop\newsf/data/runtime/cache\ab\123dc28ac4835f93741121bd8e7a56.php";

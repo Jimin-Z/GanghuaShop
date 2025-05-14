@@ -1,0 +1,534 @@
+*{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    /* color: ; */
+}
+
+/* 公共 */
+.flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.flex--column{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper--gobal{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.wrapper--px{
+    width: 83.33rem;
+    margin: 0 auto;
+}
+
+.wrapper--percent{
+    width: 80%;
+    margin: 0 auto;
+}
+
+/* 总布局 */
+/* 每个板块打算设置100vh，但是目前是auto */
+
+.hkIndex__container{
+    width: 100%;
+    height: 100%;
+    overflow:hidden;
+}
+
+/* 头部 */
+.hkIndex__header{
+    width: 100%;
+    /* height: 100vh; */
+    background-image: url(/hkshop/hk-Index/images/header__bgc.png);
+}
+
+.header__title{
+    border-radius: 20px;
+    box-sizing: border-box;
+    padding: .5em 1em;
+    background-color: #fff;
+    font-size: 1.9444rem;
+    justify-content: space-around;
+    position: relative;
+    /* justify-content: start; */
+}
+
+.header__text--underline{
+    border-bottom: 5px solid #601173;
+}
+
+.header__text--chinese{
+    /* font-size: 3.333rem; */
+}
+
+/* 头部的切换语言 */
+.lang__box{
+    position: absolute;
+    bottom: .6944rem;
+    right: 2.0833rem;
+    font-size: 1.1112rem;
+}
+
+.lang--en{
+    color: #000;
+}
+
+.lang--en:hover{
+    color:goldenrod;
+}
+
+/* header-items */
+.header-items{
+    width: 100%;
+    justify-content: space-around;
+}
+
+.header-item{
+    width: 24%;
+    padding-top: 1.3888rem;
+    height: auto;
+    align-items: end;
+    border-right: 3px solid #000;
+}
+
+.header-item__link{
+    color: #000;
+    font-size: 1.1112rem;
+    transition: transform .3s linear;
+    align-self: center;
+    margin-bottom: 1em;
+}
+
+.header-item__link:hover{
+    transform: scale(1.2);
+    color: gold;
+}
+
+.header-item__text{
+    width: 100%;
+    height: 5.5555rem;
+    align-items: start;
+    justify-content: end;
+}
+
+.header-item__details{
+    order: 1;
+    width: 13.8888rem;
+    font-size: .972222rem;
+    display: -webkit-box;               /* 必须结合 -webkit-box 才能使用 -webkit-line-clamp */
+    -webkit-box-orient: vertical;       /* 设置盒子为垂直方向布局 */
+    -webkit-line-clamp: 3;              /* 限制显示的行数，3行为例 */
+    overflow: hidden;                   /* 溢出部分隐藏 */
+    text-overflow: ellipsis;            /* 溢出时显示省略号 */
+    
+}
+
+.header-item__title{
+    font-size: 1.3888rem;
+    writing-mode: vertical-lr;
+    order: 2;
+    margin: 0 .5em;
+}
+
+.header-item__img{
+    width: 6.94445rem;
+    height: 6.94445rem;
+    margin: 0 auto;
+    /* margin-top: 1.3888rem; */
+}
+
+
+/* banner */
+.hkIndex__banner{
+    width: 100%;
+    position: relative;
+}
+
+.hkIndex__banner-swiper{
+    width: 100%;
+    height: 20.8333rem;
+    overflow: hidden;
+    margin-top: 1.3888rem;
+}
+
+.hkIndex__banner-swiper-items{
+    display: flex;
+    height: 100%;
+}
+
+.hkIndex__banner-swiper-items:hover{
+    cursor: pointer;
+}
+
+.hkIndex__banner-swiper-item{
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hkIndex__banner-swiper-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* arrow */
+.hkIndex__banner-arrow-left,.hkIndex__banner-arrow-right{
+    width: 70px;
+    height: 50%;
+    background-color: rgba(0, 0, 0, .5);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.hkIndex__banner-arrow-left:hover,.hkIndex__banner-arrow-right:hover{
+    cursor: pointer;
+}
+
+/* 左箭头 */
+.hkIndex__banner-arrow-left{
+    left: 0;
+}
+
+.hkIndex__banner-arrow-right{
+    right: 0;
+}
+
+
+/* zodiac 生肖部分 */
+.hkIndex__zodiac{
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 1.388rem;
+    display: grid;
+    grid-template-columns: repeat(12,5.5555rem);
+    grid-gap: 1.388rem;   
+}
+
+.hkIndex__zodiac-item{
+    text-align: center;
+}
+
+.hkIndex__zodiac-link{
+    width: 5.5555rem;
+    height: 5.5555rem;
+    margin-bottom: .6944rem;
+    /* border-radius: 50%; */
+}
+
+.hkIndex__zodiac-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.hkIndex__zodiac-desc{
+
+}
+
+/* main */
+.hkIndex__main{
+    text-align: center;
+    margin-bottom: 6.944rem;
+}
+
+/* module */
+.module__block--main{
+    width: 100%;
+    border-top: 5px solid #000 ;
+    padding-top: 1.3888rem;
+    margin-top: 2.08333rem;
+    height: auto;
+}
+
+.module__header--main{
+    padding: 1em;
+}
+
+/* header--main */
+.header__title--main{
+    font-size: 2.5rem;
+}
+
+.header__link--main{
+    font-size: 1.388rem;
+}
+
+.header__link--main:hover{
+    color: gold;
+}
+
+.module__subtitle{
+    font-size: 1.9444rem;
+}
+
+/* module__item */
+.module__item{
+    margin-top: 2em;
+    justify-content: space-around;
+}
+
+.module__item-img{
+    width: 27.77rem;
+    height: 27.77rem;
+}
+
+.module__item-description{
+    font-size: 1.112rem;
+    text-align: start;
+    margin-bottom: 1em;
+    width: 48.611rem;
+}
+
+.module__item-description:nth-last-child(1){
+    margin-bottom: 0;
+}
+
+.desc__details--small{
+    font-size: 1.38rem;
+}
+
+/* migrant */
+.module__item-content--top{
+    align-self: self-start;
+}
+
+.migrant__item-img{
+    width: 27.77rem;
+    height: 27.77rem;
+    object-fit: cover;
+}
+
+/* migrant 移民作用 */
+.migrant__item-subtitle{
+    margin-top: 3.472rem;
+    background-color: #fff;
+    color: orange;
+    box-shadow: 0 0 5px  rgba(0, 0, 0, .5);
+    border-radius: 5px;
+    font-size: 2.5rem;
+    box-sizing: border-box;
+    padding: .2em 0;
+    padding-left:3em;
+    width:100%;
+    text-align: start;
+    position: relative;
+}
+
+.migrant__item-subtitle::before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -3.194rem;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-width: 1.388rem 1.5972rem;
+    border-right:1.5972rem solid rgba(0, 0, 0, .5);
+}
+
+.migrant__item-subtitle::after{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -2.5rem;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-width: 1.38rem;
+    border-right:1.38rem solid #fff;
+}
+
+.subtitle__text--special{
+    background-color: #000;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateY(-50%) skew(-20deg);
+    display: inline-block;
+    height: 4.166rem;
+    line-height: 4.166rem;
+    padding:0 1em;
+}
+
+.subtitle__text--special::before,.subtitle__text--special::after{
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+
+.subtitle__text--special::before{
+    top:0;
+    left: 0;
+    border-top: 30px solid #fff;
+    border-left: 20px solid #fff;
+    border-bottom: 30px solid transparent;
+    border-right: 20px solid transparent;
+    z-index: 0;
+}
+
+.subtitle__text--special::after{
+    top:0;
+    right: 0;
+    border-bottom: 30px solid #fff;
+    border-right: 20px solid #fff;
+    border-top: 30px solid transparent;
+    border-left: 20px solid transparent;   
+}
+
+/* hkShop 跨境电商 */
+/* 电商标题 */
+.hkShop__block--main{
+    position: relative;
+}
+
+.hkShop__header--main{
+    position: absolute;
+    top:3.472rem;
+    left: 40%;
+    z-index: 1;
+}
+
+.header__title--hkShop{
+    position: relative;
+    width: 10.416rem;
+    height: 10.416rem;
+    line-height: 10.416rem;
+    font-size: 1.66rem;
+    border-radius: 50%;
+    background: linear-gradient(to right,rgb(255,177,9),rgb(240,137,42));
+    color: #fff;
+}
+
+.header__title--hkShop::before{
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 12.5rem;
+    height: 12.5rem;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 50%;
+}
+
+.header__title--hkShop::after{
+    content: '';
+    position: absolute;
+    z-index: -2;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 13.88rem;
+    height: 13.88rem;
+    background-color: rgba(255,255,255,.5);
+    border-radius: 50%;
+}
+
+/* 电商图片 */
+.hkShop__item-img{
+    width: 45.1388rem;
+    height: 24.3055rem;
+}
+
+/* 电商文字内容 */
+.hkShop__item-desc{
+    width: 27.77rem;
+}
+
+.desc__title--hkShop{
+    font-size: 1.66rem;
+}
+
+.desc__details--hkShop{
+    font-size: 1.12rem;
+}
+
+
+
+/* medical */
+.desc__title--medical{
+    width: fit-content;
+    padding: .3em .5em;
+    border-radius: 5px;
+    margin-bottom: .5em;
+}
+
+.bgc--orange{
+    background: linear-gradient(to right, rgb(253,183,5),rgb(236,123,47));
+}
+
+.bgc--orange-red{
+    background: linear-gradient(to right, rgb(235,122,47),rgb(198,92,21));
+}
+
+.bgc--gray{
+    background: linear-gradient(to right, rgb(164,164,164),rgb(136,136,136));
+}
+
+/* 医疗图片 */
+.medical__imgs{
+    width: 27.77rem;
+}
+
+.medical__item-img{
+    margin-bottom: 1.38rem;
+}
+
+.medical__item-img:nth-last-child(1){
+    margin-bottom: 0;
+}
+
+/* 医疗内容 */
+.medical__content{
+    width: 48.611rem;
+}
+
+/* 医疗头部 */
+.module__header--medical{
+    text-align: start;
+}
+
+/* 医疗副标题 */
+.medical__subtitle{
+    font-size: 1.388rem;
+    font-weight: 200;
+}
+
+/* 医疗阴影盒子 */
+.medical__item--shadow{
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.5);
+    padding: 1em 2em;
+    border-radius: 5px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.medical__subtitle--orange{
+    color: orange;
+    font-weight: 700;
+    font-size: 2.22rem;
+    margin-bottom: 1em;
+}
+
+.medical__item-desc{
+    width: fit-content;
+    color: gray;
+}

@@ -1,0 +1,75 @@
+<?php
+namespace wstmart\admin\controller;
+use wstmart\admin\model\CashDraws as M;
+/**
+ * ============================================================================
+//官网地址:http://hk-city.com
+ * ============================================================================
+ * 提现控制器
+ */
+class Cashdraws extends Base{
+
+    public function index(){
+        $this->assign("p",(int)input("p"));
+    	return $this->fetch("list");
+    }
+
+    /**
+     * 获取分页
+     */
+    public function pageQuery(){
+        $m = new M();
+        return WSTLayGrid($m->pageQuery());
+    }
+
+    /**
+     * 跳去编辑页面
+     */
+    public function toHandle(){
+        //获取该记录信息
+        $m = new M();
+        $this->assign('object', $m->getById());
+        $this->assign("p",(int)input("p"));
+        return $this->fetch("edit");
+    }
+
+    /**
+    * 修改
+    */
+    public function handle(){
+        $drawsStatus = (int)input('cashSatus',-1);
+        $m = new M();
+        if($drawsStatus==1){
+            return $m->handle();
+        }else{
+            return $m->handleFail();
+        }
+    }
+
+    /**
+     * 查看提现内容
+     */
+    public function toView(){
+        $m = new M();
+        $this->assign('object', $m->getById());
+        $this->assign("p",(int)input("p"));
+        return $this->fetch("view");
+    }
+    /**
+     * 导出
+     */
+    public function toExport(){
+        $m = new M();
+        $rs = $m->toExport();
+        $this->assign('rs',$rs);
+    }
+
+    /**
+     * 提现统计
+     */
+    public function statCashDrawal(){
+        $m = new M();
+        $rs = $m->statCashDrawal();
+        return WSTLayGrid($rs);
+    }
+}

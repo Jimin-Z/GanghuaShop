@@ -1,0 +1,93 @@
+{extend name="base" /}
+{block name="css"}
+<style>
+	td .layui-table-cell{height:auto !important;line-height: auto !important;overflow: inherit!important;padding:5px 15px;}
+	td .laytable-cell-1-0-3,td .laytable-cell-1-0-5,td .laytable-cell-2-0-3,td .laytable-cell-2-0-5{overflow:hidden!important;}
+	.layui-table img{max-width:150px!important;}
+</style>
+{/block}
+{block name="js"}
+<script src="__ADMIN__/goodsappraises/goodsappraises.js?v={$v}" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="wst-grid">
+<div class="layui-tab layui-tab-brief" lay-filter="msgTab">
+	<ul class="layui-tab-title">
+		<li {if $tabType==1}class="layui-this"{/if}>评论</li>
+		<li {if $tabType==2}class="layui-this"{/if}>评论举报</li>
+	</ul>
+	<div class="layui-tab-content" style="padding: 10px 0;">
+		<div class="layui-tab-item {if $tabType==1}layui-show{/if}">
+			<div class="wst-toolbar">
+				<div id="query" style="float:left;">
+					<select id="areaId1" class='query' level="0" onchange="WST.ITAreas({id:'areaId1',val:this.value,className:'query'});" >
+						<option value="-1">-请选择地区-</option>
+						{foreach $area1 as $v}
+						<option value="<?=$v['areaId']?>"><?=$v['areaName']?></option>
+						{/foreach}
+					</select>
+					<input type="text" name="shopName" placeholder='店铺名称' id="shopName" class="query" />
+					<input type="text" name="goodsName" placeholder='商品名称' id="goodsName" class="query" />
+					<button type="button"  class='btn btn-primary btn-mright' onclick="javascript:loadGrid(0)"><i class="fa fa-search"></i>查询</button>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div class='wst-grid'>
+				<div id="mmg" class="mmg layui-form"></div>
+			</div>
+		</div>
+		<div class="layui-tab-item {if $tabType==2}layui-show{/if}">
+			<div class="wst-toolbar wst-toolbar2">
+				<div id="query2" style="float:left;">
+					<select id="areaId2" class='query2' level="0" onchange="WST.ITAreas({id:'areaId2',val:this.value,className:'query2'});" >
+						<option value="-1">-请选择地区-</option>
+						{foreach $area1 as $v}
+						<option value="<?=$v['areaId']?>"><?=$v['areaName']?></option>
+						{/foreach}
+					</select>
+					<input type="text" name="shopName" placeholder='店铺名称' id="shopName2" class="query2" />
+					<input type="text" name="goodsName" placeholder='商品名称' id="goodsName2" class="query2" />
+					<button type="button"  class='btn btn-primary btn-mright' onclick="javascript:loadGrid2(0)"><i class="fa fa-search"></i>查询</button>
+				</div>
+				<div style="clear:both"></div>
+			</div>
+			<div class='wst-grid'>
+				<div id="mmg2" class="mmg2 layui-form"></div>
+			</div>
+		</div>
+	</div>
+
+</div>
+</div>
+<script>
+$(function(){
+	var isInit = isInit2 = false;
+	{if $tabType==1}
+	isInit = true;
+	initGrid({$p});
+	{else}
+	isInit2 = true;
+	initGrid2({$p});
+	{/if}
+		var element = layui.element;
+		element.on('tab(msgTab)', function(data){
+			if(data.index==1){
+				if(!isInit2){
+					isInit2 = true;
+					initGrid2({$p});
+				}else{
+					loadGrid2({$p});
+				}
+			}else{
+				if(!isInit){
+					isInit = true;
+					initGrid({$p});
+				}else{
+					loadGrid({$p});
+				}
+			}
+		});
+	});
+</script>
+
+{/block}
